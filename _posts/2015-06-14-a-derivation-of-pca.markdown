@@ -169,3 +169,7 @@ $$
 $$
 
 I'll note in passing that these eigenvectors are found computationally by computed the singular value decomposition $X=USV^T$. The right singular vectors, $V$, are the eigenvectors of $S = X^TX$.
+
+<video width="640" height="500" controls loop>
+    <source src="{{ site.baseurl }}/videos/pca.mp4" type="video/mp4">
+</video>
