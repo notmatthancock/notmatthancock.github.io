@@ -78,7 +78,7 @@ ln -s $PYPATH/easy_install $LOCAL/bin/easy_install
 Great. Now you can install some other great packages easily:
 
 {% highlight bash %}
-pip install cython # for installing python into c
+pip install cython # for compiling python into c
 pip install nose # unit tests
 pip install memory_profiler # great tool for tracking the line-by-line memory behavior of a script
 {% endhighlight %}
