@@ -1,6 +1,8 @@
 ---
 layout: post
 title: Building Python from Source
+tags: software python guides
+mathjax: false
 ---
 
 The following are notes for building and installing tcl/tk/python 2.7.6 from source into a custom directory.

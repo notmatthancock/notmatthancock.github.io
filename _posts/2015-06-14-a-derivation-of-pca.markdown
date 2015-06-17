@@ -1,6 +1,8 @@
 ---
 layout: post
 title: A Derivation of PCA
+tags: math linear-algebra dimensionality-reduction
+mathjax: true
 ---
 
 Principle component analysis or PCA is a widely-used method for dimensionality reduction. In this post, I will derive the method from a least squares error perspective using linear algebra. Therefore, I do not specifically plan to motivate its use (although I hope to aid your intuition through the derivation).
