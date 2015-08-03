@@ -15,14 +15,16 @@ Consider $p=2$, $P(Y=1)=0.6$, and $P(X\|Y=j) \sim \mathcal{N}(\mu_j, I)$ where $
 import numpy as np
 
 rs = np.random.RandomState(1234)
-p = 0.6 
+p = 2
+n = 200
+py1 = 0.6
 mean1 = np.r_[1,1.]
 mean0 = -mean1
 
-Y = (rs.rand(200) > p).astype(int)
-X = np.zeros((200,2))
-X[Y==0] = rs.multivariate_normal(mean0, np.eye(2), size=(Y==0).sum())
-X[Y==1] = rs.multivariate_normal(mean1, np.eye(2), size=(Y==1).sum())
+Y = (rs.rand(n) > py1).astype(int)
+X = np.zeros((n,p))
+X[Y==0] = rs.multivariate_normal(mean0, np.eye(p), size=(Y==0).sum())
+X[Y==1] = rs.multivariate_normal(mean1, np.eye(p), size=(Y==1).sum())
 {% endhighlight %}
 
 ...and we can plot the data with:
@@ -103,10 +105,10 @@ print "\n"
 print "Parameters found ... w:", w, "b:", b
 
 # Generate some new testing data
-Y_ = (rs.rand(200) > p).astype(int)
-X_ = np.zeros((200,2))
-X_[Y_==0] = rs.multivariate_normal(mean0, np.eye(2), size=(Y_==0).sum())
-X_[Y_==1] = rs.multivariate_normal(mean1, np.eye(2), size=(Y_==1).sum())
+Y_ = (rs.rand(n) > py1).astype(int)
+X_ = np.zeros((n,p))
+X_[Y_==0] = rs.multivariate_normal(mean0, np.eye(p), size=(Y_==0).sum())
+X_[Y_==1] = rs.multivariate_normal(mean1, np.eye(p), size=(Y_==1).sum())
 
 G = 1 / (1. + np.exp(-b-np.dot(X_,w)))
 
