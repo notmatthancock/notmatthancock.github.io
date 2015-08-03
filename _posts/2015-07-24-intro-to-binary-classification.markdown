@@ -93,8 +93,8 @@ This function is concave so long as the logarithm of the prior term is concave. 
 
 $$
 \begin{align*}
-    D_bl(w,b) &= D_b \log(P(w,b)) + \sum_{i=1}^n g(x^i|w,b) - y^i \\
-    D_{w_k}l(w,b) &= D_{w_k} \log(P(w,b)) + \sum_{i=1}^n (g(x^i|w,b) - y^i) x_k^i
+    D_bl(w,b) &= D_b \log(P(w,b)) + \sum_{i=1}^n y^i - g(x^i|w,b) \\
+    D_{w_k}l(w,b) &= D_{w_k} \log(P(w,b)) + \sum_{i=1}^n (y^i - g(x^i|w,b)) x_k^i
 \end{align*}
 $$
 
