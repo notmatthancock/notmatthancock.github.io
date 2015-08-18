@@ -78,7 +78,7 @@ Finally, we compute the AUC score for the ROC curve using the trapezoidal method
 AUC = 0.
 for i in range(100):
     AUC += (ROC[i+1,0]-ROC[i,0]) * (ROC[i+1,1]+ROC[i,1])
-    AUC *= 0.5
+AUC *= 0.5
 
 plt.title('ROC curve, AUC = %.4f'%AUC)
 plt.show()

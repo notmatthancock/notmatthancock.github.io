@@ -13,7 +13,7 @@ This post builds on a [previous introductory post on the binary classification p
 
 Recall that our discriminative model, $g(x\|\theta) = P(Y=1\|X=x,\theta)$, has fixed parameters learned through a maximization process. Let $T = g(X\|\theta)$ be the random quantity which is the output of the classifier. Hence, the range of $T$ is $[0,1]$. Previously, we implicitly assumed that a label of $1$ is assigned when $T \gt 0.5$ and label $0$ is assigned when $T \leq 0.5$. The goal of ROC analysis is to observe threshold values other than $0.5$ in order to make trade-offs between true and false positivity. 
 
-To be clear, this whole analysis could be done assuming the range of $T$ is a subset or possible all of $\mathbb{R}$. I assume the range above so that this post is cohesive with my previous post on binary classification. What's really important is that $T$ is to be interpreted as some scalar value for which we must apply a threshold to say it belongs to one of two classes. Afterwards, our decision based on this threshold may or may not agree the ground truth label, $Y$.
+To be clear, this whole analysis could be done assuming the range of $T$ is a subset or possibly all of $\mathbb{R}$. I assume the range above so that this post is cohesive with my previous post on binary classification. What's really important is that $T$ is to be interpreted as some scalar value for which we must apply a threshold to say it belongs to one of two classes. Afterwards, our decision based on this threshold may or may not agree the ground truth label, $Y$.
 
 ### Events of label and classifier agreement
 
@@ -87,7 +87,7 @@ Each component is the complementary cumulative distribution function (complement
 
 <div style="text-align:center"><img src="{{ site.baseurl }}/images/roc-1.png"></div>
 
-Plotting the ROC curve allows us to visualize how the true positive rate changes as a function of the false positive rate for various threshold values. It allows us to find a threshold which makes a compromise between the two. What happens if you desired to increase $P(T \gt \| Y=1)$ or decrease $P(T \gt t \| Y=0)$?
+Plotting the ROC curve allows us to visualize how the true positive rate changes as a function of the false positive rate for various threshold values. It allows us to find a threshold which makes a compromise between the two.
 
 <div style="text-align:center"><img src="{{ site.baseurl }}/images/roc-2.png"></div>
 
@@ -141,7 +141,7 @@ Given a discretization of $m$ threshold values, $1 = t_1 \gt t_2 \gt \cdots \gt 
 
 ## AUC score
 
-The AUC score summarizes the ROC curve to a single scalar value by summing the area underneath the ROC curve. For a parametric curve, $z(t) = [x(t) y(t)]^T$, recall that the area underneath is given by $\int y(t) x'(t) dt$. We assume for simplicity from here on out that $T\|Y=y$, $y=0,1$ admit density functions so that $P'(Y \gt t\|Y=y) = p(t\|Y=y)$. Recalling properties 1 & 2 of the ROC curve above, we integrate from $t=1$ to $t=0$ to obtain a positive area:
+The AUC score summarizes the ROC curve to a single scalar value by summing the area underneath the ROC curve. For a parametric curve, $z(t) = [x(t), \; y(t)]^T$, recall that the area underneath is given by $\int y(t) x'(t) dt$. We assume for simplicity from here on out that $T\|Y=y$, $y=0,1$ admit density functions so that $P'(T \gt t\|Y=y) = p(t\|Y=y)$. Recalling properties 1 & 2 of the ROC curve above, we integrate from $t=1$ to $t=0$ to obtain a positive area:
 
 $$
 \begin{align*}
@@ -154,7 +154,7 @@ Note that an AUC score of $1$ is still only possible in the best curve case. How
 
 ### Interpreting the AUC score
 
-Let's take two random classifier and label pairs, $(T^i, Y^i)$ and $(T^j, Y^j)$ ($i \neq j$), and ask the following question: What is the probability that the classifier output value for $T^i$ will be greater than $T^j$ given that the true labels are $Y^i=1$ and $Y^j=0$?
+Let's take two random classifier and label pairs, $(T^i, Y^i)$ and $(T^j, Y^j)$ ($i \neq j$), and ask the following question: What is the probability that the value for $T^i$ will be greater than $T^j$ given that the corresponding labels are $Y^i=1$ and $Y^j=0$?
 
 Let's write this out:
 
