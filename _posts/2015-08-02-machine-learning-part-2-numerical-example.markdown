@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Classification Intro Part 2 - Numerical Example with Python
+title: Machine Learning Part 2 - Numerical Example with Python
 tags: math pattern-recognition python
 mathjax: true
 ---

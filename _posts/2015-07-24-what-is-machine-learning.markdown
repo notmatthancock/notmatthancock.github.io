@@ -1,11 +1,11 @@
 ---
 layout: post
-title: A Short Introduction to Binary Classification and Pattern Recognition
+title: What is Machine Learning?!
 mathjax: true
 tags: math pattern-recognition
 ---
 
-In this post, I give a brief introduction to the binary classification problem in pattern recognition. I assume a familiarity with basic probability theory and statistics. Afterwards, I introduce the logistic regression model. In a separate post, I'll give a numerical example with Python of the logistic regression method.
+In this post, I give a brief introduction to the binary classification problem in machine learning / pattern recognition. I assume a familiarity with basic probability theory and statistics. Afterwards, I introduce the logistic regression model. In a separate post, I'll give a numerical example with Python of the logistic regression method.
 
 ## Probabilistic set-up
 
