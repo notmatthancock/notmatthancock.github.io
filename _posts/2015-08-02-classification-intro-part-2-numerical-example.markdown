@@ -139,6 +139,8 @@ Parameters found ... w: [ 2.45641058  1.55227045] b: -0.824723538369
 Accuracy on test data: 0.93
 {% endhighlight %}
 
+It is very important to test the model on a data set held out from the parameter learning process. Although it is fine to monitor the progress of the learning process using the data set used for learning parameters, scores for the model should **not** be reported using this data unless it is made completely explicit. It is the scores on data not used to learn parameters that provide insight as to how the model might generalize to unseen data. Thus, these scores are more truthful to report.
+
 Note that I ignored the regularization term. It turns out to be not significant for this toy problem (try it yourself). However, in problems where $n$ is small, $p$ is large, or both, regularization can help tremendously.
 
 Finally let's visualize the predictions made over the region and the decision boundary:

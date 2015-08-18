@@ -19,7 +19,11 @@
 
     &,
     &:visited {
-        color: $grey-color-dark;
+        color: $text-color;
+    }
+
+    &:hover {
+        background-color: #ffffff;
     }
 }
 
@@ -38,6 +42,10 @@
         // Gaps between nav items, but not on the first one
         &:not(:first-child) {
             margin-left: 20px;
+        }
+
+        &:hover {
+            background-color: #ffffff;
         }
     }
 
