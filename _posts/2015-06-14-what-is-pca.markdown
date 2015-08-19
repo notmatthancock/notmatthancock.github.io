@@ -1,6 +1,6 @@
 ---
 layout: post
-title: A Derivation of PCA
+title: What is PCA?!
 tags: math linear-algebra dimensionality-reduction
 mathjax: true
 ---
