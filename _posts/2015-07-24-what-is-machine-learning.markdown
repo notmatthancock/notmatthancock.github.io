@@ -45,7 +45,10 @@ At this point, we could potentially determine $\theta$ by maximizing over $(1)$ 
 In the field of machine learning / pattern recognition generative models are not used nearly as often as [discriminative models](https://en.wikipedia.org/wiki/Discriminative_model). A discriminative model only models the conditional distribution of the label, $Y$, given input, $X$. We are assuming this type of model. It derives an estimate of $\theta$ by assuming $P(X^i \| \theta) = P(X^i)$. This estimate is called the **conditional maximum likelihood** estimate. The regularization term may or may not be used. We have in this case that:
 
 $$
-    \text{(1)} \propto P(\theta) \prod_{i=1}^n g(X^i|\theta)^{Y^i} (1-g(X^i |\theta))^{1-Y^i} 
+\begin{align*}
+    \text{(1)} &\propto P(\theta)\prod_{i=1}^n P(Y^i | X^i, \theta) \\
+               &= P(\theta) \prod_{i=1}^n g(X^i|\theta)^{Y^i} (1-g(X^i |\theta))^{1-Y^i}  \\
+\end{align*}
 $$
 
 where $g$ is finally introduced. Note that writing $g$ in the form of the previous expression explicitly depends on the fact that $g$ represents a Bernoulli random variable for fixed $X$, and that $Y$'s range is $\\{0,1\\}$.
