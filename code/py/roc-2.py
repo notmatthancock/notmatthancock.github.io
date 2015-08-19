@@ -18,11 +18,13 @@ ax.grid()
 ax.set_title('ROC curves')
 
 ax = fig.add_subplot(1,2,2)
-ax.plot( t, Beta(2,6,t), '--k', lw=2)
+ax.plot( t, Beta(2,6,t), '--k', lw=2, label='$T|Y=0$')
 for k in [5,4,3,2]:
-    ax.plot( t, Beta(8-k,k,t), lw=2)
+    ax.plot(t, Beta(8-k,k,t), lw=2, label='$T|Y=1$')
+ax.set_ylim(0,4)
 ax.grid()
 ax.set_title('Conditional classifier PDFs')
 
 
-plt.savefig('../../images/roc-2.png', bbox_inches='tight')
+#plt.savefig('../../images/roc-2.png', bbox_inches='tight')
+plt.show()

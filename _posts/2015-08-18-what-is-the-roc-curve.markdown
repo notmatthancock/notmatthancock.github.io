@@ -131,7 +131,7 @@ $$
     P(T \gt t^*) = P(T \gt t^* | Y=1) P(Y=1) + P(T \gt t^* | Y=0) P(Y=0) = P(Y=1)
 $$
 
-and similarly, $P(T \leq t^*) = P(Y=0)$. Clearly, this is most we could ask for from the classifier. If the distributions of $T\|Y=0$ and $T\|Y=1$ have densities, this case essentially means that the densities have non-intersecting support, and this value $t^*$ is placed such that the density of $T\|Y=1$ lies strictly above and the density of $T\|Y=0$ lies strictly below.
+and similarly, $P(T \leq t^\*) = P(Y=0)$. Clearly, this is most we could ask for from the classifier. If the distributions of $T\|Y=0$ and $T\|Y=1$ have densities, this case essentially means that the densities have non-intersecting support, and this value $t^\*$ is placed such that the density of $T\|Y=1$ lies strictly above and the density of $T\|Y=0$ lies strictly below.
 
 It is interesting to note that the opposite curve &mdash; i.e. one that travels along the right side and bottom of the unit cube &mdash; yields the opposite conclusion as above. In this case, the classifier predicts perfectly *wrong*.
 
@@ -141,7 +141,7 @@ Given a discretization of $m$ threshold values, $1 = t_1 \gt t_2 \gt \cdots \gt 
 
 ## AUC score
 
-The AUC score summarizes the ROC curve to a single scalar value by summing the area underneath the ROC curve. For a parametric curve, $z(t) = [x(t), \; y(t)]^T$, recall that the area underneath is given by $\int y(t) x'(t) dt$. We assume for simplicity from here on out that $T\|Y=y$, $y=0,1$ admit density functions so that $P'(T \gt t\|Y=y) = p(t\|Y=y)$. Recalling properties 1 & 2 of the ROC curve above, we integrate from $t=1$ to $t=0$ to obtain a positive area:
+The AUC score summarizes the ROC curve to a single scalar value by summing the area underneath the ROC curve. For a parametric curve, $z(t) = [x(t), \; y(t)]^T$, recall that the area underneath is given by $\int y(t) x'(t) dt$. We assume for simplicity from here on out that $T\|Y=y$, $y=0,1$ admit density functions so that $P'(T \gt t\|Y=y) = -p(t\|Y=y)$. Recalling properties 1 & 2 of the ROC curve above, we integrate from $t=1$ to $t=0$ to obtain a positive area:
 
 $$
 \begin{align*}
