@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 rs = np.random.RandomState(1234)
 p = 2
-n = 200
+n = 1000
 py1 = 0.6
 mean1 = np.r_[1,1.]
 mean0 = -mean1
@@ -58,4 +58,5 @@ for i in range(100):
 AUC *= 0.5
 
 plt.title('ROC curve, AUC = %.4f'%AUC)
-plt.savefig('../../images/roc-3.png', bbox_inches='tight')
+plt.show()
+#plt.savefig('../../images/roc-3.png', bbox_inches='tight')
