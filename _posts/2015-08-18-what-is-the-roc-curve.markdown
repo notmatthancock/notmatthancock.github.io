@@ -121,7 +121,7 @@ $T$ and $Y$ are independent.
 
 <br>
 
-So a straight line from $(0,0)$ to $(1,1)$ is the worst possible ROC curve. It means the classifier's prediction is independent of the label, which is no better than a classifier that guesses randomly.
+So a straight line from $(0,0)$ to $(1,1)$ is the worst possible ROC curve. It means the classifier's prediction is independent of the label, which is no better than a classifier that guesses randomly. Remember that independence intuitvely means the outcome of one random variable gives us **no** information about the outcome of another. Ideally, observing $T$ would tell us a lot about $Y$.
 
 ### The best curve
 
