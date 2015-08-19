@@ -13,7 +13,7 @@ This post builds on a [previous introductory post on the binary classification p
 
 Recall that our discriminative model, $g(x\|\theta) = P(Y=1\|X=x,\theta)$, has fixed parameters learned through a maximization process. Let $T = g(X\|\theta)$ be the random quantity which is the output of the classifier. Hence, the range of $T$ is $[0,1]$. Previously, we implicitly assumed that a label of $1$ is assigned when $T \gt 0.5$ and label $0$ is assigned when $T \leq 0.5$. The goal of ROC analysis is to observe threshold values other than $0.5$ in order to make trade-offs between true and false positivity. 
 
-To be clear, this whole analysis could be done assuming the range of $T$ is a subset or possibly all of $\mathbb{R}$. I assume the range above so that this post is cohesive with my previous post on binary classification. What's really important is that $T$ is to be interpreted as some scalar value for which we must apply a threshold to say it belongs to one of two classes. Afterwards, our decision based on this threshold may or may not agree the ground truth label, $Y$.
+To be clear, this whole analysis could be done assuming the range of $T$ is any subset or possibly all of $\mathbb{R}$. I assume the range above so that this post is cohesive with my previous post on binary classification. What's really important is that $T$ is to be interpreted as some scalar value for which we must apply a threshold to say it belongs to one of two classes. Afterwards, our decision based on this threshold may or may not agree the ground truth label, $Y$.
 
 ### Events of label and classifier agreement
 
@@ -27,7 +27,7 @@ $$
     \frac{TP(t)}{n} := \frac{1}{n}\sum_{i=1}^n \mathbb{I}( T^i > t \land Y^i=1 ) \approx P(T \gt t, Y=1)
 $$
 
-$TP(t)$ is the empirical number of true positive examples using a threshold of $t$ for the given sample. Similar estimates can be made for the probability of a true negative, false negative, and false positive:
+$\mathbb{I}$ is the indicator function who is $1$ if the argument is true and $0$ otherwise. So, $TP(t)$ is the empirical number of true positive examples using a threshold of $t$ for the given sample. Similar estimates can be made for the probability of a true negative, false negative, and false positive:
 
 $$
 \begin{align*}
