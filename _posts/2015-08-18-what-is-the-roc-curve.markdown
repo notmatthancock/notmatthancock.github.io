@@ -131,7 +131,7 @@ $$
     P(T \gt t^*) = P(T \gt t^* | Y=1) P(Y=1) + P(T \gt t^* | Y=0) P(Y=0) = P(Y=1)
 $$
 
-and similarly, $P(T \leq t^*) = P(Y=0)$. Clearly, this is most we could ask for from the classifier. If the distributions of $T\|Y=0$ and $T\|Y=1$ have densities, this case essentially means that the densities have non-intersecting support.
+and similarly, $P(T \leq t^*) = P(Y=0)$. Clearly, this is most we could ask for from the classifier. If the distributions of $T\|Y=0$ and $T\|Y=1$ have densities, this case essentially means that the densities have non-intersecting support, and this value $t^*$ is placed such that the density of $T\|Y=1$ lies strictly above and the density of $T\|Y=0$ lies strictly below.
 
 It is interesting to note that the opposite curve &mdash; i.e. one that travels along the right side and bottom of the unit cube &mdash; yields the opposite conclusion as above. In this case, the classifier predicts perfectly *wrong*.
 
