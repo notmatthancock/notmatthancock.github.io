@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Linear Transformation Javscript App
+title: Interactive Linear Transformations
 tags: math 
 mathjax: true
 ---
