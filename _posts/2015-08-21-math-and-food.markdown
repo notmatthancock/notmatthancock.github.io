@@ -4,7 +4,7 @@ title: Math and Food
 tags: math 
 mathjax: false
 ---
-A bit ago, there was a story on [y combinator news about the potato paradox](https://news.ycombinator.com/item?id=9878047). I mentioned that I had small list of math theorems loosely related to food. The list grew. An attempt was made to establish the list on Wikipedia. It was deleted.
+A bit ago, there was a story on [y combinator news about the potato paradox](https://news.ycombinator.com/item?id=9894237). I mentioned that I had small list of math theorems loosely related to food. The list grew. An attempt was made to establish the list on Wikipedia. It was deleted.
 
 So, I'm sharing here because it's interesting trivia. It's not strictly mathematics, but loosely math / science related. Anyhow, here it is:
 
