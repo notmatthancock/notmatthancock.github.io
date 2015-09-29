@@ -94,7 +94,7 @@ $$
     \sum_{j=2}^{p} \lambda_j
 $$
 
-This is an absolute sort of error measure (not as in $L_1$). We could make it a relative error by measuring:
+This is an absolute error measure. We could make it a relative error by measuring:
 
 $$
     \frac{ \sum_{j=2}^{p} \lambda_j } { \sum_{j=1}^{p} \lambda_j }
