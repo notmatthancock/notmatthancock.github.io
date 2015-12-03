@@ -6,14 +6,14 @@
 
 
 // Our variables
-$base-font-family: Courier;/*Helvetica, Arial, sans-serif;*/
+$base-font-family: "Lucida Grande", Helvetica, sans-serif;
 $base-font-size:   17px;
 $small-font-size:  $base-font-size * 0.875;
 $base-line-height: 1.5;
 
 $spacing-unit:     30px;
 
-$text-color:       #111;
+$text-color:       #000000;
 $background-color: #ffffff;
 $brand-color:      #2a7ae2;
 
@@ -26,8 +26,6 @@ $content-width:    900px;
 
 $on-palm:          600px;
 $on-laptop:        900px;
-
-
 
 // Using media queries with like this:
 // @include media-query($on-palm) {

@@ -24,16 +24,16 @@ We're interested in the joint distribution of $(T,Y)$ so that we can examine qua
 We can make the following empirical estimate:
 
 $$
-    \frac{TP(t)}{n} := \frac{1}{n}\sum_{i=1}^n \mathbb{I}( T^i > t \land Y^i=1 ) \approx P(T \gt t, Y=1)
+    \frac{\text{TP}(t)}{n} := \frac{1}{n}\sum_{i=1}^n \mathbb{I}( T^i > t \land Y^i=1 ) \approx P(T \gt t, Y=1)
 $$
 
-$\mathbb{I}$ is the indicator function who is $1$ if the argument is true and $0$ otherwise. So, $TP(t)$ is the empirical number of true positive examples using a threshold of $t$ for the given sample. Similar estimates can be made for the probability of a true negative, false negative, and false positive:
+$\mathbb{I}$ is the indicator function who is $1$ if the argument is true and $0$ otherwise. So, $\text{TP}(t)$ is the empirical number of true positive examples using a threshold of $t$ for the given sample. Similar estimates can be made for the probability of a true negative, false negative, and false positive:
 
 $$
 \begin{align*}
-    \frac{TN(t)}{n} &\approx P(T \leq t, Y=0) \\
-    \frac{FN(t)}{n} &\approx P(T \leq t, Y=1) \\
-    \frac{FP(t)}{n} &\approx P(T \gt  t, Y=0) \\
+    \frac{\text{TN}(t)}{n} &\approx P(T \leq t, Y=0) \\
+    \frac{\text{FN}(t)}{n} &\approx P(T \leq t, Y=1) \\
+    \frac{\text{FP}(t)}{n} &\approx P(T \gt  t, Y=0) \\
 \end{align*}
 $$
 
@@ -42,7 +42,7 @@ These estimates are valid asymptotically due to the iid assumption and the [Gliv
 Now, for example, using these estimates, we can measure empirical accuracy:
 
 $$
-    \text{empirical accuracy} := \frac{TP(t)+TN(t)}{n} \approx P(T \gt t, Y=1 \cup T \leq t, Y=0) 
+    \text{ACC}(t) := \frac{\text{TP}(t)+\text{TN}(t)}{n} \approx P(T \gt t, Y=1 \cup T \leq t, Y=0) 
 $$
 
 However, accuracy alone isn't always the best measure of success. Measures of "false positivity" and "false negativity" are also important to consider in many situations.
@@ -59,17 +59,17 @@ $$
 \begin{align*}
     P(T \gt t | Y=1) &= \frac{P(T \gt t, Y=1)}{P(Y=1)}  \\
     &= \frac{P(T \gt t, Y=1)}{P(T \gt t, Y=1) + P(T \leq t, Y=1)} \\
-    &\approx \frac{TP(t)/n}{TP(t)/n + FN(t)/n} \\
-    &= \frac{TP(t)}{TP(t)+FN(t)} \\
-    &=: TPR(t)
+    &\approx \frac{\text{TP}(t)/n}{\text{TP}(t)/n + \text{FN}(t)/n} \\
+    &= \frac{\text{TP}(t)}{\text{TP}(t)+\text{FN}(t)} \\
+    &=: \text{TPR}(t)
     &\\
     &\\
-    P(T \gt t | Y=0) &\approx \frac{FP(t)}{FP(t)+TN(t)} \\
-    &=: FPR(t)
+    P(T \gt t | Y=0) &\approx \frac{\text{FP}(t)}{\text{FP}(t)+\text{TN}(t)} \\
+    &=: \text{FPR}(t)
 \end{align*}
 $$
 
-$TPR(t)$ and $FPR(t)$ stand for the empirical **true positive rate** and **false positive rate** (at threshold level $t$), respectively. $TPR(t)$ also goes by **sensitivity**, **hit-rate**, or **recall**. It approximates the probability of the event that the classifier will predict $1$ given that the true label is $1$. $FPR(t)$ is also known as the **fall-out** or $1$-**specificity**. It approximates the probability that the classifier will predict label $1$ given that the true label is $0$. Again, these empirical estimates coincide with the usual definitions.
+$\text{TPR}(t)$ and $\text{FPR}(t)$ stand for the empirical **true positive rate** and **false positive rate** (at threshold level $t$), respectively. $\text{TPR}(t)$ also goes by **sensitivity**, **hit-rate**, or **recall**. It approximates the probability of the event that the classifier will predict $1$ given that the true label is $1$. $\text{FPR}(t)$ is also known as the **fall-out** or $1$-**specificity**. It approximates the probability that the classifier will predict label $1$ given that the true label is $0$. Again, these empirical estimates coincide with the usual definitions.
 
 ## The ROC curve
 
@@ -145,8 +145,8 @@ The AUC score summarizes the ROC curve to a single scalar value by summing the a
 
 $$
 \begin{align*}
-    AUC &= \int_1^0 P(T \gt t | Y=1) P'(T \gt t | Y=0) dt\\
-        &= \int_0^1 P(T \gt t | Y=1) p(t | Y=0) dt
+    \text{AUC} &= \int_1^0 P(T \gt t | Y=1) P'(T \gt t | Y=0) dt\\
+               &= \int_0^1 P(T \gt t | Y=1) p(t | Y=0) dt
 \end{align*}
 $$
 
@@ -166,7 +166,7 @@ $$
     &= \int_0^1 \left( \int_{t^j}^1 p(t^i | Y^i=1) dt^i \right) \; p(t^j | Y^j=0) dt^j \\
     &= \int_0^1 P(T^i \gt t^j | Y^i=1) p(t^j | Y^j=0) dt^j \\
     &= \int_0^1 P(T \gt t | Y=1) p(t | Y=0) dt \\
-    &= AUC
+    &= \text{AUC}
 \end{align*}
 $$
 
@@ -177,8 +177,10 @@ Aha! So the previous question is answered exactly by the AUC score. We should po
 Finally, the estimate of the ROC curve is just an interpolation between points in the plane, and so the AUC is easy to estimate using various numerical methods. For example, if piecewise linear interpolation is used to approximate the ROC curve, the trapezoidal rule yields:
 
 $$
-    AUC \approx \frac{1}{2} \sum_{j=1}^{m-1} \left[ TPR(t_{j+1}) + TPR(t_j)\right] \cdot \left[ (FPR(t_{j+1}) - FPR(t_j) \right]
+    \text{AUC} \approx \frac{1}{2} \sum_{j=1}^{m-1} \left[ TPR(t_{j+1}) + TPR(t_j)\right] \cdot \left[ (FPR(t_{j+1}) - FPR(t_j) \right]
 $$
+
+In a [separate post]({{ site.baseurl }}/2015/08/19/roc-curve-part-2-numerical-example.html), I give a numerical example of the estimation of the ROC and AUC.
 
 
 ### References

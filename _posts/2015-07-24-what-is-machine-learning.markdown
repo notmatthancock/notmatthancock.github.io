@@ -103,7 +103,7 @@ $$
 \end{align*}
 $$
 
-In a separate post, I will go through a numerical example using Python.
+In [a separate post]({{ site.baseurl }}/2015/08/02/machine-learning-part-2-numerical-example.html), I go through a numerical example using Python.
 
 
 ### References
