@@ -8,6 +8,7 @@
 
     // Positioning context for the mobile navigation icon
     position: relative;
+    background-color: $grey-color-dark;
 }
 
 .site-title {
@@ -16,14 +17,16 @@
     letter-spacing: -1px;
     margin-bottom: 0;
     float: left;
+    text-decoration: none;
 
     &,
     &:visited {
-        color: $text-color;
+        color: #fff;
     }
 
     &:hover {
-        background-color: #ffffff;
+        color: #fff;
+        background-color: $grey-color-dark;
     }
 }
 
@@ -36,7 +39,7 @@
     }
 
     .page-link {
-        color: $text-color;
+        color: #fff;
         line-height: $base-line-height;
 
         // Gaps between nav items, but not on the first one
@@ -45,7 +48,8 @@
         }
 
         &:hover {
-            background-color: #ffffff;
+            color: #FFFF93;
+            background-color: $grey-color-dark;
         }
     }
 

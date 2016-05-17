@@ -81,7 +81,7 @@ li {
  */
 h1, h2, h3, h4, h5, h6 {
     font-weight: 400;
-    text-decoration: underline;
+    /*text-decoration: underline;*/
 }
 
 
@@ -89,8 +89,8 @@ h1, h2, h3, h4, h5, h6 {
 /**
  * Links
  */
-a {
-    color: #282ffc/*$brand-color*/;
+a:not(.site-title) {
+    color: $brand-color;
     text-decoration: none;
 
     &:visited {
@@ -100,11 +100,8 @@ a {
     &:hover {
         /*color: $text-color;*/
         background-color: #ffff93;
-        text-decoration: underline;
     }
 }
-
-
 
 /**
  * Blockquotes
