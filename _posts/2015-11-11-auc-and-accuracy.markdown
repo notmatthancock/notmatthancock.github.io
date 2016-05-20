@@ -1,7 +1,10 @@
 ---
 layout: post
 title: A relationship between accuracy and the AUC score
-tags: math 
+tags:
+- math 
+- statistics
+- pattern-recognition
 mathjax: true
 ---
 

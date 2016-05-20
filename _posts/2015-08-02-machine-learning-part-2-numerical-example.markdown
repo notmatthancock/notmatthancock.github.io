@@ -1,7 +1,10 @@
 ---
 layout: post
 title: Machine Learning Part 2 - Numerical Example with Python
-tags: math pattern-recognition python
+tags:
+- math
+- pattern-recognition
+- python
 mathjax: true
 ---
 

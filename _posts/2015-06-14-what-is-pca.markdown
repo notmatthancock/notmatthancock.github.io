@@ -1,7 +1,10 @@
 ---
 layout: post
 title: What is PCA?!
-tags: math linear-algebra dimensionality-reduction
+tags: 
+- math
+- linear-algebra
+- dimensionality-reduction
 mathjax: true
 ---
 

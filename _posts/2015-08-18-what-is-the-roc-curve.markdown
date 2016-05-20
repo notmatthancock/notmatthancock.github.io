@@ -1,7 +1,10 @@
 ---
 layout: post
 title: What is the ROC curve?!
-tags: math statistics pattern-recognition
+tags:
+- math
+- statistics
+- pattern-recognition
 mathjax: true
 ---
 

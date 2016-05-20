@@ -1,7 +1,9 @@
 ---
 layout: post
 title: A better confusion matrix with python
-tags: math 
+tags:
+- pattern-recognition
+- python
 mathjax: true
 ---
 

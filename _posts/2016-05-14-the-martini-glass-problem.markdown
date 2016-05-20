@@ -1,7 +1,10 @@
 ---
 layout: post
 title: The martini glass problem
-tags: math 
+tags:
+- math
+- riddles
+- geometry
 mathjax: true
 ---
 

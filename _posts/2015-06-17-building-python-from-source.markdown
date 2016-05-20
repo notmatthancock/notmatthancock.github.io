@@ -1,7 +1,10 @@
 ---
 layout: post
 title: Building Python from Source
-tags: software python guides
+tags:
+- software
+- python
+- guides
 mathjax: false
 ---
 

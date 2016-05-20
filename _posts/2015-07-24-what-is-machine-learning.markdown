@@ -2,7 +2,9 @@
 layout: post
 title: What is Machine Learning?!
 mathjax: true
-tags: math pattern-recognition
+tags:
+- math
+- pattern-recognition
 ---
 
 In this post, I give a brief introduction to the binary classification problem in machine learning / pattern recognition. This problem is one particular instance of the "supervised learning" problem in machine learning, which itself is also a subset of the field of machine learning (arguably the most popular subset, however). I assume a familiarity with basic probability theory and statistics. Afterwards, I introduce the logistic regression model. In a separate post, I'll give a numerical example with Python of the logistic regression method.

@@ -1,7 +1,10 @@
 ---
 layout: post
 title: Decision boundary preserving PCA
-tags: math 
+tags:
+- math 
+- pattern-recognition
+- linear-algebra
 mathjax: true
 ---
 

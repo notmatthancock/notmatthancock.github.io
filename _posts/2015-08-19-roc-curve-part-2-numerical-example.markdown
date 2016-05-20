@@ -1,7 +1,10 @@
 ---
 layout: post
 title: The ROC curve Part 2 - Numerical Example with Python
-tags: math pattern-recognition python
+tags:
+- math
+- pattern-recognition
+- python
 mathjax: true
 ---
 

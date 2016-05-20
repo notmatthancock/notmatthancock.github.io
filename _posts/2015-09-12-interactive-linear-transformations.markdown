@@ -1,7 +1,9 @@
 ---
 layout: post
 title: Interactive Linear Transformations
-tags: math 
+tags:
+- math 
+- linear-algebra
 mathjax: true
 ---
 

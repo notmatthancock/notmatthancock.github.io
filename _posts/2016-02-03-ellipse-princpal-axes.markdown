@@ -1,7 +1,9 @@
 ---
 layout: post
 title: The principal axes of a sampled ellipse are the ellipse's principal axes
-tags: math 
+tags:
+- math 
+- dimensionality-reduction
 mathjax: true
 ---
 
