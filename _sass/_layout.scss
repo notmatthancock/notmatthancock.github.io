@@ -254,13 +254,16 @@
 // for tag cloud and archives
 .tag-cloud {
     list-style: none;
-    padding: 0;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 0;
     text-align: justify; 
     font-size: 16px;
+    background: $grey-color-light;
     li {
-    display: inline-block;
-    margin: 0 12px 12px 0; 
-}
+        display: inline-block;
+        margin: 0 12px 12px 0; 
+    }
 }
 #archives {
   padding: 5px;
