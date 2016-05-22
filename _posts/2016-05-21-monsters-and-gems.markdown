@@ -92,7 +92,6 @@ On the other hand, if any two gem counts are zero, the third must be equal to $n
 2. $P(X_1=0, X_3=0) = P(X_2=n) = \left(\frac{1}{3}\right)^n $
 3. $P(X_2=0, X_3=0) = P(X_1=n) = \left(\frac{1}{2}\right)^n $
 
-Note that $P(N > n) = 1$ for any $n < 3$ by definition, and in fact, the above formula holds for $n \geq 1$, but not $n \leq 0$.
 Lastly, the event that all three gem counts are zero never occurs, so its probability is zero.
 
 Thus, we have:
@@ -105,7 +104,9 @@ $$
 \end{align*}
 $$
 
-Finally, by [writing the terms in the expectation](http://math.stackexchange.com/a/64227/28479), we have:
+In the above, note that $P(N > n) = 1$ for any $n < 3$ by definition, and in fact, the above formula holds for $n \geq 1$, but not $n \leq 0$.
+
+So we have the distribution, and now we need the expectation. By [writing the terms in the expectation](http://math.stackexchange.com/a/64227/28479), we have:
 
 $$
     E[N] = \sum_{n=3}^{\infty} n P(N = n) = 2P(N>2) + \sum_{n=2}^{\infty} P(N > n) \tag{3}
@@ -117,7 +118,7 @@ $$
     \sum_{n=2}^{\infty} P(N > n) = \sum_{n=2}^{\infty} [r_1^n - (1-r_1)^n] + [r_2^n - (1-r_2)^n]
 $$
 
-where $r_1 = 2/3$ and $r_2=5/6$. In any case, we have that
+where $r_1 = 2/3$ and $r_2=5/6$. In both cases, we have that
 
 $$
     \sum_{n=2}^{\infty} r^n - (1-r)^n = \frac{r^2}{1-r} - \frac{(1-r)^2}{r}
@@ -129,7 +130,7 @@ $$
     E[N] = 2 + \frac{124}{30} + \frac{7}{6} = 2 + 5.3 = 7.3
 $$
 
-and **finally**, the average common gem count when we have slain enough monsters to obtain at least one gem of each type is:
+**Finally**, the average common gem count when we have slain enough monsters to obtain at least one gem of each type is:
 
 <div style="color:red">
 $$
