@@ -3,7 +3,7 @@ layout: post
 title: Monsters and gems riddle
 tags:
 - math
-- statistics
+- probability
 - riddles
 mathjax: true
 ---
