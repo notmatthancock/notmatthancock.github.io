@@ -16,6 +16,7 @@ where $a_0=a_1=1$, $a_2=a_3=0$, etc. In general, however, we would like to say w
 
 <br>
 <hr>
+<br>
 
 **Theorem** Suppose $x \in (0,\infty)$, $b \in \\{2, 3, \ldots \\}$. Then, there exist both an integer, $e$, and a sequence $( a_n )_{n=0}^\infty$ with $a_n \in \\{0,1,\ldots,b-1\\}$ such that
 
@@ -23,6 +24,7 @@ $$
     b^e \sum_{n=0}^N a_n b^{-n} \to x, \;\; N \to \infty
 $$
 
+<br>
 <hr>
 <br>
 
@@ -100,8 +102,8 @@ First, fix $\epsilon > 0$. Then, by choosing $n$ such that $b^{e-n} < \epsilon$,
 
 $$
 \begin{align*}
-    a_n &> \left(\frac{x}{b^e} - \sum_{k=0}^n a_k b^{-k}\right)b^n -1 \\ 
-        &= \left(\frac{x}{b^e} - s_{n-1}\right)b^n -1 \\ 
+    a_n &> \left(\frac{x}{b^e} - \sum_{k=0}^{n-1} a_k b^{-k}\right)b^n -1 \\ 
+        &= \left(\frac{x}{b^e} - \frac{s_{n-1}}{b^e}\right)b^n -1 \\ 
         &= \frac{x - s_{n-1} - b^{e-n}}{b^{e-n}} \\ 
         &> \frac{x - s_{n-1} - \epsilon}{b^{e-n}} \\ 
 \end{align*}
@@ -113,6 +115,7 @@ This completes the proof.
 
 ## Testing the construction numerically
 <hr>
+<br>
 
 Because the proof is constructive it directly translates to an algorithm for generating the base-b expansion of a given number. [Here's some code to do it.]({{ site.baseurl }}/code/py/base_b_expansion.py) Try it out:
 
