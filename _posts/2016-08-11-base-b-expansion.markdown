@@ -43,7 +43,7 @@ $$
 Loosely, the values arise by successively solving for $a_n$ in the partial sums, and then taking the floor of the resulting value. Denote the partial sums, $s_n = b^e\sum_{k=0}^n a_k b^{-k}$. The proof is completed in 3 parts, by proving
 
 1. $0 \leq a_n < b$ for all $n$
-2. $x-s_n > 0$ for all $n$.
+2. $x-s_n \geq 0$ for all $n$.
 3. $s_n \to x$.
 
 Before proceeding, note that the inequalties $t-1 < \lfloor t \rfloor \leq t$ hold for all real $t$. These two inequalities will be used extensively.
