@@ -12,7 +12,11 @@ $$
 0.1 = 0.000110011001100 \ldots = 2^{-4} \times \sum_{n=0}^\infty a_k 2^{-k}
 $$
 
-where $a_0=a_1=1$, $a_2=a_3=0$, etc. In general, however, we would like to say we can expand any given real number in any integer base, $b$, greater than 1. This is what we'll show.
+where $a_0=a_1=1$, $a_2=a_3=0$, etc.
+
+The bases, $b=2,8,16$ are typical in computing. For $b=10$, such an expansion corresponds with the usual base-10 decimal expansion of a number. However, we would like to say, more generally, that we can expand any given real number in any integer base, $b > 1$.
+
+This is what we'll show.
 
 <br>
 <hr>
@@ -88,7 +92,7 @@ $$
 \begin{align*}
     x - s_n &= x - b^e\sum_{k=0}^na_kb^{-k} \\
             &= b^e \left(\frac{x}{b^e} - \sum_{k=0}^na_kb^{-k} \right) b^nb^{-n} \\
-            &\geq b^e \left\lfloor \frac{x}{b^e} - \sum_{k=0}^na_kb^{-k} b^n \right\rfloor b^{-n} \\
+            &\geq b^e \left\lfloor \left( \frac{x}{b^e} - \sum_{k=0}^na_kb^{-k} \right) b^n \right\rfloor b^{-n} \\
             &= b^e a_n b^{-n} \\
             &\geq 0 \\
 \end{align*}
