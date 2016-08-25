@@ -9,6 +9,7 @@ A bit ago, there was a story on [y combinator news about the potato paradox](htt
 So, I'm sharing here because it's interesting trivia. It's not strictly mathematics, but loosely math / science related. Anyhow, here it is:
 
 * [Ham sandwich theorem](https://en.wikipedia.org/wiki/Ham_sandwich_theorem)
+* [Hamburger moment problem](https://en.wikipedia.org/wiki/Hamburger_moment_problem)
 * [No free lunch theorem](https://en.wikipedia.org/wiki/No_free_lunch_theorem)
 * [Squeeze (sandwich) theorem ](https://en.wikipedia.org/wiki/Squeeze_theorem)
 * [Layer cake representation](https://en.wikipedia.org/wiki/Layer_cake_representation)
