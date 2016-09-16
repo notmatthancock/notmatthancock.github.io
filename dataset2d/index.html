@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+    <head>
+        <link href="./css/main.css" type="text/css" rel="stylesheet">
+    </head>
+    <body>
+        <h1>2D, Two-class Classification Dataset Maker</h1>
+
+        <div id="wrapper">
+        <table id="ptable">
+            <tr>
+                <td id="pmenu">
+                    <ul>
+                        <li>L-click for class 0<br>R-click for class 1</li>
+
+                        <li><a href="javascript:;" id="help">Help</a></li>
+                        <li><a href="javascript:;" id="share">Share</a></li>
+                        <li><a href="javascript:;" id="download">Download</a></li>
+                        <li><a href="javascript:;" id="clear">Clear</a></li>
+
+                        <li>
+                            <div id="hover-coords">
+                                (<span id="hover-x">0</span>,
+                                 <span id="hover-y">0</span>)
+                            </div>
+                        </li>
+                    </ul>
+                </td>
+                <td id="pgrid"></td>
+            </tr>
+        </table>
+        </div>
+
+        <div id="help-menu-wrapper">
+            <div id="help-menu">
+                <ol>
+                    <li>Left-click to add a point of "class 0" (indicated by a circle).</li>
+                    <li>Right-click to add a point of "class 1" (indicated by a square).</li>
+                    <li>Click any existing point to remove it.</li>
+                    <li>Start anew by pressing the "Clear" link.</li>
+                    <li>Share or download the data using the respective links.</li>
+                </ol>
+
+                <p>(Because sometimes you just want a synthetic dataset for testing simple classification problems without having to define the point coordinates functionally.)</p>
+            </div>
+        </div>
+
+        <div id="footer"><a href="https://github.com/notmatthancock/notmatthancock.github.io/dataset2d" target="_blank">view source on github</a></div>
+
+        <script src="./js/jquery.js"></script>
+        <script src="./js/main.js"></script>
+    </body>
+</html>

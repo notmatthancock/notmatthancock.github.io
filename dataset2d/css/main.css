@@ -1,0 +1,119 @@
+html { height: 100%; margin: 0 auto; }
+body {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    font: 16px sans-serif;
+    color: #333;
+    background-color: #f8f8f8;
+}
+
+h1 { height: 50px; }
+
+div#wrapper {
+    text-align: center;
+    margin: 0 auto;
+    border: 2px solid gray;
+    border-radius: 4px;
+    width: 800px;
+    height: 600px;
+}
+
+table#ptable {
+    margin: 0 auto;
+    width: 800px;
+    height: 600px;
+}
+
+td#pmenu {
+    width: 20%;
+    border: 1px solid #aaa;
+    background-color: #f3f3f3;
+    text-align: left;
+}
+
+td#pmenu ul {
+    border: 2px solid #808080;
+    border-radius: 5px;
+    padding: 15px;
+    font-size: 130%;
+    width: 60%;
+    margin: 0 auto;
+    list-style-type: none;
+    background-color: #fafafa;
+}
+
+td#pmenu ul li:first-child { margin-bottom: 25px; font-size: 50%; }
+td#pmenu ul li:last-child { margin-top: 25px; font-size: 60%; }
+
+td#pgrid {
+    width: 80%;
+    border: 1px solid white;
+    position: relative;
+    background-color: #fcfcfc;
+}
+
+div.axes {
+    position: absolute;
+    background-color: #ddd;
+}
+
+div.x-axis { width: 100%; height: 3px; }
+div.y-axis { height: 100%; width: 3px; }
+
+div.point {
+    font-size: 200%;
+    position: absolute;
+    display: block;
+    text-decoration: none;
+    z-index: 2;
+    height: 14px;
+    width: 14px;
+    border: 3px solid #606060;
+}
+
+div.point:hover { cursor: pointer; opacity: 0.7; }
+div.class0 { background-color: salmon; border-radius: 20px; }
+div.class1 { background-color: lightsteelblue; }
+
+div#help-menu-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.6);
+    z-index: 24;
+}
+div#help-menu {
+    border: 3px solid #444;
+    border-radius: 3px;
+    position: relative;
+    text-align: left;
+    width: 50%;
+    font-size: 120%;
+    top: 25%;
+    padding: 25px;
+    z-index: 25;
+    background-color: white;
+    margin: 0 auto;
+}
+
+input#share-url { position: absolute; z-index: 10 }
+
+
+div#footer {
+    position: absolute;
+    bottom: 0;
+    background-color: #e0e0e0;
+    width: 100%;
+    padding: 10px 0 10px 0;
+}
+
+div#footer a, div#footer a:visited {
+    color: #707070;
+    text-decoration: none;
+}
+
+div#footer a:hover { color: #505050; }

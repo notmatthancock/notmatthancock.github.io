@@ -1,0 +1,13 @@
+---
+layout: post
+title: 2D, Two-class Classification Dataset Maker
+tags:
+    software
+    pattern-recognition
+---
+
+[I created a web-app for creating 2D, two-class datasets for testing machine learning classifiers.]({{ site.baseurl }}/dataset2d/) Just point and click to add points of each class type (left-click for "class-0"; right-click for "class-1"). Click existing points to remove them. You can share (via a url) and download (as plain text) the resulting datasets.
+
+Often, synthetic datasets are created by defining points of a particular class to lie in some region that is defined functionally, and then adding noise; or by assuming a particular distribution type for each class and generating random data. This is fine, but sometimes it's just easier to point and click! That's what this web-app is intended for.
+
+[Try it out.]({{ site.baseurl }}/dataset2d/#-246%2C-138%2C0%2C-200%2C-85%2C0%2C-155%2C-10%2C0%2C-128%2C58%2C0%2C-28%2C161%2C0%2C73%2C158%2C0%2C17%2C208%2C0%2C-130%2C219%2C0%2C-217%2C87%2C0%2C-169%2C-23%2C0%2C36%2C163%2C0%2C96%2C195%2C0%2C-84%2C233%2C0%2C-145%2C148%2C0%2C-62%2C125%2C0%2C-18%2C108%2C0%2C-15%2C40%2C0%2C-91%2C-24%2C0%2C-114%2C-88%2C0%2C-142%2C177%2C0%2C-225%2C189%2C0%2C-210%2C132%2C0%2C-224%2C31%2C0%2C-252%2C-21%2C0%2C-264%2C-74%2C0%2C-207%2C-24%2C0%2C-185%2C36%2C0%2C-304%2C111%2C0%2C-252%2C154%2C0%2C-151%2C193%2C0%2C-143%2C247%2C0%2C13%2C158%2C0%2C-89%2C39%2C0%2C-116%2C104%2C0%2C-21%2C217%2C0%2C-4%2C257%2C0%2C-50%2C279%2C0%2C-62%2C193%2C0%2C-82%2C148%2C0%2C-115%2C129%2C0%2C-151%2C85%2C0%2C0%2C-42%2C0%2C82%2C90%2C0%2C34%2C79%2C0%2C39%2C230%2C1%2C73%2C249%2C1%2C174%2C100%2C1%2C180%2C-44%2C1%2C144%2C-76%2C1%2C42%2C-122%2C1%2C-64%2C-175%2C1%2C-97%2C-170%2C1%2C-144%2C-129%2C1%2C-163%2C-110%2C1%2C-210%2C-179%2C1%2C-257%2C-214%2C1%2C-293%2C-117%2C1%2C-291%2C-61%2C1%2C-144%2C-98%2C1%2C-96%2C-63%2C1%2C-80%2C-49%2C1%2C6%2C-27%2C1%2C72%2C9%2C1%2C111%2C-48%2C1%2C75%2C-221%2C1%2C16%2C-224%2C1%2C-58%2C70%2C1%2C-29%2C-154%2C1%2C-30%2C-30%2C1%2C71%2C213%2C1%2C127%2C83%2C1%2C252%2C-91%2C1%2C267%2C-114%2C1%2C206%2C133%2C1%2C204%2C192%2C1%2C183%2C243%2C1%2C22%2C55%2C1%2C17%2C-66%2C1%2C-32%2C-110%2C1%2C-64%2C-128%2C1%2C-81%2C3%2C1%2C5%2C29%2C1%2C-119%2C-215%2C1%2C248%2C65%2C1)
