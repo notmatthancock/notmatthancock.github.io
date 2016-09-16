@@ -1,7 +1,7 @@
 var origin = [0,0];
 var pclass = [0, null, 1];
 var labels = ['&#9679;', null, '&#9632;'];
- points = Array();
+var points = Array();
 var pid = 0;
 
 // Return the html string to be added, and add the
@@ -40,11 +40,6 @@ points_empty = function() {
 }
 
 $(document).ready(function() {
-    // Initialize the main table.
-    //var pad = 2*$('h1').outerHeight(true);
-    //$('#ptable').height($(window).height() - pad);
-    //$('#wrapper, #ptable').width( $(window).width() - pad);
-
     // Draw x and y axes.
     origin[0] = $('#pgrid').outerWidth()*0.5-1.5;
     origin[1] = $('#pgrid').outerHeight()*0.5-1.5;
@@ -56,7 +51,7 @@ $(document).ready(function() {
         pid = 0;
         points = Array();
         $('div.point').remove();
-         pstring = decodeURIComponent(location.hash.slice(1)).split(',');
+        var pstring = decodeURIComponent(location.hash.slice(1)).split(',');
 
         // Check if the share url is valid.
         if (pstring.length % 3 !=0) {
