@@ -8,7 +8,7 @@ tags:
 mathjax: true
 ---
 
-Suppose we train a linear classifier on some data, and we'd like to reduce project the data onto a few dimensions for visualization in such a way that respects the boundary of the classifier in some optimal way. This means we should project the data parallel to the hyperplane defining the decision surface in a way that minimizes the distance between the point in the original space and the projection.
+Suppose we train a linear classifier on some data, and we'd like to project the data onto a few dimensions for visualization in such a way that respects the boundary of the classifier in some optimal way. This means we should project the data parallel to the hyperplane defining the decision surface in a way that minimizes the distance between the point in the original space and the projection.
 
 For convenience, let's suppose that the hyperplane passes through the origin. We can always subtract off the intercept to make this true anyway. In this case, the separating hyperplane is defined by the unit vector, $w \in \mathbb{R}^p$. Suppose $X \in \mathbb{R}^{n \times p}$ is the matrix of training examples, $x_i \in \mathbb{R}^p$, used to create the classifier.
 
