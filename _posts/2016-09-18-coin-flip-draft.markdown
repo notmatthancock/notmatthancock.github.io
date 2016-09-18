@@ -35,7 +35,7 @@ $$
 $N$ is clearly [binomial](https://en.wikipedia.org/wiki/Binomial_distribution), and $P(W\|N=n) = \frac{n}{30}$, so that
 
 $$
-    P(W, N=n) = P(W|N=n)P(N=n) = \frac{n}{30} {30 \choose n} \left(\frac{1}{2}\right)^30
+    P(W, N=n) = P(W|N=n)P(N=n) = \frac{n}{30} {30 \choose n} \left(\frac{1}{2}\right)^{30}
 $$
 
 $P(L,N=n)$ also follows from the above. Finally the last pieces are $P(X=j\|N=n,W)$ and $P(X=j\|N=n,L)$. These distributions are obtained by counting. In the first, the probability is zero if $j \gt n$ or if $n \gt 10$ and $j \gt 10$. Otherwise, to be in draft position $j$, we must choose $j-1$ of the 9 teams with draft positions greater than ours, and we must choose $n-j$ of the 20 teams with draft positions lower than our own. The total number of choices is found by choosing $n-1$ from among the 29 remaining teams (since it is given that we won our coin toss). Thus,
