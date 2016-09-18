@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Coin flip draft
-published: false
+published: true
 mathjax: true
 tags:
     riddles
