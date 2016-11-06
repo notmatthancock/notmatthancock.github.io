@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [["$","$"]]}
+  });
+</script>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML-full"></script>
+<style>
+    body {
+        padding: 75px;
+        font-family: Courier new;
+        font-size: 18px;
+        max-width: 700px;
+        margin: 0 auto;
+    }
+</style>
+</head>
+
+<body>
+
+    <div style="background-color: #eee; font-style: italic; color: #555; padding: 5px;">
+        <p>You are the only sane voter in a state with two candidates running for Senate. There are N other people in the state, and each of them votes completely randomly! Those voters all act independently and have a 50-50 chance of voting for either candidate. What are the odds that your vote changes the outcome of the election toward your preferred candidate?</p>
+
+        <p>More importantly, how do these odds scale with the number of people in the state? For example, if twice as many people lived in the state, how much would your chances of swinging the election change?</p>
+    </div>
+
+    <br><br>
+
+    There are $N$ voters, $X_i \in \{0,1\}$, $i=1,\ldots,N$ with $P(X_i=1)=1/2$. A vote for the first candidate by the $i$th voter is indicated by $\{X_i=0\}$ while $\{X_i=1\}$ indicates a vote for the second candidate.
+
+    <br><br>
+    
+    If $N$ is even, then your vote will sway the election (in either preferred direction) only if $\sum_i X_i = N/2$. So, the probability that your vote determines the election is
+    $$
+        P\left(\sum_i X_i = N/2\right) = \frac{N \choose N/2}{2^N} = \frac{N!}{[(N/2)!]^2 2^N}
+    $$
+    <br>
+    Using <a href="https://en.wikipedia.org/wiki/Stirling%27s_approximation">Stirling's approximation</a> for large $N$,
+    $$
+        P\left(\sum_i X_i = N/2\right) \approx \sqrt{\frac{2}{\pi N}}
+    $$
+
+    If the population doubles, the probability of your vote determining the election decays by a multiplicative factor of $1/\sqrt{2}$. Or perhaps more intuitively, whenever the population quadruples, the probablity is halved. This is illustrated below:<br>
+
+    <br>
+
+    <div style="text-align:center;">
+        <img src="./plot.svg" style="margin: 0 auto">
+    </div>
+
+    <br><br>
+
+    If $N$ is odd, then your vote can determine the election towards your preferred candidate by forcing a tie. The probabilistic results are essentially the same.<br>
+    
+    <br>
+    
+    In this case, $N=2M+1$ for some $M$, and we must have that either $\sum_i X_i = M$ (and your vote goes to the first candidate, forcing a tie) or $\sum_i X_i = M+1$ (and your vote goes to the second candidate, forcing a tie).<br>
+
+    <br>
+    
+    The exact probability works out to ${N \choose M} / 2^{N-1}$, and the asymptotic approximation is identical to the even case (i.e., $\sqrt{2/(\pi N)}$).
+
+</body>
+</html>
