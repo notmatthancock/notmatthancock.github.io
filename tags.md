@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Archive
-permalink: /tags/
+permalink: /notes/tags/
 ---
 
 <ul class="tag-cloud">

@@ -1,23 +1,29 @@
 ---
-layout: default
 ---
+<!doctype html>
+<html>
 
-<div class="home">
+  {% include head.html %}
 
-  <h1 class="page-heading">Posts</h1>
+  <body>
 
-  <ul class="post-list">
-    {% for post in site.posts %}
-      <li>
-        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
 
-        <h2>
-          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-        </h2>
-      </li>
-    {% endfor %}
-  </ul>
+    <div id="index-wrap">
+        <div id="me-wrap"><img id="me" src="{{ site.baseurl }}/images/me.jpg"></div>
+        
+        <p id="index-blurb">Hello, I'm Matt. I'm a PhD candidate in applied and computational mathematics at Florida State University. I work on problems in medical image processing and analysis.</p>
 
-  <!--p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p-->
+        <table id="index-nav">
+            <tr>
+                <td><a href="notes">Notes</a></td>
+                <td><a href="apps">Apps</a></td>
+                <td><a href="resume">Resume</a></td>
+            </tr>
+        </table>
+        
+    </div>
 
-</div>
+
+  </body>
+
+</html>

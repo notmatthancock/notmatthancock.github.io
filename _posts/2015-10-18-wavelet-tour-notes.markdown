@@ -1,16 +1,10 @@
 ---
 layout: post
-title: Wavelet Tour Notes
+title: Wavelet Tour Review
 tags: math 
-mathjax: true
-published: false
 ---
 
-A picked up Stephane Mallat's **A Wavelet Tour of Signal Processing** a while ago and have been spending my few off-hours working through it. I bought the 2nd edition because the price was substantially cheaper and the only substantial differences between the 2nd and 3rd editions seemed to be the later topics. Since the errata for this second edition is not available, I intend to use this post to catalog some of the notes I've made reading the text, as well as list some (what I believe to be) small errors.
-
-* [Review](#review)
-* [Errors](#errors)
-* [Notes](#notes)
+A picked up Stephane Mallat's **A Wavelet Tour of Signal Processing** a while ago and have been spending my few off-hours working through it. I bought the 2nd edition because the price was substantially cheaper and the only substantial differences between the 2nd and 3rd editions seemed to be the later topics.
 
 ### Review
 
@@ -29,7 +23,3 @@ Chapter 6 is has results on regularity. One nice result relates vanishing moment
 Chapter 7 is the ride you bought the ticket for. This chapter introduces orthonormal wavelet bases through the framework of the multiresolution analysis &mdash; topics that the author himself was a main contributor. Unfortunately, this chapter is very slow-going, but I get the impression that it doesn't necessarily need to be depending on if the reader wants to trudge through the many tediously technical proofs or not. I chose to trudge. That the proofs to many theorems are technical and somewhat long seems to be the nature of the topic &mdash; I do not mean to give the impression that the author has some preference for long-winded pedantry. One should keep in mind the end-game, which is building up orthonormal wavelet bases of $L^2(\mathbb{R})$, with many of the results providing the necessary results to lead up to this.
 
 If you're patient, you're finally rewarded with conditions that lead to orthormal wavelet bases. In doing so, one gains insight into the close connection between the scaling function and its associated discrete filter. This, in turn, lays the ground-work for fast transform algorithms where one sees how the convolution with these discrete filters together with the a downsampling decimation operation allow one to quickly compute the coefficients in the wavelet expansion of a signal (with similar operations for fast reconstruction). The rest of the chapter provides variants on all sorts of related methods and applications.
-
-### Errors
-
-### Notes

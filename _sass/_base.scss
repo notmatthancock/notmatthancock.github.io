@@ -1,4 +1,4 @@
-/**
+/*
  * Reset some basic elements
  */
 body, h1, h2, h3, h4, h5, h6,
@@ -80,8 +80,8 @@ li {
  * Headings
  */
 h1, h2, h3, h4, h5, h6 {
-    font-weight: 400;
-    /*text-decoration: underline;*/
+    //font-weight: 400;
+    text-decoration: underline;
 }
 
 
@@ -100,6 +100,7 @@ a:not(.site-title) {
     &:hover {
         /*color: $text-color;*/
         background-color: #ffff93;
+        cursor: pointer;
     }
 }
 
@@ -107,8 +108,8 @@ a:not(.site-title) {
  * Blockquotes
  */
 blockquote {
-    color: $grey-color;
-    border-left: 4px solid $grey-color-light;
+    color: $gray;
+    border-left: 4px solid $gray-light;
     padding-left: $spacing-unit / 2;
     font-size: 18px;
     letter-spacing: -1px;
@@ -127,7 +128,7 @@ blockquote {
 pre,
 code {
     font-size: 15px;
-    border: 1px solid $grey-color-light;
+    border: 1px solid $gray-light;
     border-radius: 3px;
     background-color: #eef;
 }
@@ -197,7 +198,7 @@ pre {
         vertical-align: middle;
 
         path {
-            fill: $grey-color;
+            fill: $gray;
         }
     }
 }

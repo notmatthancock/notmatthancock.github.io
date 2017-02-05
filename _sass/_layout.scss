@@ -2,13 +2,13 @@
  * Site header
  */
 .site-header {
-    border-top: 5px solid $grey-color-dark;
-    border-bottom: 1px solid $grey-color-light;
+    border-top: 5px solid $gray-dark;
+    border-bottom: 1px solid $gray-light;
     min-height: 56px;
 
     // Positioning context for the mobile navigation icon
     position: relative;
-    background-color: $grey-color-dark;
+    background-color: $gray-dark;
 }
 
 .site-title {
@@ -26,7 +26,15 @@
 
     &:hover {
         color: #fff;
-        background-color: $grey-color-dark;
+        background-color: none;
+    }
+}
+
+.notes-title-link {
+    margin-left: 10px;
+    &,
+    &:visited {
+        color: $link-yellow;
     }
 }
 
@@ -49,7 +57,7 @@
 
         &:hover {
             color: #FFFF93;
-            background-color: $grey-color-dark;
+            background-color: $gray-dark;
         }
     }
 
@@ -58,7 +66,7 @@
         top: 9px;
         right: 30px;
         background-color: $background-color;
-        border: 1px solid $grey-color-light;
+        border: 1px solid $gray-light;
         border-radius: 5px;
         text-align: right;
 
@@ -76,7 +84,7 @@
                 height: 15px;
 
                 path {
-                    fill: $grey-color-dark;
+                    fill: $gray-dark;
                 }
             }
         }
@@ -104,7 +112,7 @@
  * Site footer
  */
 .site-footer {
-    border-top: 1px solid $grey-color-light;
+    border-top: 1px solid $gray-light;
     padding: $spacing-unit 0;
 }
 
@@ -121,7 +129,7 @@
 
 .footer-col-wrapper {
     font-size: 13px;
-    color: $grey-color;
+    color: $gray;
     margin-left: -$spacing-unit / 2;
     @extend %clearfix;
 }
@@ -192,7 +200,7 @@
 
 .post-meta {
     font-size: $small-font-size;
-    color: $grey-color;
+    color: $gray;
 }
 
 .post-link {
@@ -259,7 +267,7 @@
     margin: 0;
     text-align: justify; 
     font-size: 16px;
-    background: $grey-color-light;
+    background: $gray-light;
     li {
         display: inline-block;
         margin: 0 12px 12px 0; 
