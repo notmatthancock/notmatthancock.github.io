@@ -1,11 +1,13 @@
 ---
 layout: post
 title: Machine Learning Part 2 - Numerical Example with Python
+area: notes
 tags:
 - math
 - pattern-recognition
 - python
 mathjax: true
+comments: true
 ---
 
 This post is a continuation of the [previous introduction to binary classification]({{ site.baseurl }}/2015/07/24/intro-to-binary-classification.html). I'll go over some Python code to implement the logistic model discussed in the previous post. We'll use simple gradient ascent to find the model parameters.

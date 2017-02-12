@@ -1,8 +1,10 @@
 ---
 layout: post
 title: Math and Food
+area: notes
 tags: math 
 mathjax: false
+comments: true
 ---
 A bit ago, there was a story on [y combinator news about the potato paradox](https://news.ycombinator.com/item?id=9894237). I mentioned that I had small list of math theorems loosely related to food. The list grew. An attempt was made to establish the list on Wikipedia. It was deleted.
 
@@ -27,4 +29,3 @@ So, I'm sharing here because it's interesting trivia. It's not strictly mathemat
 * [Cake number](https://en.wikipedia.org/wiki/Cake_number)
 * [Spaghetti code](https://en.wikipedia.org/wiki/Spaghetti_code)
 
-Apparently, we are quite inspired by food and / or need to quit working while hungry :)

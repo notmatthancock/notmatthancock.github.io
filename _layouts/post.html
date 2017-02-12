@@ -12,7 +12,9 @@ layout: default
     {{ content }}
   </article>
 
-  {% include comments.html %}
+  {% if page.comments %}
+    {% include comments.html %}
+  {% endif %}
   {% if page.mathjax %}
     {% include mathjax.html %}
   {% endif %}

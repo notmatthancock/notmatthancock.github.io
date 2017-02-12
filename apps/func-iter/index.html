@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Functional Iterator Painter</title>
+        <style>
+            body { font-family: sans-serif }
+            h3 { text-align: center; margin: 0; }
+            table#frac-table { margin: 0 auto; }
+            input.bound { width: 20px; }
+            canvas#js-frac { border: 2px solid #000; border-radius: 3px; }
+            #draw-wrap {
+                border: 1px solid #404040;
+                border-radius: 3px;
+                padding: 3px;
+                float: right;
+                background: #aaa;
+            }
+            span.color-palette {
+                display: inline-block;
+                width: 10px;
+                height: 10px;
+                border: 1px solid #000;
+            }
+            span.color-palette:hover { cursor: pointer; }
+
+            div.hue-changer {
+                display: none;
+                position: absolute;
+                background: #aaa;
+                border: 1px solid #404040;
+                border-radius: 3px;
+                box-shadow: 3px 3px 3px #000;
+                background: linear-gradient(to right, hsl(0,100%,50%), hsl(60, 100%, 50%), hsl(120, 100%, 50%), hsl(180, 100%, 50%),  hsl(240, 100%, 50%), hsl(300, 100%, 50%),  hsl(360, 100%, 50%));
+            }
+           div.hue-changer > input { width: 300px; }
+        </style>
+    </head>
+
+    <body>
+        <h3>Functional Iterator Painter</h3>
+        <div>
+        <table id="frac-table">
+            <tr>
+                <td>(<input type="text" class="xMin bound">,<input type="text" class="yMax bound">)</td>
+                <td><!--blank--></td>
+                <td>(<input type="text" class="xMax bound">,<input type="text" class="yMax bound">)</td>
+            </tr>
+            <tr>
+                <td><!--blank--></td>
+                <td>
+                    <canvas id="js-frac" width="100" height="100"></canvas>
+                </td>
+                <td><!--blank--></td>
+            <tr>
+                <td>(<input type="text" class="xMin bound">,<input type="text" class="yMin bound">)</td>
+                <td>
+                    <button onclick="window.open( $('#js-frac')[0].toDataURL(), '_blank' )">Save</button>
+                    <button id="recolor">ReColor</button>
+                    <span>
+                        <span class="color-palette" which="1"></span>
+                        <span class="color-palette" which="2"></span>
+                        <span class="color-palette" which="3"></span>
+                    </span>
+                    <span id="draw-wrap">
+                        <span id="frac-loading"></span>
+                        <button id="draw" style="display: none;">ReDraw</button>
+                        <button id="stop">Stop</button>
+                    </span>
+
+                </td>
+                <td>(<input type="text" class="xMax bound">,<input type="text" class="yMin bound">)</td>
+            </tr>
+            <tr>
+                <td><!--blank--></td>
+                <td>
+                    <table style="width: 100%;">
+                        <tr>
+                            <td><a href="javascript:;" onclick="alert('Use javascript syntax for g(x,y) and h(x,y). Javascript math functions are permissible. More info on these here: http://www.w3schools.com/jsref/jsref_obj_math.asp')">Function:</a></td>
+                            <td><!--blank--></td>
+                        </tr>
+                        <tr>
+                            <td>x &larr; g(x,y) =</td>
+                            <td><input style="width: 100%" id="g_func"></td>
+                        </tr>
+                        <tr>
+                            <td>y &larr; h(x,y) =</td>
+                            <td><input style="width: 100%" id="h_func"></td>
+                        </tr>
+                        <tr>
+                            <td>Convergence Limit:</td>
+                            <td><input id="convergence_limit" class="integer-input"></td>
+                        </tr>
+                        <tr>
+                            <td>Divergence Limit:</td>
+                            <td><input id="divergence_limit" class="integer-input"></td>
+                        </tr>
+                        <tr>
+                            <td>Canvas Width:</td>
+                            <td><input id="canvas_width" class="integer-input"></td>
+                        </tr>
+                        <tr>
+                            <td>Canvas Height:</td>
+                            <td><input id="canvas_height" class="integer-input"></td>
+                        </tr>
+                    </table>
+                    
+                </td>
+                <td><!--blank--></td>
+            </tr>
+        </table>
+        </div>
+        <!--
+        <br>
+        <br>
+
+        Try these function pairs:
+        <style>ol#funcs li { padding-top: 10px; }ol#funcs li input { width: 220px; }</style>
+        <ol id="funcs">
+            <li>
+              g = <input type="text" value="Math.exp(x)*Math.cos(y)"><br>
+              h = <input type="text" value="Math.exp(x)*Math.sin(y)">
+            </li>
+            <li>
+                g = <input type="text" value="x*x + y*y"><br>
+                h = <input type="text" value="0.76*Math.cos(4*x*y - Math.sin(y))">
+            </li>
+            <li>
+                g = <input type="text" value="20*Math.cos(4*y*y)*Math.sin(3*x*x*x)"><br>
+                h = <input type="text" value="x*x*y*y*y + 0.3">
+            </li>
+            <li>
+                g = <input type="text" value="(0.1*Math.sqrt( Math.tan(y*y)*Math.sin(x*x) ) + 1.4"><br>
+                h = <input type="text" value="(x*x*y + 9)/(y-1.9)">
+            </li>
+            <li>
+                g = <input type="text" value="x*x - y*y + 0.39"><br>
+                h = <input type="text" value="Math.asin( x*y ) + 0.13">
+            </li>
+            <li>
+                g = <input type="text" value="(x*x - y*y) % y"><br>
+                h = <input type="text" value="x*y % 3">
+            </li>
+        </ol>
+
+        Some other tips:<br>
+        <ol>
+            <li>Change the limits of canvas by changing the boundary points located at the corners of the canvas. These represent the corner points of a 
+            rectangle in the x-y plane.</li>
+            <li>There is a one-to-one correspondence between pixels (canvas width and height), and points (in the plane) tested. This means that if you keep
+            the bounds constant, increasing the size of the canvas will increase the resolution. If you make a large one, keep an eye on the percentage meter
+            to guage the length of time til completion.</li>
+            <li>Recoloring requires no further computation (as intensive as testing points, that is).</li>
+            <li>If the image is small, yet the completion percentage is crawling, this means the most of the points are converging and the image will most
+            likely be a boring solid color.</li>
+            <li>Small tweaks may have surprisingly large effects on the previous behavior.</li>
+            <li>If you like an image, press the save button!</li> 
+        </ol>
+        -->
+
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="./main.js"></script>
+    </body>
+</html>

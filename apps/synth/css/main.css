@@ -1,0 +1,153 @@
+body { font-family: sans-serif; color: #333; padding: 50px; }
+#main { margin: 0 auto; width: 100%; }
+
+#synth {
+	margin: 10px;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: moz-none;
+	-ms-user-select: none;
+	user-select: none;
+    color: #000;
+}
+
+#synth > table {
+	width: 100%;
+	border: 4px solid #444;
+	border-radius: 4px;
+	background: #eaeaee;
+}
+
+#synth > table > tbody > tr > td {
+	height: 100px;
+	text-align: center;
+	border: 1px solid #808080;
+	border-radius: 4px;
+	padding: 3px;
+	background: #d6d6d6;
+}
+
+#synth > table > tbody > tr > td > table {
+	margin: auto;
+}
+
+#synth td.osc div.shape {
+	width: 50px;
+	height: 50px;
+	margin: 5px auto;
+}
+
+#synth td.osc div.osc-route label {
+	font-size: 12px;
+}
+
+#synth td.osc div.osc-title {
+	font-size: 16px;
+	font-weight: bold;
+}
+
+#synth td.osc div.shape:hover {
+	cursor: pointer;
+	opacity: 0.9;
+}
+
+#synth td.osc div.osc-oct-full {
+	float: right;
+}
+
+#synth td.osc input.osc-oct {
+	width: 70px;
+}
+
+#synth td.osc input.osc-detu {
+	width: 60px;
+}
+
+#synth td.osc input.osc-oct-disp {
+	width: 10px;
+}
+
+#synth td.osc input.osc-detu-disp {
+	width: 20px;
+}
+
+#synth td.osc div.sine {
+	background: #2f2f2f;
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+}
+#synth td.osc div.square {
+	border-radius: 0;
+	border: 0;
+	width: 50px;
+	height: 50px;
+	background: #2f2f2f;
+}
+#synth td.osc div.sawtooth {
+	border-radius: 0;
+	width: 0;
+	height: 0;
+	background: transparent;
+	border-bottom: 50px solid #2f2f2f;
+	border-right: 50px solid transparent;
+}
+#synth td.osc div.triangle {
+	border-radius: 0;
+	width: 0;
+	height: 0;
+	background: transparent;
+	border-left: 25px solid transparent;
+	border-right: 25px solid transparent;
+	border-bottom: 50px solid #2f2f2f;
+}
+
+#synth div#amp-envelope-title, #synth div#master-title, #synth div.filter-title, #synth div#filt-envelope-title {
+	font-size: 16px;
+	font-weight: bold;
+	padding-bottom: 10px;
+}
+
+#synth table.filt-route-indicators {
+	width: 100%;
+	border: 1px solid #808080;
+}
+
+#synth table.filt-route-indicators td {
+	border: 1px solid #808080;
+	height: 7px;
+	opacity: 0.9;
+}
+
+#synth table.filt-route-indicators td.on {
+	background: #6ad16f;
+}
+
+#synth table.filt-route-indicators td.off {
+	background: #d18383;
+}
+
+#synth button#kill {
+	background: red;
+	border: 1px solid #808080;
+	border-radius: 4px;
+	font-family: monospace;
+	font-weight: bold;
+	margin-top: 10px;
+}
+
+#synth button#kill:active {
+	background: yellow;
+	border-color: transparent;
+}
+
+#synth button#kill:hover {
+	cursor: pointer;
+}
+
+#synth #audio_spectrum_canvas {
+	border: 1px solid #808080;
+	border-radius: 4px;
+	background: #e5e4d3;
+}

@@ -2,6 +2,7 @@
 published: false
 layout: post
 title: Construction of Daubechies Wavelet
+area: notes
 tags: math wavelets
 mathjax: true
 ---

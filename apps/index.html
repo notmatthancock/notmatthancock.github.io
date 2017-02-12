@@ -1,20 +1,18 @@
 ---
 layout: default
+title: Apps
+area: apps
 ---
 
 <div class="home">
 
-  <h1 class="page-heading">Apps</h1>
+  <h1 class="page-heading">Web Apps</h1>
 
   <ul class="post-list">
-    {% for apps in site.apps %}
-      <li>
-        <span class="post-meta">{{ app.date | date: "%b %-d, %Y" }}</span>
-
-        <h2>
-          <a class="post-link" href="{{ app.url | prepend: site.baseurl }}">{{ app.title }}</a>
-        </h2>
-      </li>
-    {% endfor %}
+    <li><a href="./dataset2d/">Point & click, 2D, Binary classification dataset maker</a></li>
+    <li><a href="./func-iter/">Make fractals via functional iterator</a></li>
+    <li><a href="./interactive-linear-transforms/">Visualize how a matrix is a linear map</a></li>
+    <li><a href="./synth/">Make music with this synthesizer</a></li>
   </ul>
+  
 </div>

@@ -4,6 +4,7 @@
     margin-top: 200px;
 }
 
+
 div#me-wrap {
     float: left;
     margin: 10px 40px 30px 0;
@@ -25,3 +26,10 @@ img#me {
 }
 
 #index-nav td { text-align: center; }
+
+@media only screen and (max-device-width: 480px) {
+    body { font-size: 12px; }
+    #index-wrap { width: 300px; margin: 10px auto; }
+    #index-nav  { width: 300px; }
+    #index-nav td:not(:last-child) { border-right: 1px solid $gray; }
+}

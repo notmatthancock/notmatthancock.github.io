@@ -1,0 +1,401 @@
+---
+---
+<!doctype html>
+<html>
+    <head>
+        <title>Matt Hancock</title> 
+        <link rel="stylesheet" href="./css/main.css" type="text/css" media="screen"/>
+    </head>
+
+    <body>
+        <div id="main">
+
+            <div id="content">
+                <h2>Funk-o-Matic 5000</h2>
+
+<div id="synth">
+    <table>
+        <tr>
+        
+            <!--osc1-->
+            <td class="osc">
+                <table>
+                    <tr>
+                        <td><!--blank--></td>
+                        <td>
+                            <div class="osc-title">Osc-1</div>
+                        </td>
+                    </tr>
+                    
+                    <tr title="Filter routing">
+                        <td>Rout</td>
+                        <td>
+                            <div class="osc-route">
+                                <form>
+                                    <input type="radio" name="osc-1-route" id="osc-1-to-filt-1" num="1" to="1" checked="checked"><label for="osc-1-to-filt-1">F-1</label>
+                                    <input type="radio" name="osc-1-route" id="osc-1-to-filt-2" num="1" to="2"><label for="osc-1-to-filt-2">F-2</label>
+                                    <input type="radio" name="osc-1-route" id="osc-1-to-off"  num="1" to="0"><label for="osc-1-to-off">Off</label>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    
+                    <tr title="Wave shape">
+                        <td>	Shap</td>
+                        <td>
+                            <div class="shape triangle" id="osc-1-shape" num="1"></div>
+                        </td>
+                    </tr>
+                
+                    <tr title="Octave level">
+                        <td>Octv</td>
+                        <td>
+                            <div class="osc-oct-full">
+                                <input type="range" value="4" min="1" max="8" step="1" class="osc-oct" id="osc-1-oct" num="1">
+                                <input type="text" class="osc-oct-disp" id="osc-1-oct-disp" readonly="readonly" value="4">
+                            </div>
+                        </td>
+                    </tr>
+                    
+                    <tr title="Detune amount">
+                        <td>Detu</td>
+                        <td>
+                            <div class="osc-oct-full">
+                                <input type="range" value="0" min="-20" max="20" step="1" class="osc-detu" id="osc-1-detu" num="1">
+                                <input type="text" class="osc-detu-disp" id="osc-1-detu-disp" readonly="readonly" value="0">
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <!--end osc1-->
+            
+            <!--filt1-->
+            <td>
+                <table>
+                    <tr>
+                        <td><!--blank--></td>
+                        <td><div class="filter-title">Filter-1</div></td>
+                    </tr>
+                    <tr title="Filter frequency">
+                        <td>Freq</td>
+                        <td><input type="range" min="10" max="20000" value="10000" step="1" class="freq" num="1"></td>
+                    </tr>
+                    <tr title="Resonance amount">
+                        <td>Reso</td>
+                        <td><input type="range" min="0.01" max="30" value="0.7" step="0.1" class="reso" num="1"></td>
+                    </tr>
+                    <tr title="Filter type">
+                        <td>Type</td>
+                        <td>
+                            <select class="freq-type" num="1">
+                                <option value="lowpass">Lowpass</option>
+                                <option value="highpass">Highpass</option>
+                                <option value="bandpass">Bandpass</option>
+                                <option value="lowshelf">Lowshelf</option>
+                                <option value="highshelf">Highshelf</option>
+                                <option value="peaking">Peaking</option>
+                                <option value="notch">Notch</option>
+                                <option value="allpass">Allpass</option>
+                            </select>
+                        </td>
+                    </tr>
+                    
+                    <tr title="Change the amount of modulation via env. Center is 0.">
+                        <td>ModF</td>
+                        <td><input type="range" min="-1" max="1" value="0" step="0.01" class="modf" num="1"></td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Rout</td>
+                        <td>
+                            <table id="filt-1-route-indicators" class="filt-route-indicators">
+                                <tr>
+                                    <td id="1" class="on" title="Osc-1 to Filt-1"></td>
+                                    <td id="2" class="off" title="Osc-2 to Filt-1"></td>
+                                    <td id="3" class="off" title="Osc-3 to Filt-1"></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <!--end filt1-->
+            
+            <!--amp envelope-->
+            <td>
+                <table id="amp-envelopes">
+                    <tr>
+                        <td><!--blank--></td>
+                        <td>	<div id="amp-envelope-title">Amp Envelope</div></td>
+                    </tr>
+                    <tr title="Attack time">
+                        <td>A</td>
+                        <td><input type="range" min="0.01" max="1" step="0.01" value="0.03" id="attack"></td>
+                    </tr>
+                    <tr title="Decay time / Sustain level">
+                        <td>D</td>
+                        <td><input type="range" min="0.01" max="1" step="0.01" value="0.5" id="decay"></td>
+                    </tr>
+                    <tr title="Release time">
+                        <td>R</td>
+                        <td><input type="range" min="0.01" max="1" step="0.01" value="0.2" id="release"></td>
+                    </tr>
+                </table>
+            </td>
+            <!--end amp envelope-->
+        <tr>
+        <tr>
+            
+            <!--osc2-->
+            <td class="osc">
+                <table>
+                    <tr>
+                        <td><!--blank--></td>
+                        <td>
+                            <div class="osc-title">Osc-2</div>
+                        </td>
+                    </tr>
+                    
+                    <tr title="Filter routing">
+                        <td>Rout</td>
+                        <td>
+                            <div class="osc-route">
+                                <form>
+                                    <input type="radio" name="osc-2-route" id="osc-2-to-filt-1" num="2" to="1"><label for="osc-2-to-filt-1">F-1</label>
+                                    <input type="radio" name="osc-2-route" id="osc-2-to-filt-2" num="2" to="2"><label for="osc-2-to-filt-2">F-2</label>
+                                    <input type="radio" name="osc-2-route" id="osc-2-to-off"  num="2" to="0" checked="checked"><label for="osc-2-to-off">Off</label>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    
+                    <tr title="Wave shape">
+                        <td>	Shap</td>
+                        <td>
+                            <div class="shape sawtooth" id="osc-1-shape" num="2"></div>
+                        </td>
+                    </tr>
+                
+                    <tr title="Octave level">
+                        <td>Octv</td>
+                        <td>
+                            <div class="osc-oct-full">
+                                <input type="range" value="4" min="1" max="8" step="1" class="osc-oct" id="osc-2-oct" num="2">
+                                <input type="text" class="osc-oct-disp" id="osc-2-oct-disp" readonly="readonly" value="4">
+                            </div>
+                        </td>
+                    </tr>
+                    
+                    <tr title="Detune amount">
+                        <td>Detu</td>
+                        <td>
+                            <div class="osc-oct-full">
+                                <input type="range" value="0" min="-20" max="20" step="1" class="osc-detu" id="osc-2-detu" num="2">
+                                <input type="text" class="osc-detu-disp" id="osc-2-detu-disp" readonly="readonly" value="0">
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <!--end osc2-->
+            
+            <td>
+                <canvas id="audio_spectrum_canvas" width="300px" height="150px"></canvas>
+            </td>
+            
+            <!--master-->
+            <td>
+                <table id="master">
+                    <tr>
+                        <td><!--blank--></td>
+                        <td>
+                            <div id="master-title">Master</div>
+                        </td>
+                    </tr>
+                    <tr title="Master volume">
+                        <td>Volm</td>
+                        <td>
+                            <input type="range" min="0.0" max="1.0" step="0.01" value="1.0" id="master-gain">
+                        </td>
+                    </tr>
+                    <tr title="Reverb amount">
+                        <td>Revb</td>
+                        <td>
+                            <input type="range" min="0.0" max="1.0" step="0.01" value="0.0" id="master-reverb">
+                        </td>
+                    </tr>
+                    <tr title="Distortion amount">
+                        <td>Dist</td>
+                        <td>
+                            <input type="range" min="0.0" max="10.0" step="0.01" value="0.0" id="distortion">
+                        </td>
+                    </tr>
+                    <tr title="(Poly/Mono)phony">
+                        <td><!--blank--></td>
+                        <td>
+                            <input type="radio" class="poly" name="poly" id="poly" checked="checked"><label for="poly">Poly</label>
+                            <input type="radio" class="poly" name="poly" id="mono"><label for="mono">Mono</label>
+                        </td>
+                    </tr>
+                    <tr title="Slide time between notes">
+                        <td>Slid</td>
+                        <td>
+                            <input type="range" min="0.0" max="0.2" step="0.01" value="0.0" id="slide">
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <!--end master-->
+        <tr>
+        <tr>
+            
+            <!--osc3-->
+            <td class="osc">
+                <table>
+                    <tr>
+                        <td><!--blank--></td>
+                        <td>
+                            <div class="osc-title">Osc-3</div>
+                        </td>
+                    </tr>
+                    
+                    <tr title="Filter routing">
+                        <td>Rout</td>
+                        <td>
+                            <div class="osc-route">
+                                <input type="radio" name="osc-3-route" id="osc-3-to-filt-1" num="3" to="1"><label for="osc-3-to-filt-1">F-1</label>
+                                <input type="radio" name="osc-3-route" id="osc-3-to-filt-2" num="3" to="2"><label for="osc-3-to-filt-2">F-2</label>
+                                <input type="radio" name="osc-3-route" id="osc-3-to-off" num="3" to="0" checked="checked"><label for="osc-3-to-off">Off</label>
+                            </div>
+                        </td>
+                    </tr>
+                    
+                    <tr title="Wave shape">
+                        <td>	Shap</td>
+                        <td>
+                            <div class="shape square" id="osc-3-shape" num="3"></div>
+                        </td>
+                    </tr>
+                
+                    <tr title="Octave level">
+                        <td>Octv</td>
+                        <td>
+                            <div class="osc-oct-full">
+                                <input type="range" value="4" min="1" max="8" step="1" class="osc-oct" id="osc-3-oct" num="3">
+                                <input type="text" class="osc-oct-disp" id="osc-3-oct-disp" readonly="readonly" value="4">
+                            </div>
+                        </td>
+                    </tr>
+                    
+                    <tr title="Detune amount">
+                        <td>Detu</td>
+                        <td>
+                            <div class="osc-oct-full">
+                                <input type="range" value="0" min="-20" max="20" step="1" class="osc-detu" id="osc-3-detu" num="3">
+                                <input type="text" class="osc-detu-disp" id="osc-3-detu-disp" readonly="readonly" value="0">
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <!--end osc3-->
+            
+            <!--filt2-->
+            <td>
+                <table>
+                    <tr>
+                        <td><!--blank--></td>
+                        <td><div class="filter-title">Filter-2</div></td>
+                    </tr>
+                    <tr title="Filter frequency">
+                        <td>Freq</td>
+                        <td><input type="range" min="10" max="20000" value="10000" step="1" class="freq" num="2"></td>
+                    </tr>
+                    <tr title="Resonance amount">
+                        <td>Reso</td>
+                        <td><input type="range" min="0.01" max="30" value="0.7" step="0.1" class="reso" num="2"></td>
+                    </tr>
+                    <tr title="Filter type">
+                        <td>Type</td>
+                        <td>
+                            <select class="freq-type" num="2">
+                                <option value="lowpass">Lowpass</option>
+                                <option value="highpass">Highpass</option>
+                                <option value="bandpass">Bandpass</option>
+                                <option value="lowshelf">Lowshelf</option>
+                                <option value="highshelf">Highshelf</option>
+                                <option value="peaking">Peaking</option>
+                                <option value="notch">Notch</option>
+                                <option value="allpass">Allpass</option>
+                            </select>
+                        </td>
+                    </tr>
+                    
+                    <tr title="Change the amount of modulation via env. Center is 0.">
+                        <td>ModF</td>
+                        <td><input type="range" min="-1" max="1" value="0" step="0.01" class="modf" num="2"></td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Rout</td>
+                        <td>
+                            <table id="filt-2-route-indicators" class="filt-route-indicators">
+                                <tr>
+                                    <td id="1" class="off" title="Osc-1 to Filt-2"></td>
+                                    <td id="2" class="off" title="Osc-2 to Filt-2"></td>
+                                    <td id="3" class="off" title="Osc-3 to Filt-2"></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <!--end filt2-->
+            
+            <!--filt envelope-->
+            <td>
+                <table id="filt-envelopes">
+                    <tr>
+                        <td><!--blank--></td>
+                        <td>	<div id="filt-envelope-title">Filter Envelope</div></td>
+                    </tr>
+                    <tr title="Attack time">
+                        <td>A</td>
+                        <td><input type="range" min="0" max="1" step="0.01" value="0.1" id="attack"></td>
+                    </tr>
+                    <tr title="Decay time/Sustain level">
+                        <td>D</td>
+                        <td><input type="range" min="0.01" max="1" step="0.01" value="0.1" id="decay"></td>
+                    </tr>
+                    <tr title="Release time">
+                        <td>R</td>
+                        <td><input type="range" min="0.01" max="1" step="0.01" value="0.1" id="release"></td>
+                    </tr>
+                </table>
+            </td>
+            <!--end filt envelope-->
+        <tr>
+    </table>
+    
+    <br>
+
+    <div id="keyboard"></div>
+
+    <button id="kill" title="Press in case of emergency">Kill Switch</button>
+</div>
+
+<!--link rel="stylesheet" type="text/css" href="/~macuser/old-1-homepage/css/synth.css"-->
+{% include jquery.html %}
+<script type="text/javascript" src="./js/raphael-min.js"></script>
+<script type="text/javascript" src="./js/qwerty-hancock.min.js"></script>
+<script type="text/javascript" src="./js/main.js"></script>
+<script type="text/javascript">
+    $('#synth').width( $(window).width()*0.8 );
+    fix_overflow( $('#synth') );
+</script>
+   
+            </div>
+        </div>
+    </body>
+</html>

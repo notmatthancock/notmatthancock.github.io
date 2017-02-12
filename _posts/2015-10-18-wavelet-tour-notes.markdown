@@ -1,7 +1,9 @@
 ---
 layout: post
 title: Wavelet Tour Review
+area: notes
 tags: math 
+commets: true
 ---
 
 A picked up Stephane Mallat's **A Wavelet Tour of Signal Processing** a while ago and have been spending my few off-hours working through it. I bought the 2nd edition because the price was substantially cheaper and the only substantial differences between the 2nd and 3rd editions seemed to be the later topics.

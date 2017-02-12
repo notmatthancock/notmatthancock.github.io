@@ -1,0 +1,85 @@
+---
+---
+<!doctype html>
+<html>
+<head>
+    <title>Interactive Linear Transforms</title>
+    <link rel="stylesheet" href="./css/main.css" type="text/css">
+</head>
+
+<body>
+
+<h2>Interactive Linear Transforms</h2>
+
+<div id="linear-transformation">
+    <table style="width: 100%;"><tr>
+        <td><!--vector canvas-->
+            <div id="canvas-wrapper">
+                <canvas id="transformation-background" width="400px" height="400px"></canvas>
+                <canvas id="transformation-foreground" width="400px" height="400px"></canvas>
+            </div>
+        </td>
+
+        <td><!--matrix-values-->
+            <table><tr>
+                <td class="bracket matrix">[</td>
+                <td>
+                    <table>
+                        <tr>
+                            <td><input class="matrix-value" id="a00" type="text"></td>
+                            <td><input class="matrix-value" id="a01" type="text"></td>
+                        </tr>
+                        <tr>
+                            <td><input class="matrix-value" id="a10" type="text"></td>
+                            <td><input class="matrix-value" id="a11" type="text"></td>
+                        </tr>
+                    </table>
+                </td>
+                <td class="bracket matrix">]</td>
+            </tr></table>
+        </td>
+
+        <td><!--input-vector-values-->
+            <table><tr>
+                <td class="bracket input-vector">[</td>
+                <td>
+                    <table>
+                        <tr><td><input id="x0" readonly="readonly" type="text"></td></tr>
+                        <tr><td><input id="x1" readonly="readonly" type="text"></td></tr>
+                    </table>
+                </td>
+                <td class="bracket input-vector">]</td>
+            </tr></table>
+        </td>
+
+        <td class="bracket">=</td>
+
+        <td><!--output-vector-values-->
+            <table><tr>
+                <td class="bracket output-vector">[</td>
+                <td>
+                    <table>
+                        <tr><td><input id="y0" readonly="readonly" type="text"></td></tr>
+                        <tr><td><input id="y1" readonly="readonly" type="text"></td></tr>
+                    </table>
+                </td>
+                <td class="bracket output-vector">]</td>
+            </tr></table>
+        </td>
+    </tr></table>
+</div>
+
+<br>
+<br>
+
+A matrix, $A \in \mathbb{R}^{2 \times 2}$, is a mapping, $A: \mathbb{R}^2 \to \mathbb{R}^2$. To view the input and output of this function simultaneously, we'd need a 4D plot which is of course not possible. On the other hand, we can view both input and output vectors in the same plane.
+
+Above, the input is blue while the output is red. Move the input vector around with your mouse to see where different points get mapped according the given matrix. Change the matrix values to see how different matrices operate. For example, try a singular matrix or rotation matrix. Also, try to visually determine the eigenvectors of a given matrix.
+
+
+
+{% include jquery.html %}
+{% include mathjax.html %}
+<script src="./js/main.js" type="text/javascript"></script>
+</body>
+</html>

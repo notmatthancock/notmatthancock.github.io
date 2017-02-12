@@ -1,11 +1,13 @@
 ---
 layout: post
 title: The ROC curve Part 2 - Numerical Example with Python
+area: notes
 tags:
 - math
 - pattern-recognition
 - python
 mathjax: true
+comments: true
 ---
 
 This short post is a numerical example (with Python) of the concepts of the ROC curve and AUC score [introduced in this post]({{ site.baseurl }}/2015/08/18/what-is-the-roc-curve.html) using the logistic regression example introduced [in theory here]({{ site.baseurl }}/2015/07/24/intro-to-binary-classification.html) and [numerically with Python here]({{ site.baseurl }}/2015/08/02/classification-intro-part-2-numerical-example.html).

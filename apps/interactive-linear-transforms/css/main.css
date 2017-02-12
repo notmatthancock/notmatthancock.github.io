@@ -1,0 +1,37 @@
+body {
+    font-size: 18px;
+    line-height: 24px;
+    font-family: sans-serif;
+    margin: 0 auto;
+    padding: 50px;
+    width: 70%;
+    max-width: 900px;
+}
+#linear-transformation input {
+    font-size: 14px;
+    width: 40px;
+    border: 1px solid black;
+}
+td.input-vector { color: blue; }
+td.output-vector { color: red; }
+#canvas-wrapper {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    margin: 0 auto;
+}
+#canvas-wrapper canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: default;
+}
+#transformation-background {
+    border: 2px solid black;
+    border-radius: 4px;
+    background-color: #ddd;
+}
+#transformation-foreground {
+    border: 2px solid black;
+    border-radius: 4px;
+}

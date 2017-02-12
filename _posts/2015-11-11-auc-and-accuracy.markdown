@@ -1,11 +1,13 @@
 ---
 layout: post
 title: A relationship between accuracy and the AUC score
+area: notes
 tags:
 - math 
 - statistics
 - pattern-recognition
 mathjax: true
+comments: true
 ---
 
 In this post, I derive a relationship between analytic accuracy and $\text{AUC}$ score. These quantities are introduced and derived [in a previous post]({{ site.baseurl }}/2015/08/18/what-is-the-roc-curve.html). I admit that the relationship is somewhat nonintuitive, so this post is mostly just for fun. On the other hand, the existence of the relationship is interesting in its own right.

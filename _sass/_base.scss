@@ -202,3 +202,7 @@ pre {
         }
     }
 }
+
+@media only screen and (max-device-width: 480px) {
+    body,h1,h2,h3,a,li,td,pre,code,p,div { font-size: 12px; line-height: 24px; }
+}
