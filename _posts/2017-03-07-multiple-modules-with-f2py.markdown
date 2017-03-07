@@ -11,7 +11,7 @@ mathjax: false
 comments: true
 ---
 
-For an intro to `f2py` [see here]({{ site.baseurl }}/2017/02/10/calling-fortran-from-python.html)
+For an intro to `f2py` [see here]({{ site.baseurl }}/2017/02/10/calling-fortran-from-python.html).
 
 It's possible to combine multiple Fortran modules into a single shared library to be used by Python using `f2py`. It's actually pretty easy, but I'm writing a note about it because I'll likely forget how to do it in the future.
 
