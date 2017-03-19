@@ -1,0 +1,435 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>GSS Python Talk</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+        <link href="https://fonts.googleapis.com/css?family=Patrick+Hand" rel="stylesheet">
+		<link rel="stylesheet" href="css/theme/mytheme.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/atelier-dune-light.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-background-repeat="repeat" data-background-size="300px" data-background-image="./img/py.png">
+                    <h1>10 <span style="color: yellow">FREE</span> Python Libraries for Mathematical and Scientific Computing that will <span style="color: yellow">TOTALLY SHOCK</span> you</h1>
+                    <hr>
+                    <p style="font-family: inherit">Matt Hancock, <a href="mailto:mhancock@math.fsu.edu">mhancock@math.fsu.edu</a></p>
+                </section>
+
+                <section>
+                    <h1>Why Python?  <img src="./img/pylogo.svg" style="height: 20%; width: 20%; border: none; margin: 0 0 0 25px"/></h1>
+                    <ul>
+                        <li>Interpreted, object-oriented, <span style="color: #ff6262">general purpose</span> language</li>
+                        <li class="fragment">Syntax emphasizes readability</li>
+                        <li class="fragment">Interactive environments make it ideal for prototyping</li>
+                        <li class="fragment">Big standard library included (text manipulation, file I/O, etc.)</li>
+                        <li class="fragment" style="color: #ff6262">Large, active development community for other libraries (math, science, database mgmt, web development, etc.)</li>
+                        <li class="fragment">C / C++ / Fortran extensions possible</li>
+                        <li class="fragment">Runs on most Operating Systems</li>
+                        <li class="fragment">Free to use! Free to modify and redistribute!</li>
+                    </ul>
+
+                    <br><br>
+                    <small>
+                    See: <a href="https://wiki.python.org/moin/BeginnersGuide/Overview">Python beginner's guide</a>
+                    </small>
+                </section>
+
+                <section>
+                    <h1>Rough outline</h1>
+
+                    <ol>
+                        <li>Python basics: writing / running code, environments, etc.</li>
+                        <li>The Holy Trinity: <a href="http://www.numpy.org/">NumPy</a>, <a href="https://www.scipy.org/">SciPy</a>, <a href="http://matplotlib.org/">Matplotlib</a></li>
+                        <li>Specialized libraries for math/science</li>
+                    </ol>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Getting started</h2>
+                        <ul>
+                            <li><a href="https://www.python.org/downloads/">Download and install python</a></li>
+                            <li>Options for running code:
+                                <ol>
+                                    <li>Write script first, and then execute it from a terminal; or,</li>
+                                    <li>Execute scripts/commands from interactive console or GUI.</li>
+                                </ol>
+                            </li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h3>Running a script from terminal</h3>
+                        Create new file, <code><a href="./code/collatz.py">collatz.py</a></code>:
+	                    <pre><code class="python" data-code="./code/collatz.py" data-trim></code></pre>
+                    </section>
+
+                    <section>
+                        <h3>Running a script from terminal</h3>
+
+                        <img src="./img/collatz.gif">
+                    </section>
+
+                    <section>
+                        <h3>Interactive console: <a href="https://ipython.org/">IPython</a></h3>
+
+                        <img src="./img/collatz-ipy.gif">
+                    </section>
+
+                    <section>
+                        <h4>Integrated Development Environment (IDE): <a href="http://pythonhosted.org/spyder/">Spyder</a></h4>
+
+                        <img src="./img/spyder.gif">
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h1><a style="position: 20px;" href="http://www.numpy.org">NumPy</a> <img src="./img/numpylogo.svg" style="border: none; width: 10%; height: 10%; margin: 0 0 0 25px;"></h1>
+                        <ul>
+                            <li>Multidimensional array objects of various data types (floating point, integer, bool, etc.)</li>
+                            <li>Array slicing / broadcasting</li>
+                            <li>Linear algebra (basic ones), Fourier transform, random number generation tools</li>
+                            <li>Tools for integrating Fortran code</li>
+                            <li><a href="https://docs.scipy.org/doc/numpy-dev/user/numpy-for-matlab-users.html">NumPy guide for Matlab users</a></li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>NumPy example</h3>
+                        <pre><code class="python" data-code="./code/numpy-example.py" data-trim></code></pre>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h1><a href="https://www.scipy.org">SciPy</a> <img src="./img/scipylogo.png" style="margin: 0 0 0 20px; width: 10%; height: 10%; border: 0;"></h1>
+                        <ul style="font-size: 77%">
+                            <li><a href="https://docs.scipy.org/doc/scipy/reference/cluster.html"><code>scipy.cluster</code></a> - Hierarchical clustering</li>
+                            <li class="fragment"><a href="https://docs.scipy.org/doc/scipy/reference/tutorial/integrate.html"><code>scipy.integrate</code></a> - Integration (uni- and multi-dimensional) and ODE solvers</li>
+                            <li class="fragment"><a href="https://docs.scipy.org/doc/scipy/reference/tutorial/interpolate.html"><code>scipy.interpolate</code></a> - Interpolation (uni- and multi-dimensional, splines, etc.)</li>
+                            <li class="fragment"><a href="https://docs.scipy.org/doc/scipy/reference/tutorial/io.html"><code>scipy.io</code></a> - Various file readers / writers <span style="font-size: 70%">(including Matlab format)</span></li>
+                            <li class="fragment"><a href="https://docs.scipy.org/doc/scipy/reference/tutorial/linalg.html"><code>scipy.linalg</code></a> - Linear algebra routines</li>
+                            <li class="fragment"><a href="https://docs.scipy.org/doc/scipy/reference/tutorial/ndimage.html"><code>scipy.ndimage</code></a> - Image processing routines <span style="font-size: 70%">(filters, interpolation, i/o, morphology, etc.)</span></li>
+                            <li class="fragment"><a href="https://docs.scipy.org/doc/scipy/reference/tutorial/optimize.html"><code>scipy.optimize</code></a> - Optimization <span style="font-size: 70%">(too many methods to list!)</span></li>
+                            <li class="fragment"><a href="https://docs.scipy.org/doc/scipy/reference/signal.html"><code>scipy.signal</code></a> - DSP routines <span style="font-size: 70%">(filters, wavelets, spectrogram analysis)</span></li>
+                            <li class="fragment"><a href="https://docs.scipy.org/doc/scipy/reference/sparse.html"><code>scipy.sparse</code></a> - Sparse matrix data structures and graph routines</li>
+                            <li class="fragment"><a href="https://docs.scipy.org/doc/scipy/reference/tutorial/special.html"><code>scipy.special</code></a> - Various special functions <span style="font-size: 70%">(Bessel functions, orthogonal polynomials, etc.)</span></li>
+                            <li class="fragment"><a href="https://docs.scipy.org/doc/scipy/reference/tutorial/stats.html"><code>scipy.stats</code></a> - Statistical tests, pdf parameter fitting, Gaussian KDE, etc.</li>
+                        </ul>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <div><a href="http://matplotlib.org/"><img src="./img/matplotliblogo.svg"></a></div>
+                        <ul>
+                            <li>2D / 3D plotting</li>
+                            <li>Renders $\rm\LaTeX$</li>
+                            <li>Animation writers - gif / mpeg</li>
+                            <li>Interactive GUI stuff - sliders, buttons, etc.</li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <img src="http://matplotlib.org/_images/simple_plot.png">
+                        <br>
+                        Source: <a href="http://matplotlib.org/users/screenshots.html">Matplotlib gallery</a>
+                    </section>
+
+                    <section>
+                        <img src="http://matplotlib.org/_images/subplot_demo1.png">
+                        <br>
+                        Source: <a href="http://matplotlib.org/users/screenshots.html">Matplotlib gallery</a>
+                    </section>
+
+                    <section>
+                        <img src="http://matplotlib.org/_images/histogram_demo_features2.png">
+                        <br>
+                        Source: <a href="http://matplotlib.org/users/screenshots.html">Matplotlib gallery</a>
+                    </section>
+
+                    <section>
+                        <img src="http://matplotlib.org/_images/surface3d_demo1.png">
+                        <br>
+                        Source: <a href="http://matplotlib.org/users/screenshots.html">Matplotlib gallery</a>
+                    </section>
+
+                    <section>
+                        <img src="https://raw.githubusercontent.com/pylidc/pylidc/master/img/viz-in-3d-example.png">
+                        <br>
+                        Source: <a href="https://github.com/pylidc/pylidc">pylidc</a>
+                    </section>
+
+                    <section>
+                        <img src="https://raw.githubusercontent.com/pylidc/pylidc/master/img/viz-in-scan-example.png">
+                        <br>
+                        Source: <a href="https://github.com/pylidc/pylidc">pylidc</a>
+                    </section>
+
+                    <section>
+                        <img src="http://matplotlib.org/_images/streamplot_demo_features_001.png">
+                        <br>
+                        Source: <a href="http://matplotlib.org/users/screenshots.html">Matplotlib gallery</a>
+                    </section>
+
+                    <section>
+                        <img src="http://matplotlib.org/_images/pie_demo_features1.png">
+                        <br>
+                        Source: <a href="http://matplotlib.org/users/screenshots.html">Matplotlib gallery</a>
+                    </section>
+
+                    <section>
+                        <img src="http://matplotlib.org/_images/polar_demo.png">
+                        <br>
+                        Source: <a href="http://matplotlib.org/users/screenshots.html">Matplotlib gallery</a>
+                    </section>
+
+                    <section>
+                        <video controls>
+                            <source src="./img/matplotlibanim.mp4" type="video/mp4">
+                        </video>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Compiling Python code to C - <a href="http://cython.org/">Cython</a></h2>
+                        <ul>
+                            <li>Involves typing variables and function return types / arguments</li>
+                            <li>Sometimes useful to speed up code after it has been prototyped in Python</li>
+                            <li>Must be careful to type *all* variables, or code may still be slow</li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h2>Cython example</h2>
+                        File: <a href="./code/ip_slow.py"><code>ip_slow.py</code></a>
+                        <pre><code class="python" data-code="./code/ip_slow.py"></code></pre>
+                    </section>
+
+                    <section>
+                        <h2>Cython example</h2>
+                        File: <a href="./code/ip_cython.pyx"><code>ip_cython.pyx</code></a>
+                        <pre><code class="python" data-code="./code/ip_cython.pyx"></code></pre>
+                    </section>
+
+                    <section>
+                        <h2>Cython example</h2>
+                        Compiling the ".pyx" Cython file to C:
+                        <pre><code class="bash" data-trim>
+# Creates ip_cython.c file.
+cython ip_cython.pyx 
+
+# Creates ".so" file that can be imported as Python module.
+gcc -shared -pthread -fPIC -fwrapv -O2 -Wall \
+-fno-strict-aliasing -I/usr/include/python2.7 \
+-o ip_cython.so ip_cython.c 
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>Cython example</h2>
+                        <img src="img/cython-example.png">
+                        <br>
+                        $\approx$ 10x speed up (for contrived example)!
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Calling Fortran from Python - <a href="https://docs.scipy.org/doc/numpy-dev/f2py/">f2py</a></h2>
+                        <ul>
+                            <li>Utility that comes packaged with NumPy</li>
+                            <li>Creates Python wrappers for Fortran modules/subroutines/functions</li>
+                            <li>Numerical variables / NumPy arrays are passed through Python wrapper function to Fortran routines where treated as native Fortran objects</li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h2>f2py example</h2>
+                        File: <a href="./code/ip_fortran.f90"><code>ip_fortran.f90</code></a>
+                        <pre><code class="fortran" data-code="./code/ip_fortran.f90"></code></pre>
+                        <pre><code class="bash">
+f2py -c -m ip_fortran ip_fortran.f90
+                        </code></pre>
+                    </section>
+
+                    <section>
+                        <h2>f2py example</h2>
+                        <img src="./img/f2py-example.png">
+                        <br>
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Machine learning - <a href="http://scikit-learn.org/stable/">Scikit-learn</a></h2><h4>aka "sklearn"</h4>
+                        <ul>
+                            <li><a href="http://scikit-learn.org/stable/supervised_learning.html#supervised-learning">Classification</a> - SVM, Logistic regression, Random Forests, neural networks, etc.</li>
+                            <li class="fragment"><a href="http://scikit-learn.org/stable/supervised_learning.html#supervised-learning">Regression</a> - SVR, Random Forest Regression, ridge, LASSO, etc.</li>
+                            <li class="fragment"><a href="http://scikit-learn.org/stable/modules/clustering.html#clustering">Clustering</a> - K-means, spectral clustering, etc.</li>
+                            <li class="fragment"><a href="http://scikit-learn.org/stable/modules/decomposition.html#decompositions">Dimensionality reduction</a> - PCA, kernel PCA, Laplacian Eigenmaps, etc.</li>
+                            <li class="fragment"><a href="http://scikit-learn.org/stable/model_selection.html#model-selection">Model selection</a> - Grid search, cross validation, performance metics</li>
+                            <li class="fragment"><a href="http://scikit-learn.org/stable/modules/preprocessing.html#preprocessing">Pre-processing</a> - Filling missing values, encoding labels, etc.</li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h4>Sklearn example - classification with SVM</h4>
+                        File: <a href="./code/sklearn-example.py"><code>sklearn-example.py</code></a>
+                        <pre><code class="python" data-code="./code/sklearn-example.py"></code></pre>
+                    </section>
+
+                    <section>
+                        <h4>Sklearn example - classification with SVM</h4>
+                        <pre><code class="bash" data-trim>
+python ./sklearn-example.py
+                        </code></pre>
+                        <img src="./img/sklearn-example.svg">
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Symbolic Math - <a href="http://www.sympy.org/">SymPy</a> <img style="border: 0; width: 15%; height: 15%; margin: 0;" src="./img/sympylogo.png"></h2>
+
+                        <ul>
+                            <li>Used by <a href="http://www.sagemath.org/">Sage Math</a></li>
+                            <li>Calculus</li>
+                            <li>Combinatorics</li>
+                            <li>Equation solving</li>
+                            <li>Polynomials</li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h2>Sympy example</h2>
+                        <img src="./img/sympy-example.png">
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <h3>Symbolic computation chains, symbolic differentiation, CPU/GPU compilation - <a href="http://deeplearning.net/software/theano/">Theano</a></h3>
+                        <ul>
+                            <li>Create computation chains symbolically</li>
+                            <li>Symbolic differentiation</li>
+                            <li>Compiles symbolic Python computation chains to CPU/GPU code</li>
+                            <li>Used a lot by neural network / "deep learning" folks, but not a neural-network specific library, e.g. <a href="http://caffe.berkeleyvision.org/">Caffe</a></li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <h4>Matrix multiplication - Theano vs. Numpy / GPU vs. CPU</h4>
+                        <img src="./img/theano-example.png">
+                    </section>
+
+                    <section>
+                        <h4>Theano example - grad. descent with symbolic gradient computation</h4>
+                        $$
+                            \text{Solve:} \;\; \min_a SSE := \min_a \sum_i (y_i - ax_i^2)^2
+                        $$
+                        $$
+                            a_{n+1} \leftarrow a_n - \left. \frac{d SSE}{da} \right|_{a = a_n}
+                        $$
+                    </section>
+
+                    <section>
+                        <h4>Theano example - grad. descent with symbolic gradient computation</h4>
+                        File: <a href="./code/theano_regression.py"><code>theano_regression.py</code></a>
+                        <pre><code class="fortran" data-code="./code/theano_regression.py"></code></pre>
+                    </section>
+
+                    <section>
+                        <h4>Theano example - grad. descent with symbolic gradient computation</h4>
+                        <img src="./img/theano-example2.svg">
+                    </section>
+                </section>
+
+                <section>
+                    <section>
+                        <div><a href="http://scikit-image.org/"><img style="width: 40%; height: 40%;" src="./img/skiamgelogo.png"></a></div>
+                        <ul>
+                            <li>More advanced image-processing methods (than, e.g., scipy.ndimage</li>
+                            <li>Low-level ops: exposure, histogram equalization, edge detection</li>
+                            <li>Mesh generation: marching cubes</li>
+                            <li>Object detection: Hough transforms, corner/blob detection, template matching</li>
+                            <li>Gabor filtering / texture analysis</li>
+                            <li>Lots of filtering: deconvolution, denoising, in-painting</li> 
+                            <li>Segmentation: active contours, random walker, watershed, otsu thresholding</li>
+                        </ul>
+                    </section>
+
+                    <section>
+                        <img style="width: 55%; height: 55%;" src="https://raw.githubusercontent.com/pylidc/pylidc/master/img/viz-in-3d-example.png">
+                        <br>
+                        <ul>
+                            <li>Generated using skimage's marching cubes method on boolean volume.</li>
+                            <li>Meshed surface plotted using Matplotlib</li>
+                        </ul>
+                    </section>
+                </section>
+
+                <section>
+                    <h2>Honorable mentions</h2>
+                    <ul>
+                        <li><a href="http://pandas.pydata.org/">Pandas</a> - data structures and analysis</li>
+                        <li><a href="http://pydicom.readthedocs.io/en/stable/getting_started.html">Pydicom</a> - DICOM (standard medical image format) file parser</li>
+                        <li><a href="https://www.tensorflow.org/">Tensor flow</a> - Google's machine learning library</li>
+                        <li><a href="https://keras.io/">Keras</a> - Neural network library that uses either Theano or Tensorflow</li>
+                        <li><a href="http://mayavi.sourceforge.net/">Mayavi</a> - True 3d visualization library, built on <a href="http://www.vtk.org/">VTK</a></li>
+                        <li><a href="http://www.sqlalchemy.org/">SQLAlchemy</a> - Object relational mapper for mapping Python object attributes to SQL databases</a></li>
+                        <li><a href="https://www.djangoproject.com/">Django</a> - Web development framework</a></li>
+                        <li><a href="http://jinja.pocoo.org/">Jinja</a> - Templating engine, used by Mozilla, SourceForge, Instagram, NPR</a></li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h1>The End</h1>
+                    <h2>Go forth, and use Python.</h2>
+                </section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				history: true,
+                transition: 'none', 
+                math: {
+                    mathjax: 'http://cdn.mathjax.org/mathjax/latest/MathJax.js',
+                    config: 'TeX-AMS_HTML-full' // See http://docs.mathjax.org/en/latest/config-files.html
+                },
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+                    { src: 'plugin/math/math.js', async: true },
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+                    { src: './plugin/externalcode/externalcode.js', condition: function() { return !!document.querySelector( '[data-code]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>

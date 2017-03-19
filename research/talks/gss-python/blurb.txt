@@ -1,0 +1,5 @@
+10 FREE Python Libraries for Mathematical and Scientific Computing that will TOTALLY SHOCK you
+
+---
+
+Are you using expensive, proprietary software for your research? In this talk, I present the one simple trick for open and effective computing that experts don't want you to know about! When other researchers learned about these Python libraries, their jaws hit the floor! Numerical linear algebra! Optimization! Statistics! Interpolation! Integration! Machine learning! Symbolic computation! Visualization! Compiled extensions!  GPU programming! Get these libraries before they're BANNED.

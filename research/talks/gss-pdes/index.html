@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>A survey of PDE methods for image segmentation</title>
+
+		<meta name="description" content="A survey of PDE methods for image segmentation">
+		<meta name="author" content="Matt Hancock">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/white.css" id="theme">
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<div class="slides">
+				<section>
+					<h2>A survey of PDE methods for image segmentation</h2>
+					<p><small>Matt Hancock &mdash; Florida State University &mdash; Department of Mathematics</small></p>
+				</section>
+
+                <section>
+                    <h3>Image segmentation</h3>
+                    <img src="./img/nod2d3d.png">
+                </section>
+
+                <section>
+                    <h3>Not in this talk</h3>
+                    <ul>
+                        <li>Simple intensity based methods
+                            <ul>
+                                <li>Thresholding</li>
+                                <li>Region growing</li>
+                                <li>Clustering</li>
+                            </ul>
+                        </li>
+                        <li>Edge-based
+                            <ul>
+                                <li>Watershed</li>
+                            </ul>
+                        </li>
+                        <li>Statistical methods
+                            <ul>
+                                <li>Active shape, active appearance models</li>
+                                <li>Pixel / voxel - wise Classification</li>
+                                <li>Markov random fields</li>
+                            </ul>
+                        </li>
+                        <li>etc ...</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Basic idea of PDEs for segmentation</h3>
+                    <ul>
+                        <li>A curve on the image evolves according to some PDE.</li>
+                        <li>At equilibrium, the curve represents the boundary of segmentation.</li>
+                    </ul>
+                    <img style="height: 25%; width: 25%" src="./img/032.png">
+                </section>
+
+                <section>
+                    <h2>Issues</h2>
+                    <ul>
+                        <li>Ability to capture "true" segmentation</li>
+                        <li>Free parameter choices</li>
+                        <li>Stability</li>
+                        <li>Smoothness</li>
+                        <li>Topology</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>A simple model</h3>
+                    <ul>
+                        <li>Segment with parametric curve: $\displaystyle \begin{bmatrix} x(s,t) & y(s,t) \end{bmatrix}^T $</li>
+                        <li>
+                            Curve velocity is in the direction of the outward normal, and has magnitude proportional to image pixel values:
+                            $$
+                                \begin{bmatrix} x_t \\ y_t \end{bmatrix} = \hat{I}(x,y) \mathbf{n}(s,t) = \frac{\hat{I}(x,y)}{\sqrt{x_s^2 + y_s^2}}\begin{bmatrix} y_s \\ -x_s \end{bmatrix}
+
+                            $$
+                        </li>
+                        <li>
+                            $\hat{I}(x,y) = S(G*I)(x,y; \sigma, \beta)$ is the image convolved with a gaussian filter with parameter $\sigma$ and processed with a sigmoidal filter with parameter, $\beta$.
+                        </li>
+                        <li>Approximate PDE with finite differences.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h4>Spiculated lung nodule from LIDC dataset</h4>
+                    <img src="./img/init.png">
+                </section>
+
+                <section>
+                    <h4>It works!</h4>
+                    <img src="./img/basic.gif">
+                </section>
+
+                <section>
+                    <h4>Sort of...</h4>
+                    <img src="./img/basic-bad.gif">
+                </section>
+
+                <section>
+                    <h3>Issues</h3>
+                    <ul>
+                        <li>Sensitive to parameters of gaussian and sigmoidal filter.</li>
+                        <li>Time step size? Curve parameter discretization?</li>
+                        <li>How do we know when to stop evolving the curve?</li>
+                        <li>Curve can't adapt to holes</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Active contours (snakes) <span style="font-size:50%">[1]</span></h3>
+
+                    <ul>
+                        <li>Again, segment via a parametrically defined curve, $\mathbf{c}(s)$.</li>
+                        <li>Energy minimization principle: $$J[\mathbf{c}] = \int E[\mathbf{c}] ds = \int \left( E_{\text{int}}[\mathbf{c}] + E_{\text{ext}}[\mathbf{c}] \right) ds$$</li>
+                        <li>Desired curve is $\displaystyle\text{arg}\min_{\mathbf{c}}J[\mathbf{c}]$.</li>
+                    </ul>
+
+                    <br>
+                    <br>
+
+                    <small>[1]: Kass et. al. <i>Snakes: Active contour models.</i> International journal of computer vision. 1988</small>
+                </section>
+
+                <section>
+                    <h3>Active contours</h3>
+
+                    <ul>
+                        <li>Typically,$$E_{\text{int}}[\mathbf{c}] = \frac{1}{2}\left( \alpha ||\mathbf{c}'||^2 + \beta ||\mathbf{c}''||^2 \right) $$</li>
+                        <li>and, $$E_{\text{ext}}[\mathbf{c}] = -\frac{\gamma}{2} ||\nabla (G*I)(\mathbf{c};\sigma)||^2$$</li>
+                        <li>$\alpha,\beta,\gamma,\sigma$ are all free parameters</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Minimizing the energy functional</h3>
+                    <ul>
+                        <li>Euler-Lagrange equations yield: $$\nabla E_{\text{ext}} - \alpha \mathbf{c}'' + \beta \mathbf{c}^{(4)} = 0 \tag{1}$$</li>
+                        <li>Introduce "time" variable, set $(1) := F(t)$.</li>
+                        <li>Set $\frac{\partial \mathbf{c}}{\partial t} = F(t)$, and discretize in $s$ and $t$ using finite differences.</li>
+                        <li>At equilibrium, the Euler-Lagrange equations are satisfied.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h4>It works!</h4>
+                    <img src="./img/snake.gif">
+                </section>
+
+                <section>
+                    <h4>Sort of...</h4>
+                    <img src="./img/snake-bad.gif">
+                </section>
+
+                <section>
+                    <h3>Issues</h3>
+                    <ul>
+                        <li>Needs good initialization.</li>
+                        <li>So many free parameters! How to set them?</li>
+                        <li>Can't adapt to holes (without additional bookkeeping).</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Level Sets <span style="font-size: 50%">[2]</span></h3>
+
+                    <ul>
+                        <li>Segmenting contour is the zero level set of an evolving surface: $$ \mathbf{c}(t) = \{\mathbf{x} \; | \; \psi(\mathbf{x},t) = 0 \}$$</li>
+                    </ul>
+
+                    <br><br>
+                    
+                    <img style="width: 30%; height: 30%" src="./img/level-set-idea.gif">
+
+                    <br><br>
+                    <small>[2]: Malladi, Sethian, Vemuri. <i>Shape Modelling with Front Propagation: A level set approach.</i> IEEE Transactions on Pattern Analysis and Machine Intelligence. 1995</small>
+                </section>
+
+                <section>
+                    <h3>Motion of the surface</h3>
+                    <ul>
+                        <li>$\mathbf{x}(t)$ on contour $\Leftrightarrow \psi(\mathbf{x}(t), t) = 0$</li>
+                        <li>$\mathbf{x}(t)$ moves normal to $\mathbf{c}(t)$ and $||\mathbf{x}_t|| = F(\mathbf{x}(t))$</li>
+                        <li>So, $$\psi_t + F(\mathbf{x}) ||\nabla \psi|| = 0$$ governs the motion of the surface, and its implicitly defined contour.</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Controlling the speed</h3>
+                    <ul>
+                        <li>Speed is governed by a combination of image attributes and by the geometry of the curve</li>
+                        <li>Let $F = F_A + F_G$</li>
+                        <li>Often, $$\begin{align*} F_A &= F_A( ||\nabla (G * I)(\mathbf{x};\sigma)|| ) \\ F_G &= F_G(K) \end{align*}$$</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <img src="./img/level-set-example.gif">
+                </section>
+
+                <section>
+                    <h3>Advantages</h3>
+                    <ul>
+                        <li>Contours easily split and merge.</li>
+                        <li>No conceptual differences in extending to 3 dimensions.</li>
+                    </ul>
+                    <br><br>
+                    <h3>Disadvantages</h3>
+                    <ul>
+                        <li>Same as other methods: stability, parameter setting, etc...</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h3>Other PDE methods not discussed</h3>
+                    <ul>
+                        <li>Caselles, Vicent, Ron Kimmel, and Guillermo Sapiro. "Geodesic active contours." International journal of computer vision 1997</li>
+                        <li>Vese, Luminita A., and Tony F. Chan. "A multiphase level set framework for image segmentation using the Mumford and Shah model." International journal of computer vision 2002</li>
+                        <li>Álvarez, Luis, et al. "Morphological snakes." Computer Vision and Pattern Recognition (CVPR), 2010 IEEE Conference on. IEEE, 2010.</li>
+                    </ul>
+                </section>
+				<section style="text-align: left;">
+					<h2>... this is the last slide</h2>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'none', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/math/math.js', async: true },
+				]
+			});
+
+		</script>
+
+	</body>
+</html>

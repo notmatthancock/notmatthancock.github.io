@@ -8,7 +8,7 @@
       <div class="footer-col  footer-col-1">
         <ul class="contact-list">
           <li>{{ site.title }}</li>
-          <li><a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
+          <li><a href="javascript: ee = document.getElementById('footer-email'); es=[110,111,116,46,109,97,116,116,46,104,97,110,99,111,99,107,64,103,109,97,105,108,46,99,111,109].map( function(n) { return String.fromCharCode(n) } ).join(''); ee.innerHTML=es; ee.setAttribute('href','mailto:'+es);" id="footer-email">Click here for email</a></li>
         </ul>
       </div>
 
