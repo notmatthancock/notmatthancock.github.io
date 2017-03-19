@@ -3,9 +3,13 @@ title: Matt Hancock
 email: not.matt.hancock@gmail.com
 description: >
     Math, notes, ramblings, etc
-baseurl: "" # the subpath of your site, e.g. /blog/
+baseurl: ""
 url: "http://notmatthancock.github.com" # the base hostname & protocol for your site
 github_username: notmatthancock
+
+paginate: 5
+paginate_path: "/notes/page/:num"
+gems: [jekyll-paginate]
 
 # Build settings
 include: ['_pages']

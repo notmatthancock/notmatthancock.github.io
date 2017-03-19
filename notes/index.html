@@ -8,7 +8,7 @@ area: notes
   <h1 class="page-heading">Notes</h1>
 
   <ul class="post-list">
-    {% for post in site.posts %}
+    {% for post in paginator.posts %}
       <li>
         <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
 
@@ -18,4 +18,11 @@ area: notes
       </li>
     {% endfor %}
   </ul>
+
+  <table class="post-pagination">
+    <tr>
+        {% if paginator.previous_page_path %}<td><a href="{{ paginator.previous_page_path }}">&lArr; Newer notes</a></td>{% endif %}
+        {% if paginator.next_page_path %}<td><a href="{{ paginator.next_page_path }}">Older notes &rArr;</a></td>{% endif %}
+    </tr>
+  </table>
 </div>
