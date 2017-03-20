@@ -1,0 +1,1669 @@
+#+title: ACM Computing Seminar C++ Guide
+#+author: Matt Hancock
+#+date: 
+#+options: html-postamble:nil
+#+property: header-args :mkdirp yes :cache yes
+#+options: H:4
+#+html_head: <link rel="stylesheet" type="text/css" href="../css/main.css">
+#+html_head: <script src="../js/main.js"></script>
+#+html: <div id="main">
+#+html: <div id="footer"><a href="../../../">ACM Computing Seminar Home</a> &mdash; This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_US">Creative Commons Attribution 3.0 Unported License</a>.</div>
+#+html: <a href="javascript:;" id="toc-open">&#9776;</a>
+#+html: <a href="javascript:;" id="toc-close">&times;</a>
+
+* Introduction
+This manual is a guide for quickly learning C++ for mathematical and 
+scientific computing applications. The goal of this guide is not to 
+make you a C++ expert, but to quickly teach you enough of the C++ 
+fundamentals and design patterns to help you off the ground. If you 
+should like to go beyond this guide, a few references are listed below.
+
+** A little about the language
+Before you dive in, here is a little about the C++ programming language:
+
+C++ is an extension of the C programming language. Both C and C++ are 
+*statically-typed* and *compiled* languages, which means that the *type* 
+of variables used in your source code must be declared explicitly and is 
+checked when the program is compiled (i.e., translated into a machine 
+executable file).
+
+One key difference between C++ and C, however, is that C++ provides 
+many mechanisms to allow for the [[https://en.wikipedia.org/wiki/Object-oriented_programming][object-oriented programming paradigm]]. This 
+essentially allows the software writer to create custom, complex, 
+reusable data structures. The object-oriented paradigm is extremely useful, 
+but we will only touch the surface of it in this guide.
+
+** Additional references
+- [[http://cppreference.com][C++ reference]]
+- [[http://www.cplusplus.com/doc/tutorial][C++ tutorials]]
+- [[https://en.wikipedia.org/wiki/C%2B%2B][C++ wiki]]
+- [[http://stackoverflow.com/questions/388242/the-definitive-c-book-guide-and-list][A compiled list of C++ textbooks from stackoverflow]]
+
+** License, source, etc. 
+This document was created using [[https://www.gnu.org/software/emacs/][Emacs]] [[http://orgmode.org/][org mode]] with some custom css and 
+javascript. You can find the license, view the source, and contribute 
+to this document here:
+
+[[https://github.com/notmatthancock/acm-computing-seminar][https://github.com/notmatthancock/acm-computing-seminar]]
+
+* Getting started
+The particular programming tools that you choose to use will
+likely be largely influenced by the operating system that you use.
+We will use free tools (often developed for GNU / Linux systems) in
+this guide. These tools are mostly available in other operating 
+systems as well. For example, on Windows, you could use [[https://www.cygwin.com/][Cygwin]], or 
+install a dual boot with some Linux distribution (e.g., [[http://www.ubuntu.com/][Ubuntu]]). On the 
+other hand, MAC OSX, being a BSD-derived system, has many of the 
+required tools already available (although, a command line utility, 
+[[http://brew.sh][Brew]], makes building and installing other tools very simple).
+
+In the following two sections, we'll talk about the two basic types of 
+software that you'll need to begin writing C++ programs.
+
+** Text editors
+
+The text editor that you choose to use should be be any program 
+capable of editing plain text files. However, you may find that it's 
+more productive to write in an editor that offers features such as 
+syntax highlighting, code-completion, bracket-matching, or other features. 
+Here are some popular free text editors:
+
+- [[https://atom.io/][Atom]] is a recently open-sourced GUI editor which some have compared to the very popular non-free editor, [[https://sublimetext.com][Sublime Text]].
+- [[https://www.gnu.org/software/emacs/][Emacs]] is another powerful editor, which allows for highly optimized workflows.
+- [[https://wiki.gnome.org/Apps/Gedit][Gedit]] is a nice and simple GUI editor, which is the default in GNOME desktop environment.
+- [[https://kate-editor.org][Kate]] is a another simple GUI editor, which is the default in the KDE desktop environment.
+- [[http://www.vim.org][Vim]] is a modal editor with a steep learning curve. It offers highly efficient means to edit text, and is available (or it's predecessor, vi) by default on nearly all UNIX-like operating systems.
+
+** Compilers
+
+Second, you'll need a program called a *compiler*. A compiler translates 
+the high-level C++ language into an executable program. In this guide, we 
+will use the =g++= compiler which is freely available through the 
+[[https://gcc.gnu.org/][gnu compiler collection (gcc)]].
+
+=g++= is a program which you typically call from the command line, which 
+takes as input, your C++ source code file, and produces as output, a 
+binary executable file.
+
+** Writing a program
+
+Let's create our first C++ program, the obligatory "Hello, world!". First, 
+fire-up your text editor and create a file called, =hello.cpp=, with the 
+following contents:
+
+#+begin_src cpp -n :tangle src/hello/hello.cpp
+  #include <iostream>
+
+  int main() {
+    std::cout << "Hello, world!";
+    return 0;
+  }
+#+end_src
+
+Now, to compile the program, execute:
+
+#+begin_src sh :dir src/hello
+  g++ hello.cpp
+#+end_src
+
+#+RESULTS[2569c75ff851326a2241f3dce1cdb3099b98fca4]:
+
+Followed by:
+#+begin_src sh :dir src/hello
+  ./a.out
+#+end_src
+
+#+RESULTS[5abb9750f318cc870453d631847a2525e5a701ee]:
+| Hello | world! |
+
+By default, =g++= names the resulting binary executable, =a.out=, but
+you can specify a different output file name by using the =-o= flag:
+
+#+begin_src sh :dir src/hello
+  g++ hello.cpp -o my_executable_file.bin
+#+end_src
+
+#+RESULTS[9fc39bf8ee6cbae0e89a6dd19cfe230aa8e23c77]:
+
+Note that in Windows, executable files typically end in =.exe=. In Unix-like
+systems, there is no particular file-extension type for executables.
+
+* Data types
+As we [[A little about the language][mentioned previously]], you must explicitly declare the type of a 
+variable. So, in this section, we'll talk about the main variable 
+types you'll use. In the section on [[Object-oriented programming][object-oriented programming]], 
+we'll discuss how to build more complex data types.
+
+** The =bool= type
+A boolean data type is either =true= or =false=. There are a number of 
+operators between these types, illustrated in the code snippet below 
+(note that lines starting with =//= are comments and are ignored by the 
+compiler):
+
+#+begin_src cpp -n :tangle ./src/dtypes/bool/main.cpp
+  bool a,b,c; // Declare the type of variables a, b, and c.
+  a = true;
+  b = false;
+
+  // !  is logical negation when applied to a single variable.
+  c = !a; // c is false.
+
+  // && is logical and.
+  c = (a && b); // c is false.
+
+  // || is logical or.
+  c = (a || b); // c is true.
+#+end_src
+
+We don't often use boolean variables by themselves, but rather as a result 
+of comparing two other data types (such as comparing if one integer is less 
+than another integer). Expressions that result in boolean values are mostly 
+used in [[Conditionals][conditional control structures]].
+
+** =int= types
+
+There are [[http://en.cppreference.com/w/cpp/language/types][a variety of integer types]] in C++. Below, we illustrate a 
+couple. These can be modified further using the =short= and =long= 
+keywords, changing the number of bytes occupied by the variable (and 
+hence the maximum and minimum size the variable can take on).
+
+#+begin_src cpp -n :tangle src/dtypes/int/main.cpp
+    int a = 6; // initialize a to 6.
+    unsigned int b = 7; // initialize b to 7.
+    int c; // declare c to be an integer variable.
+
+    a = 6;
+    b = 7;
+
+    c = a / b; // c is 0
+    c = b / a; // c is 1
+    c = b % a; // c is 1 (% is the integer remainder or modulo operator)
+    c = a - b; // c is -1
+    c = a > b; // c is 0 (boolean gets cast to integer)
+    c = a < b; // c is 1 (boolean gets cast to integer)
+    c++;       // c is 2 (++ is shorthand for c = c + 1)
+
+    b = a - b; // b is 4294967295 (-1 gets cast to unsigned)
+    b = b + 1; // b is 0 (b was previously the largest unsigned,
+               // so adding one circles it back to zero.)
+    b += 7;    // b is 7 (+= is shorthand for b = b + 7;
+#+end_src
+
+In the above, we've illustrated the use of signed and unsigned 
+integer types and the operators between them. It is important to 
+take care when you assign a result to a variable that doesn't match 
+the type of the result. In many cases, the result gets implicitly 
+cast to the type of variable being assigned to. The result may or 
+may not match your expectations, as shown above.
+
+** Floating point types
+There are two main floating point data types in C++, =float= and =double=,
+which correspond to [[https://en.wikipedia.org/wiki/IEEE_floating_point][IEEE 32- and 64-bit floating point types]]. 
+
+#+begin_src cpp -n :tangle src/dtypes/float/main.cpp :exports both :results output
+  #include <iostream>
+  #include <limits>
+
+  int main() {
+    float a; //  Declare a single precision float.
+    double b; // Declare a double precision float.
+
+    // Print the max value of a float type.
+    std::cout << std::numeric_limits<float>::max() << std::endl;
+
+    // Print the max value of a double type.
+    std::cout << std::numeric_limits<double>::max() << std::endl;
+
+    // Print machine epsilon of a float type.
+    std::cout << std::numeric_limits<float>::epsilon() << std::endl;
+
+    // Print machine epsilon of a double type.
+    std::cout << std::numeric_limits<double>::epsilon() << std::endl;
+
+    return 0;
+  }
+#+end_src
+
+#+RESULTS[654068c6d84db6c255469f8810f846be9a6cc34a]:
+: 3.40282e+38
+: 1.79769e+308
+: 1.19209e-07
+: 2.22045e-16
+
+** Casting
+
+Sometimes it is useful to explicitly cast one variable type as another. 
+This can be done like the following:
+
+#+begin_src cpp -n :includes <iostream> :exports both :output results :tangle src/dtypes/casting/main.cpp
+  int a; double b = 3.14159;
+
+  a = (int) b;
+
+  std::cout << a << std::endl;
+#+end_src
+
+#+RESULTS[accfd981d512e31a619201c89ee4b411343f389b]:
+: 3
+
+** The =const= modifier
+
+If the value of some variable should not change, you can use the =const=
+keyword to protect its status. It is typical to denote =const= variables 
+with all caps. Try to compile the following program:
+
+#+begin_src cpp -n :tangle src/dtypes/const/main.cpp
+  const double PI = 3.14159;
+
+  PI = 3.0;
+#+end_src
+
+#+RESULTS[0d6309bd59e8e0a5e714b688d8de858846cc1301]:
+
+You will see an error like, =error: assignment of read-only variable ‘PI’=. 
+
+** The =typedef= keyword
+Suppose you have a large numerical experiment, where all your code used 
+floating point of type =double=. Your curious about how the results will 
+be affected by changing the floating point type to single precision =float=
+type. One solution would be to run a "find and replace" in your editor, but 
+something about that doesn't feel right.
+
+Instead, we can use the =typedef= statement to define types:
+
+#+begin_src cpp -n :tangle src/dtypes/typedef/main.cpp
+  // Define "int_type" to be a short int.
+  typedef short int int_type;
+
+  // Define "float_type" to be single precision float.
+  typedef float float_type;
+
+  // Define "array_index_type" to be unsigned long int.
+  typedef unsigned long int array_index_type;
+
+  int_type a = -17; 
+  float_type b = 1.14; 
+  array_index_type c = 9;
+#+end_src
+
+#+RESULTS:
+
+** Pointers and references
+*** Pointers
+Pointers are variables that hold the *memory address* for a variable 
+of a specific type. Pointers are declared by specifying the variable 
+type, followed by the =*= symbol, followed by the name of the pointer 
+variable, e.g., =double * x= defines a "pointer to double" variable. 
+The variable, =x=, therefore, does not hold the value of a =double= 
+type, but rather, the memory address for a variable of type, =double=.
+The memory address for a variable can be obtained by the =&= operator.
+
+#+begin_src cpp -n :exports both :results output :includes <iostream> :tangle src/dtypes/pointers/main1.cpp
+  double * a;
+  double b = 7;
+  
+  // This obtains the memory address of `b`.
+  a = &b;
+  
+  // Prints some memory address (starts with 0x)
+  std::cout << a << std::endl;
+#+end_src
+
+#+RESULTS[2fdeaa25980d5084736b0b9ed6298c0a2b21f3f6]:
+: 0x7ffe0d98f7b8
+
+Similar to obtaining the memory address from a regular variable, using the
+=&= operator, you can use the =*= symbol before a pointer to access the 
+variable value held at the memory location of the pointer. In this context,
+the =*= symbol is called the *dereference operator*. This is probably better 
+understood with a short example:
+
+#+begin_src cpp -n :includes <iostream> :exports both :results output :tangle src/dtypes/pointers/main2.cpp
+  double * a;
+  double b = 7.3;
+  double c;
+
+  // Now `a` holds the memory address of `b`.
+  a = &b;
+
+  // `*a` obtains the value of the variable
+  // at the memory address held by `a`.
+  // So, `c` is 7.3.
+  c = *a;
+
+  std::cout << c << "\n";
+#+end_src
+
+#+RESULTS[4faba160c0ff0d4f8e2103ca9ae5fa00c1c3c6dc]:
+: 7.3
+
+*** References
+
+A reference is a sort of like a pointer, but not quite. [[https://en.wikipedia.org/wiki/Reference_(C%2B%2B)][There are differences]].
+A good analogy, which you can find in the previous link, is that a reference
+is similar to a symbolic link, or "shortcut" if you're on Windows. You can 
+treat it more-or-less like the original variable, but it's not the original.
+
+#+begin_src cpp -n :includes <iostream> :exports both :results output src/dtypes/references/main.cpp
+  double a = 1.1;
+  // `b` is a reference to `a`.
+  double & b = a;
+
+  std::cout << "a: " << a << ", b: " << b << "\n";
+
+  a = 2.1;
+
+  std::cout << "a: " << a << ", b: " << b << "\n";
+
+  b = 3.1;
+
+  std::cout << "a: " << a << ", b: " << b << "\n";
+
+  std::cout << "\n\n";
+  std::cout << "&a: " << &a << "\n" << "&b: " << &b << "\n";
+#+end_src
+
+#+RESULTS[fca20756bf8fb0aa7033917d1f8cf51ef1d8f659]:
+: a: 1.1, b: 1.1
+: a: 2.1, b: 2.1
+: a: 3.1, b: 3.1
+: 
+: 
+: &a: 0x7ffcfbe7b1e8
+: &b: 0x7ffcfbe7b1e8
+
+References are useful for passing around large objects, so that the object
+doesn't need to be copied. References are also useful as a return type for 
+functions [[Functions][(to be discussed later)]] because it allows to assign to assign a 
+value to a function, which is useful if the function, for example, returns 
+a reference to the element of an array.
+
+** Arrays
+The length of an array can be fixed or dynamic, and how you
+declare the array depends on this. Array indexing starts at 0 in C++ 
+(compared to start at 1, for example, in Fortran or Matlab).
+
+*** Fixed length arrays
+#+begin_src cpp -n :tangle src/dtypes/arrays/fixed.cpp
+double a[5];
+
+a[0] = 1.0;
+// etc.
+#+end_src
+
+#+RESULTS[9acd5efc944280def09a7d443465f861a00f28a6]:
+
+*** Dynamic length arrays
+Dynamic length arrays are made possible through pointers:
+
+#+begin_src cpp -n :tangle src/dtypes/arrays/dynamic.cpp
+  // This allocates memory for 5 double types.
+  double * a = new double[5];
+
+  // Afterwards, you can treat `a` like a normal array.
+  a[0] = 1.0;
+  // etc...
+
+  // Whenever you use the `new` keyword, you must
+  // delete the memory allocated when you're done by hand.
+  delete [] a;
+
+  // We can change the size of `a`.
+  a = new double [10];
+
+  a[0] = 2.0;
+  // etc...
+
+  delete [] a;
+#+end_src
+
+#+RESULTS[99c12b3b1f8910dea8d9f6b702187269bfa0d918]:
+
+Note that omitting the first =delete= statement will cause no error. 
+However, the memory allocated by the first =new= statement will not 
+be freed, and thus inaccessible. This is bad because the memory cannot 
+be allocated to other resources. You should generally try to avoid 
+manually memory management when possible, but a good tool for debugging 
+memory problems is called [[http://valgrind.org/][valgrind]]. 
+
+#+RESULTS:
+
+* Control structures
+** Conditionals
+*** Example: =if= / =else= and random number generation
+Often a code block should only be executed if some condition is true. 
+Below, we generate a random number between 0 and 1; print the number; and,
+print whether or not the number was greater than 0.5.
+
+#+begin_src cpp -n :exports both :results output :tangle src/conditionals/ifelse/main.cpp
+  #include <iostream>
+  #include <stdlib.h>
+  #include <time.h>
+
+  int main() {
+    // Seed a random number generator.
+    srand(123);
+
+    // rand() produces a random integer between 0 and RAND_MAX.
+    double num = rand() / ((double) RAND_MAX);
+
+    std::cout << "num: " << num << "\n";
+
+    if (num < 0.5) {
+      std::cout << "num was less than 0.5.\n";
+    }
+    else {
+      std::cout << "num was greater than 0.5.\n";
+    }
+
+    // Do it again.
+    num = rand() / ((double) RAND_MAX);
+
+    std::cout << "num: " << num << "\n";
+
+    if (num < 0.5) {
+      std::cout << "num was less than 0.5.\n";
+    }
+    else {
+      std::cout << "num was greater than 0.5.\n";
+    }
+
+    return 0;
+  }
+#+end_src
+
+#+RESULTS[89e0babb392b5cd36e346b57da6e76ba39cea3cf]:
+: num: 0.0600514
+: num was less than 0.5.
+: num: 0.788318
+: num was greater than 0.5.
+
+*** Example: =if= / =else if= / =else=
+
+You can follow =else= immediate by another =if= to have multiple mutually-
+exclusive blocks:
+
+#+begin_src cpp -n :exports both :results output :tangle src/conditionals/elif/main.cpp
+  #include <iostream>
+  #include <stdlib.h>
+  #include <time.h>
+
+  int main() {
+    // Seed the random number generator based on the current time.
+    srand(time(NULL));
+
+    // rand() produces a random integer between 0 and RAND_MAX.
+    double num = rand() / ((double) RAND_MAX);
+
+    std::cout << "num: " << num << "\n";
+
+    if (num >= 0.75) {
+      std::cout << "num was between 0.75 and 1.\n";
+    }
+    else if (num >= 0.5) {
+      std::cout << "num was between 0.5 and 0.75.";
+    }
+    else if (num >= 0.25) {
+      std::cout << "num was between 0.25 and 0.5.";
+    }
+    else {
+      std::cout << "num was between 0 and 0.25";
+    }
+
+    return 0;
+  }
+#+end_src
+
+#+RESULTS[014df5b5413cb63ddbba75f173c7008595bdf56a]:
+: num: 0.0456405
+: num was between 0 and 0.25
+
+The conditions are checked in the order that they're written. So, for example,
+in the second condition, we don't need to specify ~num >= 0.5 && num < 0.75~ 
+because we know that this condition will only be checked if the previous 
+was false.
+
+** Loops
+We discuss two main structures for iterating -- the =for= and =while= loops.
+*** The =for= loop
+The =for= loop requires three specifications -- the iteration variable 
+initialization, the termination condition, and the update rule. The body
+of the loop follows these three specifications. Shown below, we declare 
+an array; assign to its components; and, print the current component to 
+the screen.
+
+#+begin_src cpp -n :includes <iostream> :results output :exports both :tangle src/loops/for/linspace.cpp
+  int length = 11;
+  double x[length];
+
+  for(int i=0; i < length; i++) {
+    // Assign to each array component.
+    x[i] = (double) i / (length - 1);
+
+    // Print the current component.
+    std::cout << "x[" << i << "] = " << x[i] << std::endl;
+  }
+#+end_src
+
+#+RESULTS[877d922a085062a38d850eb283cf7b918cdd88aa]:
+#+begin_example
+x[0] = 0
+x[1] = 0.1
+x[2] = 0.2
+x[3] = 0.3
+x[4] = 0.4
+x[5] = 0.5
+x[6] = 0.6
+x[7] = 0.7
+x[8] = 0.8
+x[9] = 0.9
+x[10] = 1
+#+end_example
+
+
+**** Example: row-major matrix
+
+You can nest loops, i.e., loops inside of loops, etc.
+
+Below, is an example of a double loop for creating and accessing 
+matrix data stored in a flat array. The matrix data is stored in 
+[[https://en.wikipedia.org/wiki/Row-major-order][row-major order]]. This means the first =n_cols= elements of the 
+array named, =matrix=, will contain the first row of the matrix, 
+the second =n_cols= elements of =matrix= will contain the second row, etc.
+
+#+begin_src cpp -n :includes <iostream> :exports both :results output :tangle src/loops/for/flat-matrix.cpp
+  int n_rows = 4;
+  int n_cols = 3;
+
+  // Row-major matrix array.
+  double matrix [n_rows*n_cols];
+
+  // temporary index.
+  int k;
+
+  for(int i=0; i < n_rows; i++) {
+    for(int j=0; j < n_cols; j++) {
+      // Convert the (i,j) matrix index to the "flat" row-major index.
+      k = i*n_cols + j;
+
+      // Assign a value of 1.0 to the diagonal,
+      // 2 to the off-diagonal, and 0 otherwise.
+      if (i == j) {
+        matrix[k] = 1.0;
+      }
+      else if ((i == (j+1)) || (i == (j-1))){
+        matrix[k] = 2.0;
+      }
+      else {
+        matrix[k] = 0.0;
+      }
+    }
+  }
+
+
+  // Print the matrix elements.
+  for(int i=0; i < n_rows; i++) {
+    for(int j=0; j < n_cols; j++) {
+      k = i*n_cols + j;
+
+      std::cout << matrix[k];
+      if (j != (n_cols-1)) {
+        std::cout << ", ";
+      }
+    }
+
+    if (i != (n_rows-1)) {
+      std::cout << "\n";
+    }
+  }
+#+end_src
+
+#+RESULTS[453eb42cd8778bde63505600cd96e4583975b649]:
+: 1, 2, 0
+: 2, 1, 2
+: 0, 2, 1
+: 0, 0, 2
+
+*** The =while= loop
+A =while= loop iterates while a condition is =true=. Essentially, it is a =for=
+loop without an update variable.
+
+**** Example: truncated sum
+In the following example, we approximate the geometric series:
+
+$$
+1 = \sum_{n=1}^{\infty} \left(\frac{1}{2}\right)^n
+$$
+
+The loop exits when the absolute error, 
+
+$$
+    \text{absolute error} := 1-\sum_{n=1}^N  \left(\frac{1}{2}\right)^n
+$$
+
+is less than some specified tolerance, =tol=.
+
+#+begin_src cpp -n :includes <iostream> <cstdio> :exports both :results output :tangle src/loops/while/sum/main.cpp
+  double sum = 0.0;
+  double base = 0.5;
+  double pow = base; // initialize to base^1
+  double tol = 1e-4;
+  int iter = 1;
+
+  while((1-sum) >= tol) {
+    // Add `pow` to `sum`.
+    sum += pow;
+    // Update `pow` by one power of `base`.
+    pow *= base;
+
+    printf("Iter: %03d, Sum: %.5f, Abs Err: %.5f\n", iter, sum, 1-sum); 
+
+    // Update the `iter` val by 1.
+    iter += 1;
+  }
+#+end_src
+
+#+RESULTS[961ac44668fff1b00dd0f83d5f9512ccea7effcf]:
+#+begin_example
+Iter: 001, Sum: 0.50000, Abs Err: 0.50000
+Iter: 002, Sum: 0.75000, Abs Err: 0.25000
+Iter: 003, Sum: 0.87500, Abs Err: 0.12500
+Iter: 004, Sum: 0.93750, Abs Err: 0.06250
+Iter: 005, Sum: 0.96875, Abs Err: 0.03125
+Iter: 006, Sum: 0.98438, Abs Err: 0.01562
+Iter: 007, Sum: 0.99219, Abs Err: 0.00781
+Iter: 008, Sum: 0.99609, Abs Err: 0.00391
+Iter: 009, Sum: 0.99805, Abs Err: 0.00195
+Iter: 010, Sum: 0.99902, Abs Err: 0.00098
+Iter: 011, Sum: 0.99951, Abs Err: 0.00049
+Iter: 012, Sum: 0.99976, Abs Err: 0.00024
+Iter: 013, Sum: 0.99988, Abs Err: 0.00012
+Iter: 014, Sum: 0.99994, Abs Err: 0.00006
+#+end_example
+
+**** Example: estimating machine epsilon
+
+#+begin_src cpp -n :includes <iostream> <limits> :exports both :results output :tangle src/loops/while/macheps/main.cpp
+  double eps = 1;
+  int count = 1;
+
+  while(1.0 + eps*0.5 > 1.0) {
+      eps *= 0.5;
+      count += 1;
+  }
+
+  std::cout << eps << ", " << std::numeric_limits<double>::epsilon() << "\n"
+            << count << ", " << std::numeric_limits<double>::digits;
+#+end_src
+
+#+RESULTS[c3a7af7b2d8705da49b720904d1ca6e52a38c76c]:
+: 2.22045e-16, 2.22045e-16
+: 53, 53
+
+*** The =break= keyword
+The =break= keyword provides a mechanism for exiting the direct parent loop
+for which the =break= statement is placed. For example:
+
+#+begin_src cpp -n :results output :exports both :includes <iostream> :tangle src/loops/break/main.cpp
+  for(int i=0; i < 3; i++) {
+    while(true) {
+      std::cout << "Entering infinite loop number " << (i+1) << "\n";
+      break;
+    }
+    std::cout << "We escaped the infinite loop!\n";
+  }
+#+end_src
+
+#+RESULTS[5a9e1b5a8e6ead2c157283224afe0ac32cde0aec]:
+: Entering infinite loop number 1
+: We escaped the infinite loop!
+: Entering infinite loop number 2
+: We escaped the infinite loop!
+: Entering infinite loop number 3
+: We escaped the infinite loop!
+
+The previous example is contrived, but there are situations, where you
+might find the break statement within an infinite loop useful. Of course,
+you should avoid this sort of thing if there is a more straight-forward 
+approach.
+
+** COMMENT Exercises
+1. Given integers, $n$ and $k$, write a program to compute the binomial coefficient, $\displaystyle {n \choose k}$.
+2. The series, $\displaystyle \sum_{n=1}^{\infty} \frac{1}{n^2}$, converges to $\displaystyle\frac{\pi^2}{6}$. Create a program that approximates this series up to some specified tolerance, printing the absolute error at each iteration.
+3. Fix numbers, $a$ and $b$. Let $x_0 = a$ and $x_N=b$. Let $\Delta x = \frac{b-a}{N}$ and $x_i = a + i \cdot \Delta x$, for $i = 0, 1, \ldots, N$. The left endpoint Riemann sum approximation to the integral, $\displaystyle\int_a^b x^2 dx$, is given by $\displaystyle\sum_{n=1}^N (x_i)^2 \Delta x$. Write a program with $a=0$ and $b=1$, which successively halves $\Delta x$ (starting from the initial value of $\Delta x = 0.5$) until the absolute error between the approximation and the true integral value is less than some specified tolerance. Record the absolute error at each iteration.
+4. Maybe do something with a matrix.
+
+* Input / Output
+We have already used the =<iostream>= library to print results to 
+the console. However, in many cases, we'd like to read in lots of 
+data from a file, pass option flags to the program from the command 
+line, or save the results of some computation to a file for further 
+analysis.
+
+** Inputs to =main=: =argc= and =argv=
+The =main= function has two optional arguments which we have thus far omitted, 
+=argc= and =argv=. These arguments allow arguments to passed to the =main= 
+function when the program is run. This is how flags and other arguments are 
+passed to programs you use from the command line. The first, =argc=, is of 
+type, =int=, and stands for arg count. It gives the number of arguments 
+to the program. The arg count is always at least 1 because the program's 
+name is always the first argument. The second, =argv=, is a double pointer to
+=char=. In essence, =argv= is an array of strings.
+
+#+begin_src cpp -n :tangle src/io/args/main.cpp
+  #include <iostream>
+
+  int main(int argc, char ** argv) {
+    std::cout << "argc = " << argc << "\n";
+
+    for(int i=0; i < argc; i++) {
+      std::cout << "argv[" << i << "] = " << argv[i] << "\n";
+    }
+    return 0;
+  }
+#+end_src
+
+Compile this program, and run, for example:
+
+#+begin_src bash :exports both :results output :dir src/io/args
+  g++ main.cpp
+  ./a.out hello 1 2 34
+#+end_src
+
+#+RESULTS[53bac763edb87bb7b31f57514f3f5ef4e0f18b5a]:
+: argc = 5
+: argv[0] = ./a.out
+: argv[1] = hello
+: argv[2] = 1
+: argv[3] = 2
+: argv[4] = 34
+
+=argc= and =argv= are handy for setting up large experiments. You could, for 
+example, set up your main function so that different functions or parameters 
+or used based on the arguments of =arcv=. Then, you could set up a shell 
+script that loops through the desired arguments to be supplied to the main 
+function.
+
+** Filestreams
+File input and output is crucial for numerical experiments with lots of data. 
+In this section, we see how to read and write data to files.
+
+*** Reading data from a file
+    
+In general, how data is read in depends heavily on how the data is stored. 
+Nevertheless, we will give an example of reading in a vector stored in a 
+particular fashion. Suppose a text file exists in the directory, 
+=./data/vector.txt=, containing
+
+: 1 2 3.14 4 5 6.28
+
+#+begin_src cpp -n :exports both :tangle src/io/fstreams/in/main.cpp
+#include <iostream>
+#include <fstream>
+
+int main() {
+    std::fstream fin("./data/vector.txt", std::ios_base::in);
+    double vector[6];
+    int i = 0;
+    while(fin >> vector[i]) {
+      std::cout << vector[i] << " ";
+      i++;
+    }
+    return 0;
+}
+#+end_src
+
+#+begin_src sh :exports rewiults :dir src/io/fstreams/in
+  g++ main.cpp && ./a.out
+#+end_src
+
+#+RESULTS[dc9907de744360bffc1ef8e5bbb81878c2945a2e]:
+: 1 2 3.14 4 5 6.28
+
+This simply prints the data in the file back out to the console. Note, however, 
+that the data is read into an array of type =double=, so it can be processed 
+numerically thereafter.
+
+In this example dealt with simply stored data, and it was 
+assumed that the number of data entries was known beforehand. Parsing 
+data can become quite complicated depending on how it is stored, and 
+depending on the intended format of the data.
+
+*** Writing data to a file
+    
+Writing to a file is similar, using the =<fstream>= library.
+
+#+begin_src cpp -n :tangle src/io/fstreams/out/main.cpp
+  #include <fstream>
+  #include <cmath>
+
+  int main() {
+    std::fstream fout("./data/new_shiny_data.txt", std::ios_base::out);
+    double x;
+
+    fout << "x\tsin(x)\n";
+
+    for(int i=0; i < 11; i++) {
+      x = i / 10.0;
+      fout << x << "\t" << sin(x) << "\n";
+    }
+
+    fout.close();
+
+    return 0;
+  }
+#+end_src
+
+#+RESULTS[c8a8d5cb7019f16193d8423bfb7f32f278857520]:
+
+#+begin_src sh :exports none :dir src/io/fstreams/out
+  g++ main.cpp && ./a.out
+#+end_src
+
+#+RESULTS[93337642d8102d27a7d5d685555ccbf4cd69a052]:
+
+This produces a file called =new_shiny_data.txt= in the folder, =data=, 
+containing:
+
+#+include: src/io/fstreams/out/data/new_shiny_data.txt src sh
+
+* Functions
+
+So far, we've piled everything into the =main= function. When we have a block of 
+code used for a specific subtask, we can offload it to a function. This promotes 
+code which is separated based on the subtasks each block is intended to perform. 
+This, in turn, makes your code easier to debug and easier to understand.  
+
+** Writing a function
+   
+A function must be declared before use. Thus, a function usual consists of two
+parts, a declaration and an implementation. You must declare the return type 
+of a function as well as the types of all the function's arguments. If the 
+function is defined in the same file as the =main= function, you should write
+the declaration before =main= and the implementation after =main=.
+
+*** Example: =linspace=: generating a set of equally-spaced points
+
+#+begin_src cpp -n :exports both :results output :tangle src/functions/linspace/main.cpp
+  #include <iostream>
+
+  // This is the function declaration.
+  // You should describe the functions arguments
+  // and what is returned by the function in comments
+  // near the declaration.
+  //
+  // `linspace` returns an array of doubles containing
+  // `n_points` entries which are equally-spaced, starting
+  // at `start` and ending at `stop`.
+  double * linspace(double start, double stop, int n_points);
+
+  // `void` is a function with no return type.
+  // `print_array` takes an array and prints it to std out.
+  void print_array(double * arr, int arr_len);
+
+  int main() {
+    double * xs = linspace(-1, 1, 5);
+    print_array(xs, 5);
+    delete [] xs;
+
+    return 0;
+  }
+
+  // Implementation of `linspace`.
+  double * linspace(double start, double stop, int n_points) {
+    double * arr = new double [n_points];
+    double dx = (stop-start) / (n_points-1.0);
+
+    for(int i=0; i < n_points; i++) {
+      arr[i] = start + i*dx;
+    }
+
+    return arr;
+  }
+
+  // Implementation of `print_array`.
+  void print_array(double * arr, int arr_len) {
+    for(int i=0; i < arr_len; i++) {
+      std::cout << arr[i] << "\n";
+    }
+  }
+#+end_src
+
+#+RESULTS[188d6aa51776ba0b2f2f4c47a2aa1a5a0e28c214]:
+: -1
+: -0.5
+: 0
+: 0.5
+: 1
+
+** Header and implementation files
+   
+The example in the previous section certainly made the =main= function
+cleaner and simpler to understand, having only two function calls. However, 
+the file itself was still pretty messy. Thankfully, there is a way to modularize 
+further, by creating header and implementation files. Here is how we do it:
+
+*** The header file
+
+Put the declarations from the into a header file, called =my_library.h=:
+
+#+begin_src cpp -n :main no :tangle src/functions/modular/my_library.h
+  #ifndef MY_LIBRARY_H
+  #define MY_LIBRARY_H
+
+  #include <iostream>
+
+  namespace my_namespace {
+      // `linspace` returns an array of doubles containing
+      // `n_points` entries which are equally-spaced, starting
+      // at `start` and ending at `stop`.
+      double * linspace(double start, double stop, int n_points);
+
+      // `void` is a function with no return type.
+      // `print_array` takes an array and prints it to std out.
+      void print_array(double * arr, int arr_len);
+  }
+
+  #endif
+#+end_src
+
+Note the the function declarations are wrapped in conditional "macro" 
+statments, =#ifndef=, =#define=, and =#endif=. You can think of this 
+as protecting your library from being imported twice.
+
+We have also introduced the notion of a =namespace= above. Namespaces 
+help to prevent naming clashes between separate libraries. When calling 
+a function from a particular namespace, you must write the namespace 
+followed by =::= and then the function name. This is why many standard 
+library functions like =<iostream>= begin with =std::=.
+
+*** The implementation file
+    
+Create a file called =my_library.cpp= containing the implementations as follows:
+
+#+begin_src cpp -n :main no :tangle src/functions/modular/my_library.cpp
+  #include "my_library.h"
+
+  // Implementation of `linspace`.
+  double * my_namespace::linspace(double start, double stop, int n_points) {
+    double * arr = new double [n_points];
+    double dx = (stop-start) / (n_points-1.0);
+
+    for(int i=0; i < n_points; i++) {
+      arr[i] = start + i*dx;
+    }
+
+    return arr;
+  }
+
+  // Implementation of `print_array`.
+  void my_namespace::print_array(double * arr, int arr_len) {
+    for(int i=0; i < arr_len; i++) {
+      std::cout << arr[i] << "\n";
+    }
+  }
+#+end_src
+
+Note that we have to include the header file in quotations at the beginning, 
+and the names of the functions must be prepended by the namespace that we've 
+given in the header file.
+
+*** The file containing =main=
+    
+Create a file with the main function, say =main.cpp=:
+
+#+begin_src cpp -n :tangle src/functions/modular/main.cpp
+#include <iostream>
+#include "my_library.h"
+
+int main() {
+    double * xs = my_namespace::linspace(-1,1,5);
+    my_namespace::print_array(xs, 5);
+    delete [] xs;
+
+    return 0;
+}
+#+end_src
+
+Now the main function is very nice and clean, but now we 3 separate files we 
+must compile into one executable. This is done as follows:
+
+#+begin_src bash :exports both :results output :dir src/functions/modular
+  # Convert the library into an object file.
+  g++ -c my_library.cpp
+  # Compile the main to an executable.
+  g++ my_library.o main.cpp
+  # Run it.
+  ./a.out
+#+end_src
+
+#+RESULTS[f67f89c0d068ec352bf05b4621a6f8bc93d91659]:
+: -1
+: -0.5
+: 0
+: 0.5
+: 1
+
+If successful, you will see the same output [[Writing a function][as previously]].
+
+** Function pointers
+   
+Pointers can be made to functions, and these function pointers can be used 
+as arguments to other functions. We'll look at two functions that accept a 
+function pointer as one of their arguments.
+   
+*** Example: Newton's method for rootfinding
+    
+Suppose $f: \mathbb{R} \to \mathbb{R}$, and we'd like to find a root of $f$. 
+Newton's method is an iterative method for finding roots, which, starting 
+from some initial guess, $x_0$, iterates:
+
+$$
+    x_{n+1} \leftarrow x_n - \frac{f(x_n)}{f'(x_n)}
+$$
+
+For simplicity, we'll dump everything into the file containing =main=, but
+you could imagine a libary with many methods for finding roots, which would 
+contain Newton's method.
+
+Let's consider $f(x) = x^2 - 2$.
+
+#+begin_src cpp -n :exports both :results output :tangle src/functions/newton/main.cpp
+  #include <cmath>
+  #include <iostream>
+
+  // The function to find the root of.
+  double func(double x);
+  // Its derivative.
+  double dfunc(double x);
+
+  // Find the root of `f` using Newton's method,
+  // starting from `x0` until |f(x)| < `tol` or `max_iters`
+  // is reached.
+  //
+  // Note the first and second arguments are function pointers.
+  double newton_root(double (*f)(double), double (*df)(double), double x0,
+                     double tol, int max_iters, bool print_iters); 
+
+  int main() {
+    double x = newton_root(&func, &dfunc, 1.0, 1e-6, 1000, true);
+
+    return 0;
+  }
+
+  double func( double x) { return x*x - 2; }
+  double dfunc(double x) { return 2*x; }
+
+  double newton_root(double (*f)(double), double (*df)(double), double x0,
+                     double tol, int max_iters, bool print_iters) {
+    double x  = x0;
+    int iter  = 0;
+
+    while (std::abs(f(x)) > tol && iter < max_iters) {
+      if (print_iters) { 
+        std::cout << "f(" << x << ") = " << f(x) << "\n";
+      }
+
+      // Newton's method update.
+      x -= f(x) / df(x);
+      iter++;
+    }
+    
+    // One last print if necessary.
+    if (print_iters) { 
+      std::cout << "f(" << x << ") = " << f(x) << "\n";
+    }
+
+    return x;
+  }
+#+end_src
+
+#+RESULTS[9f25e7b7d701645c163196ec87c539ce982f3880]:
+: f(1) = -1
+: f(1.5) = 0.25
+: f(1.41667) = 0.00694444
+: f(1.41422) = 6.0073e-06
+: f(1.41421) = 4.51061e-12
+
+*** Example: The midpoint rule for definite integrals
+    
+The midpoint rule is a numerical integration method which approximates 
+the definite integral of a specified function over a specified interval 
+using a specified number of subintervals where on each subinterval, the 
+area under the curve is approximated by a rectangle whose width is the 
+width of the subinterval and whose height is the height of the function 
+at the midpoint between the points defining the end points of the subinterval.
+
+Specifically, if $n$ equally-sized subintervals are used on $[a,b]$, then
+the midpoint rule approximation, $M_n$, to the definite integral of $f(x)$ 
+on $[a,b]$ is: 
+
+$$
+    \int_a^b f(x) \; dx \approx \sum_{i=1}^n f\left( \frac{x_{i-1}+x_i}{2} \right) \Delta x =: M_n
+$$
+
+where $\Delta x = \frac{b-a}{n}$, and $x_i = a + i \cdot \Delta x, \;\; i=0, 1, \ldots, n$.
+
+Let's consider $f(x) = \frac{1}{x}$ on $[1, e]$.
+
+#+begin_src cpp -n :exports both :results output :tangle src/functions/midpoint/main.cpp
+  #include <iostream>
+  #include <cmath>
+
+  const double E = std::exp(1.0);
+
+  // The function to be integrated.
+  double func(double x);
+
+  // Compute the midpoint rule approximation to
+  // the definite integral of `f` from `a` to `b`
+  // using `n` subintervals.
+  double midpoint_rule(double (*f)(double), double a, double b, int n);
+
+
+  int main() {
+    for(int n=2; n <= 20; n += 2) {
+      std::cout << "n = " << n << ", "
+                << "M_n = " << midpoint_rule(&func, 1, E, n) << "\n";
+    }
+
+    return 0;
+  }
+
+  double func(double x) { return 1.0 / x; }
+
+  double midpoint_rule(double (*f)(double), double a, double b, int n) {
+    double xi;
+    double xi_prev = a;
+    double dx = (b-a) / n;
+    double sum;
+
+    for(int i=1; i <= n; i++) {
+      xi = a + i*dx;
+      sum += f(0.5*(xi_prev + xi));
+      xi_prev = xi;
+    }
+
+    return sum*dx;
+  }
+#+end_src
+
+#+RESULTS[ca52deecf244e393f0c6945caf6157b820cfa76f]:
+#+begin_example
+n = 2, M_n = 0.97636
+n = 4, M_n = 0.993575
+n = 6, M_n = 0.997091
+n = 8, M_n = 0.998353
+n = 10, M_n = 0.998942
+n = 12, M_n = 0.999264
+n = 14, M_n = 0.999459
+n = 16, M_n = 0.999585
+n = 18, M_n = 0.999672
+n = 20, M_n = 0.999734
+#+end_example
+
+* Object-oriented programming
+  
+New data types can be created by writing a new =class=. A =class= has 
+state variables and functions that act on the state variables. An instance 
+of a =class= is called an *object*. Let's write a =vector= class that 
+improves upon the default =double= array.
+
+** Example: a vector =class=
+   
+*** The header file
+Create the header file, =vector.h=:
+
+#+include: ./src/vector/init/vector.h src cpp -n
+
+First note the macro guards, =#ifndef=, =#define=, and =#endif=, as well as the 
+namespace, =vec=, wrapping the =class= declaration. Macro guards and namespaces 
+were previously discussed when we initially introduced 
+[[Header and implementation files][how to write header and implementation files]]. 
+
+Now, within the namespace, we've declared a class, =vector=, which 
+contains =public= and =private= variables and function declarations. Private 
+functions and variables may only be accessed through the public methods. This 
+means if you created an instance of the class, =vector=, you would not be able 
+to access the private variable directly. You could only call the *public 
+member-functions*, which, in turn, may manipulate the 
+*private member-variables*, or call the *private member-functions*. 
+Splitting variables and functions into public and private helps to ensure 
+that other libraries and programs use your class as intended.
+
+Thus far, this class has 5 public member-functions, 2 private member-variables, 
+and 1 private member-function. The first two member functions are special, 
+the *constructor* and *destructor*, respectively. The constructor is called 
+explicitly when you declare a new instance of this class, while the destructor 
+is usually called implicitly when the object is deleted or when it goes out of 
+scope.
+
+Notice that the method for accessing elements of =vector= is called =element= 
+and its return type is a *reference* ([[References][discussed previously]]). This allows us 
+to use this function on both the left side of assignment operators, i.e., to 
+assign values to =vector= components, and on the right side of assignments, 
+i.e., to treat it as the value of the component.
+
+Finally, notice that some member function declarations end with the keyword, 
+=const=. Functions with such a signature are not allowed to modify member 
+variables, and they are also not allowed to call other non =const= member 
+functions.
+
+*** The implementation file
+Create the implementation file, =vector.cpp=:
+
+#+include: ./src/vector/init/vector.cpp src cpp -n
+
+Note that we again wrap the implementations in the same namespace as wrapped 
+by the class declaration. Also observe how each member-function is prepended 
+by =vector::=.
+
+The keyword, =this=, is a pointer to the calling object. Writing, =this->=,
+is equivalent to =(*this).=, and in fact, can be used for any pointer. Thus,
+=this->length= is equivalent to =(*this).length=.
+
+Observe how the private member function, =check_index=, is used in the 
+public =element= accessor function. If this library is compiled with the 
+flag, =-DNEDUBG=, then the check function will not be called. You could 
+read this flag as "define no debug". Thus, when this flag is present, the 
+debug function =check_index= is called whenever the element accessor is 
+called. The =check_index= function simply checks if the provided index is 
+out-of-bounds for the vector. If it is, an informative message is printed, 
+and the program terminates prematurely by calling =exit(1)=. Such assertions 
+with informative messages are a good practice, and will likely save you lots 
+of headaches in the future.
+
+*** Example usage
+Ok. Let's see some example usage, by creating a =main.cpp=, containing:
+
+#+include: ./src/vector/init/main.cpp src cpp -n
+
+Let's first compile with our =check_index= debugger function in place:
+
+#+begin_src bash
+  g++ -c vector.cpp
+  g++ vector.o main.cpp
+  ./a.out
+#+end_src
+
+If successful, you should see:
+
+: `v` has length = 5
+: -1.27
+: 0
+: 0
+: 3.1
+: 0
+: ERROR: index, 5, is out-of-bounds.
+: (valid indices are 0-4)
+
+Now let's run without =check_index=:
+
+#+begin_src bash
+  g++ -DNDEBUG -c vector.cpp
+  g++ vector.o main.cpp
+  ./a.out
+#+end_src
+
+Upon running, you will likely see some extensive list of errors when 
+the element beyond the array's length is attempted to be accessed. Again, 
+by liberally sprinkling these sorts of assertions through your code, you 
+will (sometimes) find debugging much easier. After you're fairly certain 
+that your code is working, you can simply compile with =-DNEDUBG=.
+
+*** Operator overloading
+   
+The =v.element(i)= accessor is a bit clunky. We can replace this with the 
+more natural, =v[i]=, by *overloading* the =[]= operator. Indeed,
+ [[http://en.cppreference.com/w/cpp/language/operators][we can overload many]] of the normal C++ operators, e.g. =+=, =-=, ~=~, etc.
+Some of these operators require more careful consideration when implementing 
+class that utilizes dynamic memory allocation, such as our =vector= class.
+
+**** Overloading =operator[]=
+
+In the header file, replace the =element= function declaration with:
+
+#+include: ./src/vector/operator-braces/vector.h :lines "16-18" src cpp -n
+
+and in the implementation file, replace the =element= implementation with:
+
+#+include: ./src/vector/operator-braces/vector.cpp :lines "21-27" src cpp -n
+
+Just think of =operator[]= as the new name of the function, =element=. We 
+can now use the overloaded operator just like how we would use the =[]= for 
+operator for accessing array components, expect now our overloaded operator 
+function is called instead.
+
+#+include: ./src/vector/operator-braces/main.cpp :lines "7-9" src cpp -n
+
+Compile and run:
+
+#+begin_src bash
+  g++ -c vector.cpp && g++ vector.o main.cpp && ./a.out
+#+end_src
+
+and you should see:
+
+: -1.27
+: 0
+: 0
+: 3.1
+: 0
+
+just like before.
+
+**** Overloading ~operator=~
+    
+Let's overload the ~=~ operator so we can assign one vector to another. 
+We'll write in a way such that the vector on the left hand side is 
+overwritten by the one on the right.
+
+Let's add a declaration to the header file,
+
+#+include: ./src/vector/operator-equal/vector.h :lines "19-21" src cpp -n
+
+and let's add to the implementation file,
+
+#+include: ./src/vector/operator-equal/vector.cpp :lines "28-43" src cpp -n
+
+Now, let's assume the =vector= instance, =v=, from above is still defined, and
+we'll create a new vector:
+
+#+include: ./src/vector/operator-equal/main.cpp :lines "10-13" src cpp -n
+
+This should print, 
+
+: -1.27
+: 0
+: 0
+: 3.1
+: 0
+
+Notice that =w= is intially defined to be of length =14=, but this is 
+overwritten, and its new length is the length of =v=. Also note that all of
+=w='s old data is deleted.
+
+*** The copy constructor
+
+It may be tempting at this point to attempt to initialize =w= from =v=
+directly:
+
+#+begin_src cpp -n
+  vec::vector w = v;
+#+end_src
+
+If you attempt this currently, you will see all sorts of errors. This is 
+because this type of intialization does not call the assignment operator. 
+It calls the *copy constructor*. The assignment operator is only called 
+when the object has already been intialized. Writing the previous line of 
+code is essentially equivalent to
+
+#+begin_src cpp -n
+  vec::vector w(v);
+#+end_src
+
+In other words, the constructor is called with the existing vector, =v=, as
+the argument, but we have not written a constructor yet with such a call 
+signature.
+    
+The constructor can be overloaded, i.e., we can write multiple versions of the 
+constructor function, and the one that matches the correct call signature will 
+be used. This function overloading behavior actually applies to all functions 
+in C++.
+
+Let's add the copy constructor declaration to the header file:
+
+#+include: ./src/vector/copy-construct/vector.h :lines "10-12" src cpp -n
+
+and let's add its implementation:
+
+#+include: ./src/vector/copy-construct/vector.cpp :lines "13-22" src cpp -n
+
+Now we compile and run something like:
+
+#+include: ./src/vector/copy-construct/main.cpp :lines "10-12" src cpp -n
+
+we will see:
+
+: -1.27
+: 0
+: 0
+: 3.1
+: 0
+
+*** Friend functions
+
+Non-member functions may access private member variables and private member 
+functions of by labeling them as =friend=. This is useful in situations where 
+it is not clear that function should be "called on" an object, i.e. 
+=object.method(params)=. Friend functions should be declared in the class 
+declaration, but their implementation is not prepended with =class::=, which 
+is necessary for member functions.
+
+**** Overloading =operator*=
+
+As an example, we'll overload =operator*= to implement scalar multiplication.
+
+Because scalar multiplication should commute, let's add the following
+two declarations to our header file:
+
+#+include: ./src/vector/operator-star/vector.h :lines "25-27" src cpp -n
+
+Let's implement the first by adding to the declaration file:
+
+#+include: ./src/vector/operator-star/vector.cpp :lines "54-63" src cpp -n
+
+Observe how we didn't prepend =vector::= before =operator*= because 
+these are =friend= functions.
+
+Now, we can use the first implementation to achieve the second:
+
+#+include: ./src/vector/operator-star/vector.cpp :lines "64-67" src cpp -n
+
+And let's try it out:
+
+#+include: ./src/vector/operator-star/main.cpp src cpp -n
+
+prints:
+
+: -2.54
+: 0
+: 0
+: 6.2
+: 0
+: 
+: -1.27
+: 0
+: 0
+: 3.1
+: 0
+
+Other binary arithmetic operators could also be implements as =friend= 
+functions, e.g., vector addition and subtraction and component-wise 
+multiplication and division. Component-wise multiplication would overload 
+=operator*= for a third time but would accept two vectors as function 
+arguments.
+
+**** Overloading =operator<<=
+We may overload =operator<<= to send things to the output stream. This 
+is a more C++ way to print than our current =print= function. We overload
+this operator by adding the following =friend= declaration to the header:
+
+#+include: ./src/vector/operator-ostream/vector.h :lines "30-31" src cpp -n
+
+Note that the =ostream= object belongs to the =std= namespace. Next, we
+add to the implementation file:
+
+#+include: ./src/vector/operator-ostream/vector.cpp :lines "68-72" src cpp -n
+
+So now we stream the vector to =std::cout= just as we do for printing 
+numbers and strings to the screen:
+
+#+include: ./src/vector/operator-ostream/main.cpp src cpp -n
+
+which prints
+
+: -1.27
+: 0
+: 0
+: 3.1
+: 0
+
+** Templating: a matrix class
+
+Template classes allow you to generalize your classes. We will introduce the 
+concept of templating by creating a templated matrix class. Below is a bare-bones 
+template class for a matrix type. Note that the implementations for templates 
+must all go in the header file; they cannot be split into seperate 
+implementation files.
+
+#+include: ./src/matrix/init/matrix.h src cpp -n
+
+Observe how the class declaration begins with the statement, =template<class T>=.
+When new instances of the class, =matrix=, are instantiated, the type, =T=, must 
+be specified. Notice that the private variable now holds a pointer to type, =T=, 
+and the element accessor returns a reference to to type, =T=. Compare this to 
+our previous =vector= class where each vector instance held type, =double=.
+
+Also notice that the copy constructor uses something called an argument list. 
+We've used it to call the initial constructor before proceeding with the copying
+of components from the =matrix= instance, =src=. To use this type of syntax (i.e., 
+initializer lists) you may have to compiel with the flag ~-std=c++11~, e.g.,
+=g++ -std=c++11 main.cpp=.
+
+Finally, observe that rather the keyword, =private=, we have used the keyword 
+=protected=. This will allow inherited classes to use the private member variables 
+and functions. We will talk about inheritance later, but for now, it essentially
+the same as marking these things as =private=.
+
+Here is some example usage:
+
+#+include: ./src/matrix/init/main.cpp src cpp -n
+
+Outputs:
+
+: 3.14
+: -6.28
+: -6.28
+: 0
+: Invalid column index, 12.
+: Valid column indices are: 0-11.
+
+*** Overloading =operator*=
+
+Let us overload =operator*= to implement matrix multiplication. It would also
+make sense to overload =operator*= with other call signatures to implement scalar 
+multiplication or vector broadcasting, but for now we will just stick with 
+matrix multiplication.
+
+Add the following two non-friend, non-member functions. They should be defined 
+just after the class definition, but they should remain in the body of namespace,
+=mtx=.
+
+#+include: ./src/matrix/operator-star/matrix.h :lines "68-97" src cpp -n
+
+Note that because we've chosen to implement these functions as non-member 
+and non-friend, we must prefix the function definitions with 
+=template<class T>=. This isn't necessary when the functions were declared 
+inside of the class body (i.e., member or friend functions) since the class 
+declaration already begins with =template<class T>=.
+
+We've added a simple matrix multiplcation function above and a debugger 
+functions to ensure that if two matrices are multiplied, that it is well-
+defined to do so. Otherwise, we print an error message and abort, as with 
+the element accessor function. We've also wrapped the debugger function 
+with compiler macros, so that it can be left out if we choose to do so.
+
+Here is some example usage:
+
+#+include: ./src/matrix/operator-star/main.cpp src cpp -n
+
+Output:
+
+: 2, -2, 6
+: 0, 0, 0
+: Size mismatch for matrix multiplication.
+: Left matrix has 3 cols, but
+: right matrix has 2 rows.
+
+** Inheritance
+
+Often classes have a natural, hierarchical structure.
+For example, a row or column vector could be seen as natural
+"subclass" of the matrix class. So, supposing we had only 
+written the matrix class, it would be nice if we could write 
+a row or column vector class that inherited many of the properties 
+of the parent matrix class, but with additional properties, 
+unique to the vector classes. This is what inheritance may allow 
+us to do.
+
+Let's create another couple of vector classes, called =rowvec= and
+=colvec= in a file called =vectors.h=:
+
+#+include: ./src/inheritance/init/vectors.h src cpp -n
+
+We have defined two classes in the =vec= namespace, =rowvec= and =colvec=.
+Notice that the declaration of the =rowvec= class is slightly augmented,
+
+#+begin_src cpp -n
+class rowvec : public mtx::matrix<T> {
+// ...
+};
+#+end_src
+
+This says that the =rowvec= class inherits all the methods and
+variables defined for the =matrix= class. The keyword =protected=, 
+rather than =private= in the =matrix= class allows derived classes 
+access to these variables and functions. The keyword, =public=, in 
+the class declaration above signals that every =rowvec<T>= instance 
+may be cast as a =matrix<T>= instance. This means that functions (such
+as our =operator*= in the =mtx= namespace) which expect =matrix= types
+in argument, can also now accept =rowvec= types: =rowvec= instances 
+will be cast as =matrix= instances when possible.
+
+
+Next, observe that the constructor simply calls the parent class 
+constructor, with an argument of =1= for the number of rows. We also 
+add a =len()= function which returns `n_cols()`, calling the parent 
+class function. =len()= is more natural for a vector class.
+
+Finally, =operator()= is overwritten so that only a single argument is 
+necessary. In the body, we simply call the parent class method. We also 
+add =operator[]=, which duplicates the functionality of =operator()=.
+
+Notice that any other methods that exist for the parent class, =matrix=, 
+have been inherited. For example, it is not necessary to write a new 
+destructor function since this already exists for the parent and the 
+functionality is the same.
+
+In the same, =vec=, namespace we have declared a =colvec= class which 
+is analogous to the =rowvec= class except with the dimensions swapped.
+
+Let's check out an example:
+
+#+include: ./src/inheritance/init/main.cpp src cpp -n
+
+This prints:
+
+: 1, 1 ... -30
+
+So =operator*= works by casting both the =rowvec= and =colvec= arguments 
+as =matrix= types. The dimensions of these matrices match for matrix 
+multiplication and the resulting 1x1 matrix is returned. Let's overwrite
+this behavior to return a scalar instead of a matrix when the operation,
+=rowvec*colvec= is performed. Add the inside the =vec= namespace but outside 
+the class declarations:
+
+#+include: ./src/inheritance/operator-star/vectors.h :lines "42-54" src cpp -n
+
+Observe that we can call the =operator*= function in the =mtx= namespace,
+just like any other function. Now, the product between a =rowvec= and a =colvec=
+is more natural:
+
+#+include: ./src/inheritance/operator-star/main.cpp src cpp -n
+
+Output:
+
+: -30
+
+#+html: </div>
