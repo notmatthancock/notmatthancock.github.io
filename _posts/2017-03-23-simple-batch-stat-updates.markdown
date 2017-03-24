@@ -10,7 +10,7 @@ mathjax: true
 comments: true
 ---
 
-It's typical in many optimization problems to standardize your data by subtracting off the empirical mean and dividing by the empirical standard deviation. However, in "online" situations where the data is acquired one at a time or in batches, it's only possible to compute these statistics over the data observed at that point. Further, it might not be desirable to store all the observations and re-compute the mean and standard deviation each time new data is acquired. There are simple formulas to update the existing mean and standard deviation to reflect the new data without storing all the observations.
+It's typical in many optimization problems in data analysis to standardize your data by subtracting off the empirical mean and dividing by the empirical standard deviation. However, in "online" situations where the data is acquired one at a time or in batches, it's only possible to compute these statistics over the data observed up to that point. Further, it might not be desirable to store all the observations and re-compute the mean and standard deviation each time new data is acquired. There are simple formulas to update the existing mean and standard deviation to reflect the new data without storing all the observations.
 
 Suppose we've observed $m$ observations, $x_i, \; i=1,\ldots,n$, so far, and we obtain a new "batch" of $n$ observations, $x_i \; i=m+1, \ldots, m+n$. Now denote,
 
@@ -28,7 +28,7 @@ $$
 \boxed{ \mu = \frac{m}{m+n} \mu_m + \frac{n}{m+n} \mu_n}
 $$
 
-In other words, the updated mean is a linear combination of the mean over the old data and the new data.
+In other words, the updated mean is a linear combination of the mean over the old data and the mean over new data, yielding a simple recursive update.
 
 Now let's consider the empirical variances:
 
@@ -45,18 +45,21 @@ Observe that
 $$
 \begin{align*}
     \sigma^2 &= \frac{1}{m+n} \sum_{i=1}^{m+n} x_i^2 - \mu^2 \\
-    \frac{1}{m} \sum_{i=1}^{m} x_i^2 = \sigma_m^2 + \mu_m^2
-    \frac{1}{n} \sum_{i=m+1}^{m+n} x_i^2 = \sigma_n^2 + \mu_n^2
+    \frac{1}{m} \sum_{i=1}^{m} x_i^2 &= \sigma_m^2 + \mu_m^2 \\
+    \frac{1}{n} \sum_{i=m+1}^{m+n} x_i^2 &= \sigma_n^2 + \mu_n^2
 \end{align*}
 $$
 
 so that
 
 $$
-\boxed{\sigma^2 = \frac{m}{m+n} (\sigma_m^2 + \mu_m^2) + \frac{n}{m+n} (\sigma_n^2 + \mu_n^2) - \mu^2}
+\boxed{\begin{align*}
+\sigma^2 &= \frac{m}{m+n} (\sigma_m^2 + \mu_m^2) + \frac{n}{m+n} (\sigma_n^2 + \mu_n^2) - \mu^2 \\
+         &= \frac{m}{m+n}\sigma_m^2 + \frac{n}{m+n} \sigma_n^2 + \frac{mn}{(m+n)^2} (\mu_m - \mu_n)^2
+\end{align*}}
 $$
 
-The new empirical mean, $\mu$, has already been computed, so $\sigma^2$ can be computed directly.
+The update is a linear combination of the observed variances plus a correction by the means.
 
 Note that, initially, we can set $m = \mu_m = \sigma_m^2 = 0$, and the formulas all work out. Also note that these are fine to use for vectors, since these statistics are computed component-wise.
 
@@ -73,9 +76,11 @@ class StatsRecorder:
         data: ndarray, shape (nobservations, ndimensions)
         """
         if data is not None:
+            data = np.atleast_2d(data)
             self.mean = data.mean(axis=0)
             self.std  = data.std(axis=0)
             self.nobservations = data.shape[0]
+            self.ndimensions   = data.shape[1]
         else:
             self.nobservations = 0
 
@@ -86,6 +91,10 @@ class StatsRecorder:
         if self.nobservations == 0:
             self.__init__(data)
         else:
+            data = np.atleast_2d(data)
+            if data.shape[1] != self.ndimensions:
+                raise ValueError("Data dims don't match prev observations.")
+
             newmean = data.mean(axis=0)
             newstd  = data.std(axis=0)
 
@@ -95,8 +104,8 @@ class StatsRecorder:
             tmp = self.mean
 
             self.mean = m/(m+n)*tmp + n/(m+n)*newmean
-            self.std  = m/(m+n)*(self.std**2 + tmp**2) + \
-                        n/(m+n)*(newstd**2 + newmean**2) - self.mean**2
+            self.std  = m/(m+n)*self.std**2 + n/(m+n)*newstd**2 +\
+                        m*n/(m+n)**2 * (tmp - newmean)**2
             self.std  = np.sqrt(self.std)
 
             self.nobservations += n
