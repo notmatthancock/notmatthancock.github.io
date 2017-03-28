@@ -1,0 +1,62 @@
+---
+---
+<!doctype html>
+<html>
+    <head>
+        <title>Functional Iterator Painter</title>
+        <style>
+            body { font-family: sans-serif; color: #333; }
+            #main { max-width: 700px; margin: 40px auto; }
+        </style>
+    </head>
+    <body>
+        <div id="main">
+            <a href="./">Back to functional iterator painter</a>
+
+            <h3>A short explanation of the functional iterator painter</h3>
+            First choose a some function $$F(x,y) = \begin{bmatrix}g(x,y) \\ h(x,y)\end{bmatrix}: \mathbb{R}^2 \to \mathbb{R}^2$$.
+            For example, the "Julia iteration" would be
+
+            $$
+            \begin{bmatrix}
+            g(x,y) \\
+            h(x,y) 
+            \end{bmatrix}
+            =
+            \begin{bmatrix}
+             x^2-y^2 + c_\text{real} \\
+            2xy      + c_\text{imag}
+            \end{bmatrix}
+            $$
+
+            which comes from separating the real and imaginary components,
+            
+            $$
+                z^2 = (x+iy)^2 = (x^2-y^2) + i(2xy)
+            $$
+
+            <br>
+
+            Next, iterate from some initial point $(x_0, y_0)$:
+
+            $$
+                (x_n, y_n) = F(x_{n-1}, y_{n-1})
+            $$
+
+            Pixels are colored based on how quickly sequence diverges when the pixel coordinate is used as $(x_0, y_0)$. The field, "convergence limit", is the maximum number of iterations performed, while "divergence limit" is the number at which we conclude the sequence (from that particular initial point) has diverged. In other words, the sequence terminates when either
+
+            $$
+                n \gt \text{convergence limit}
+            $$
+
+            or
+
+            $$
+                ||F(x_n,y_n)|| \gt \text{divergence limit}
+            $$
+
+            A pixel is colored based the value of $n$ when the sequence terminates (when the pixel coordinate is used as the initial value of the sequence).
+        </div>
+        {% include mathjax.html %}
+    </body>
+</html>
