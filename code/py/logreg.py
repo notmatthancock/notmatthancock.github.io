@@ -23,12 +23,12 @@ def gradient_ascent(w, b, lamb, eta, n_iters):
     # G is P(Y=1|X) under the current parameters.
     G = 1 / (1. + np.exp(-b-np.dot(X,w)))
     # loss is the function we're maximizing
-    loss = -lamb * np.log(w**2).sum() + np.log(G[Y==1]).sum() + np.log(1-G[Y==0]).sum()
+    loss = -lamb * (w**2).sum() + np.log(G[Y==1]).sum() + np.log(1-G[Y==0]).sum()
     print "iteration:", 0, "| loss:", loss, "| accuracy:", ((G>0.5) == Y).mean()
 
     for iter in range(1, n_iters+1):
         G = 1 / (1. + np.exp(-b-np.dot(X,w)))
-        loss = -lamb * np.log(w**2).sum() + np.log(G[Y==1]).sum() + np.log(1-G[Y==0]).sum()
+        loss = -lamb * 0.5 * (w**2).sum() + np.log(G[Y==1]).sum() + np.log(1-G[Y==0]).sum()
         print "iteration:", iter, "| loss:", loss, "| accuracy:", ((G>0.5) == Y).mean()
 
         # Now, do gradient ascent.
