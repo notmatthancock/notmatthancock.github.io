@@ -51,11 +51,11 @@ end method grow
 
 We've glossed over a few details that will appear in the actual implementation, but in a nutshell, the pseudocode says that whenever the image value at a point is above (or equal to) the average image value in the neighborhood of that point, we set the corresponding point in segmentation to "True" and add all the neighbors of that point to a stack to be checked later. When there's no points left to check, the boolean segmentation volume will (hopefully, roughly) indicate where the object is in the image volume.
 
-It's worth mentioning at this point that using the neighborhood average as the inclusion criteria will have a rather large effect in the final segmentation outcome. Indeed, we are assuming the object is "bright" relative to its surroundings. Generally speaking, this inclusion criteria should be guided by the application domain at hand and by the interpretation of actual image values. For example, in CT scans the image values correspond to [Hounsfield_scale](https://en.wikipedia.org/wiki/Hounsfield_scale) units (which correspond to tissue density), and thus our region growing routine with the inclusion criteria as is would find connected regions of high density for CT data.
+It's worth mentioning at this point that using the neighborhood average as the inclusion criteria will have a rather large effect in the final segmentation outcome. Indeed, we are assuming the object is "bright" relative to its surroundings. Generally speaking, this inclusion criteria should be guided by the application domain at hand and by the interpretation of actual image values. For example, in CT scans the image values correspond to [Hounsfield](https://en.wikipedia.org/wiki/Hounsfield_scale) units (which correspond to tissue density), and thus our region growing routine with the inclusion criteria as is would find connected regions of high density for CT data.
 
 ## Generating an image volume for testing
 
-We'll generate a synthetic volume for testing, rather than depending on some external data source (e.g., medical imaging). Specifically, we'll use implicit surfaces of the form,
+We'll generate a synthetic volume for testing, rather than depending on some external data source. Specifically, we'll use implicit surfaces of the form,
 
 $$
     x^4 - 5x^2 + y^4 - 5y^2 + z^4 - 5z^2 = k
@@ -636,7 +636,7 @@ If all goes correctly, you should observe something like:
 (C)      Errors: 0
 {% endhighlight %}
 
-$1.189 / 0.074 \approx 16$. That's a speed-up of nearly a factor of 16! Of course, this factor will change if we a image neighbor value larger than 5 as was tested here. Something to note is that in the above, the array returned by the C-wrapped function will actually be of type `int8`. For some reason, `f2py` doesn't care for boolean types. Generally, you have to be pretty careful when passing different types using `f2py` because you can observe strange results that might not appear as blatant errors.
+$1.189 / 0.074 \approx 16$. That's a speed-up of nearly a factor of 16! Of course, this factor will change if we use a image neighbor value larger than 5 as was tested here. Something to note is that in the above, the array returned by the C-wrapped function will actually be of type `int8`. [For reasons that are unknown to me](https://stackoverflow.com/questions/41411923/pass-boolean-array-without-copying-with-f2py), `f2py` doesn't care for accepting boolean types from NumPy and requires `int8` instead. Generally, you have to be pretty careful when passing different types using `f2py` because you can observe strange results that might not appear as blatant errors.
 
 In the figure below, I've plotted the run times for the Python and C codes (and their ratio) averaged over 10 runs for image neighborhood radius size of $1,5,10,15,$ and $25$ (I'm using the term radius, but we really mean cube-half-length). This means at each coordinate where we check for inclusion, we must compute the average over a volume of size $(2 \cdot 1+1)^3, (2\cdot 5 + 1)^2$, etc. Notable speed increases happen within the 1 to 15 pixel radius range. For larger neighborhood sizes, the averaging operation dominates the code, and since the NumPy average is implemented in C, it is not too surprising that the relative speed increase obtained by the pure C code begins to vanish.
 
