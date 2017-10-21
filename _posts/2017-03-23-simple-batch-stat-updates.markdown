@@ -7,7 +7,6 @@ tags:
 - statistics
 - pattern-recognition
 mathjax: true
-comments: true
 ---
 
 It's typical in many optimization problems in data analysis to standardize your data by subtracting off the empirical mean and dividing by the empirical standard deviation. However, in "online" situations where the data is acquired one at a time or in batches, it's only possible to compute these statistics over the data observed up to that point. Further, it might not be desirable to store all the observations and re-compute the mean and standard deviation each time new data is acquired. There are simple formulas to update the existing mean and standard deviation to reflect the new data without storing all the observations.

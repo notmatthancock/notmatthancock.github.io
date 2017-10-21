@@ -6,7 +6,6 @@ tags:
 - math 
 - dimensionality-reduction
 mathjax: true
-comments: true
 ---
 
 What would you expect if you sampled points from an ellipse and used PCA to find the principal components? We know [from a separate post]({{ site.baseurl }}/2015/06/14/what-is-pca.html) that the principal component directions and magnitude are the eigenvectors and eigenvalues of the scatter matrix, which itself is the maximum likelihood estimate of the covariance matrix. Intuitively, we expect that directions given by PCA should match. This is a sort "sanity check" calculation, but it also is useful if you want to fit an ellipse to scattered data because this tells you via PCA how wide the ellipse should be along its major and minor axes.

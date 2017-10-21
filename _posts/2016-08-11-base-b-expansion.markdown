@@ -6,7 +6,6 @@ tags:
 - math
 - analysis
 mathjax: true
-comments: true
 ---
 
 It's often taken for granted that we can expand a real number in a base of our choosing. For example, $0.1$, can be written in base-2 as:

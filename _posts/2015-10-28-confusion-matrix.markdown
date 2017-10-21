@@ -6,7 +6,6 @@ tags:
 - pattern-recognition
 - python
 mathjax: true
-comments: false
 ---
 
 The [Confusion Matrix](https://en.wikipedia.org/wiki/Confusion_matrix) is a nice way to summarize the results from a binary classification problem. While [scikit-learn](http://scikit-learn.org/) offers a nice method to compute this matrix (for multiclass classification, as well), I'm not aware of a built-in method that shows the relevant statistics from the confusion matrix. Often the matrix is just shown, color-coded according to entry values.

@@ -7,7 +7,6 @@ tags:
 - probability
 - riddles
 mathjax: true
-comments: true
 ---
 [Another riddle from 538!](http://fivethirtyeight.com/features/can-you-slay-the-puzzle-of-the-monsters-gems/) This one goes like this:
 

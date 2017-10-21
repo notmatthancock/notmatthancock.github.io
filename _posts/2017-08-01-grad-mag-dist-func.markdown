@@ -6,7 +6,6 @@ tags:
 - math
 - level-sets
 mathjax: true
-comments: true
 ---
 
 Suppose $\Omega$ is a subset of $\mathbb{R}^n$ with smooth boundary, $\partial\Omega$. Let's define the function,

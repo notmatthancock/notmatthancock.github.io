@@ -7,7 +7,6 @@ tags:
 - pattern-recognition
 - linear-algebra
 mathjax: true
-comments: true
 ---
 
 Suppose we train a linear classifier on some data, and we'd like to project the data onto a few dimensions for visualization in such a way that respects the boundary of the classifier in some optimal way. This means we should project the data parallel to the hyperplane defining the decision surface in a way that minimizes the distance between the point in the original space and the projection.

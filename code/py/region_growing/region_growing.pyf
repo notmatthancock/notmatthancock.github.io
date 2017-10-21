@@ -1,0 +1,16 @@
+python module region_growing
+interface
+    subroutine grow(m, n, p, img, seg, si, sj, sk, t)
+        intent(c) grow
+        intent(c)
+
+        integer intent(hide), depend(img) :: m = shape(img,0)
+        integer intent(hide), depend(img) :: n = shape(img,1)
+        integer intent(hide), depend(img) :: p = shape(img,2)
+
+        double precision intent(in) :: img(m,n,p)
+        integer(kind=1) intent(out) :: seg(m,n,p)
+        integer intent(in)          :: si, sj, sk, t
+    end subroutine grow
+end interface
+end python module region_growing

@@ -4,7 +4,6 @@ title: Coin flip draft
 area: notes
 published: true
 mathjax: true
-comments: true
 tags:
     riddles
     statistics

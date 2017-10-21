@@ -7,7 +7,6 @@ tags:
 - riddles
 - geometry
 mathjax: true
-comments: true
 ---
 
 This problem comes from [a riddle at the five thirty-eight](http://fivethirtyeight.com/features/can-you-solve-the-puzzle-of-the-overflowing-martini-glass/). Basically, the problem is this:

@@ -3,7 +3,6 @@ layout: post
 title: What is Machine Learning?!
 area: notes
 mathjax: true
-comments: true
 tags:
 - math
 - pattern-recognition

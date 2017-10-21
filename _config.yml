@@ -9,8 +9,11 @@ github_username: notmatthancock
 
 paginate: 5
 paginate_path: "/notes/page/:num"
-gems: [jekyll-paginate]
 
 # Build settings
 include: ['_pages']
 markdown: kramdown
+
+plugins:
+    - jekyll-paginate
+    - jemoji

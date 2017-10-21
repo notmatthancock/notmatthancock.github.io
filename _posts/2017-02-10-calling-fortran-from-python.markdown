@@ -6,9 +6,9 @@ tags:
 - software
 - fortran
 - python
+- f2py
 - guides
 mathjax: false
-comments: true
 ---
 
 ## A short guide on using f2py to call Fortran subroutines from Python

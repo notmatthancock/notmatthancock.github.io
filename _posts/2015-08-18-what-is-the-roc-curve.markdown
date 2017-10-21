@@ -7,7 +7,6 @@ tags:
 - statistics
 - pattern-recognition
 mathjax: true
-comments: true
 ---
 
 The [ROC curve](https://en.wikipedia.org/wiki/Receiver_operating_characteristic) as well as the area under the curve (AUC) score are frequently used in binary classification to characterize the quality of an automatic classifier. In this post, I define the ROC curve and AUC score as theoretical probabilistic quantities and use these definitions to show important properties. Next, I derive empirical estimates from the theoretical definitions using a finite sample and show that these estimates coincide with what are given as the "usual" definitions of the sensitivity, specificity, and the ROC curve.

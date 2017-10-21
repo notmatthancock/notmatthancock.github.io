@@ -5,10 +5,10 @@ area: notes
 tags:
 - software
 - fortran
+- f2py
 - python
 - guides
 mathjax: false
-comments: true
 ---
 
 For an intro to `f2py` [see here]({{ site.baseurl }}/2017/02/10/calling-fortran-from-python.html).
