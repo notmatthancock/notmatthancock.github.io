@@ -27,4 +27,4 @@ So, I'm sharing here because it's interesting trivia. It's not strictly mathemat
 * [Lazy caterer's sequence](https://en.wikipedia.org/wiki/Lazy_caterer%27s_sequence)
 * [Cake number](https://en.wikipedia.org/wiki/Cake_number)
 * [Spaghetti code](https://en.wikipedia.org/wiki/Spaghetti_code)
-
+* [Rosenbrock's banana function](https://en.wikipedia.org/wiki/Rosenbrock_function)
