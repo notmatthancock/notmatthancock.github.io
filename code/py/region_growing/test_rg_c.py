@@ -2,7 +2,7 @@ import numpy as np
 import time
 import region_growing_python as rgp
 import region_growing as rgc
-from mayavi import mlab
+#from mayavi import mlab
 
 nx = 61; ny = 51; nz = 71;
 

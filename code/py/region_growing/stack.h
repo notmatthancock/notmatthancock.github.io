@@ -18,11 +18,13 @@ typedef struct stack {
 } stack;
 
 void stack_init(stack * S) {
+//extern inline void stack_init(stack * S) {
     S->n_elements = 0;
     S->top = NULL;
 }
 
 void element_init(element * el, int i, int j, int k) {
+//extern inline void element_init(element * el, int i, int j, int k) {
     el->next = NULL;
     el->i = i;
     el->j = j;
@@ -30,6 +32,7 @@ void element_init(element * el, int i, int j, int k) {
 }
 
 void stack_push(stack * S, element * el) {
+//extern inline void stack_push(stack * S, element * el) {
     // Increment number of elements.
     S->n_elements++;
     // Set el to point to current stack top as its next element.
@@ -39,6 +42,7 @@ void stack_push(stack * S, element * el) {
 }
 
 element * stack_pop(stack * S) {
+//extern inline element * stack_pop(stack * S) {
     element * el;
 
     if (S->n_elements == 0) {

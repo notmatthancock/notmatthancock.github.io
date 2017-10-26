@@ -5,7 +5,7 @@
 
 // Map the index (i,j,k) to an index l, the "flat" index
 // into the row-major 3D array of dimensions, (m,n,p).
-int inline map_index(int i, int j, int k, int m, int n, int p) {
+inline int map_index(int i, int j, int k, int m, int n, int p) {
     return n*p*i + p*j + k;
 }
 
