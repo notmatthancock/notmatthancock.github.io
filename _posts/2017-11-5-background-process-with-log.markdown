@@ -9,7 +9,9 @@ tags:
 
 I can never remember the syntax for starting a background process and piping both stdout and stderr to a file, so this post is mostly a personal note.
 
-Let's say we a driver program that's a python script `main.py` that prints its progress to stdout, and maybe it errors, too. We'd like to set the driver program running in the background, but we'd also like to view its progress and note any errors. We'd also like to record the process id so we can kill the driver program if we'd like to. This is accomplished by a couple of lines of bash, say in a file `main.sh`:
+Let's say we have a driver program that's a python script `main.py` that prints its progress to stdout, and also the possibility exists that the script errors and quits. We want to record both the progress and the errors (if any) to a log file.
+
+Further, we'd like to set the driver program running in the background, and we also should record the process id so we can kill the driver program if we'd like. This is accomplished by a couple of lines of bash, say in a file `main.sh`:
 
 {% highlight bash %}
 python -u main.py > log.txt 2>&1 &
