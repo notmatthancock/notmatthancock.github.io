@@ -24,6 +24,12 @@ body {
 }
 
 
+::selection {
+    background: #e0e49a; /* WebKit/Blink Browsers */
+}
+::-moz-selection {
+    background: #e0e49a; /* Gecko Browsers */
+}
 
 /**
  * Set `margin-bottom` to maintain vertical rhythm
