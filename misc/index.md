@@ -7,4 +7,4 @@ area: misc
 
 
 * [Resume]({{ site.baseurl }}/resume)
-* [Quotes]({{ site.baseurl }}/quotes)
+* [Quotes]({{ site.baseurl }}/quotes.html)
