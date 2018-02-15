@@ -54,7 +54,7 @@ To compile, execute:
 
 {% highlight bash %}
 gfortran -c two.f90
-f2py -c two.f90 one.f90 -c one
+f2py -c two.f90 one.f90 -m one
 {% endhighlight %}
 
 Now, check that it works in python
