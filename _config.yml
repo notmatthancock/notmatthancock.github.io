@@ -7,6 +7,8 @@ baseurl: ""
 url: "http://notmatthancock.github.com" # the base hostname & protocol for your site
 github_username: notmatthancock
 
+gems: [jekyll-paginate]
+
 paginate: 7
 paginate_path: "/notes/page/:num"
 
