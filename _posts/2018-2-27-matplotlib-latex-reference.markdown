@@ -76,3 +76,5 @@ That not a typo --- you must run `pdflatex` twice to get the references correct.
 <div style="text-align:center">
     <img style="border: 1px solid #333; margin: 0 auto;" src="{{ site.baseurl }}/images/matplotlib-latex-ref.png">
 </div>
+
+Further, if you add `\usepackage{hyperref}` to `main.tex`, the equation reference in the figure is hyperlinked to the equation itself!
