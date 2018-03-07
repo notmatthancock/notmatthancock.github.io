@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Referencing LaTex objects from Matplotlib
+title: Referencing LaTeX objects from Matplotlib
 area: notes
 tags:
 - software
@@ -26,7 +26,7 @@ Recently, I wanted to reference an equation in a LaTeX document from a figure cr
     e^{i\pi} + 1 = 0
 \end{equation}
 
-\begin{figure}[h]
+\begin{figure}
     \centering
     \resizebox{3in}{3in}{
         \input{figure.pgf}
