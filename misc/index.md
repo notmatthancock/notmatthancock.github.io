@@ -6,5 +6,5 @@ area: misc
 # Miscellany
 
 
-* [Resume]({{ site.baseurl }}/resume)
+<!--* [Resume]({{ site.baseurl }}/resume)-->
 * [Quotes]({{ site.baseurl }}/quotes.html)
