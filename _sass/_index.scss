@@ -7,7 +7,7 @@
 
 div#me-wrap {
     float: left;
-    margin: 10px 40px 0px 0;
+    margin: 10px 20px 0px 0;
 }
 
 img#me {
@@ -17,7 +17,10 @@ img#me {
     margin: 0 auto;
 }
 
-#index-blurb { margin-bottom: 30px; }
+#index-blurb {
+    margin-bottom: 20px;
+    font-size: 90%;
+}
 
 #index-nav {
     width: $content-width / 2;
