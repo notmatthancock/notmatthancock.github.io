@@ -1,0 +1,281 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/beige.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+
+<section>
+    <h2>Image segmentation with PDEs</h2>
+    <h4>&#128498;matt hancock&#128498;</h4>
+</section>
+
+<section>
+    <h2>Image analysis</h2>
+    <table>
+        <tr>
+            <td style="vertical-align:top">
+                <ul>
+                    <li>Detection: where is the thing?</li>
+                    <li>Recognition: what is the thing?</li>
+                    <li><b>Segmentation</b>: where's the borders of the thing?</li>
+                </ul>
+            </td>
+
+            <td><img src="img/one-circle.png" ></td>
+        </tr>
+    </table>
+</section>
+
+<section>
+    <h2>Segmentation with PDEs</h2>
+
+    <ul>
+        <li>Tell curve/surface how to move &rarr; PDE</li>
+        <li class="fragment">Minimize energy functional &rarr; PDE</li>
+        <li class="fragment">Numerically solve PDE &rarr; iterative segmentation method</li>
+    </ul>
+</section>
+
+
+<section>
+    <h3>Example 1</h3>
+
+    <table>
+        <tr>
+            <td style="vertical-align:top">
+                <ul>
+                    <li>
+                        <span>
+                            <span style="color:coral">Curve velocity</span>
+                            is in
+                            <span style="color:goldenrod">the outward direction</span>
+                            with
+                            <span style="color:darkcyan">speed decaying with image edge strength</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span style="font-size: 36px">
+                            <span style="color:coral">x<sub>t</sub></span>
+                            =
+                            <span style="color:goldenrod">R x<sub>s</sub> / ||x<sub>s</sub>||</span>
+                            × <br>
+                            <span style="color:darkcyan">f(||D(G<sub>&sigma;</sub><span style="font-size: 80%;">&lowast;</span>I)(x)||)</span>
+                        </span>
+                    </li>
+                </ul>
+            </td>
+
+            <td style="width: 60%">
+                <div class="animation-frames" example="1"></div>
+                <div style="text-align:center">
+                    <input class="animation-frames-controls" example="1"
+                     type="range" value=0 min=0 max=200 step=10>
+                </div>
+            </td>
+        </tr>
+    </table>
+</section>
+
+<section>
+    <h3>Example 1 <span style="font-size: 50%">(initialization failure)</span></h3>
+
+    <table>
+        <tr>
+            <td style="vertical-align:top">
+                <ul>
+                    <li>
+                        <span>
+                            <span style="color:coral">Curve velocity</span>
+                            is in
+                            <span style="color:goldenrod">the outward direction</span>
+                            with
+                            <span style="color:darkcyan">speed decaying with image edge strength</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span style="font-size: 36px">
+                            <span style="color:coral">x<sub>t</sub></span>
+                            =
+                            <span style="color:goldenrod">R x<sub>s</sub> / ||x<sub>s</sub>||</span>
+                            × <br>
+                            <span style="color:darkcyan">f(||D(G<sub>&sigma;</sub><span style="font-size: 80%;">&lowast;</span>I)(x)||)</span>
+                        </span>
+                    </li>
+                </ul>
+            </td>
+
+            <td style="width: 60%">
+                <div class="animation-frames" example="1-1"></div>
+                <div style="text-align:center">
+                    <input class="animation-frames-controls" example="1-1"
+                     type="range" value=0 min=0 max=200 step=10>
+                </div>
+            </td>
+        </tr>
+    </table>
+</section>
+
+<section>
+    <h3>Example 1 <span style="font-size: 50%">(velocity repairs)</span></h3>
+
+    <table>
+        <tr>
+            <td style="vertical-align:top">
+                <ul>
+                    <li>
+                        <span>
+                            <span style="color:coral">Curve velocity</span>
+                            is in
+                            <span style="color:goldenrod">the outward direction</span>
+                            with
+                            <span style="color:darkcyan">speed decaying with image edge strength</span>
+                            and
+                            <span style="color:yellowgreen">contracts in bright areas</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span style="font-size: 36px">
+                            <span style="color:coral">x<sub>t</sub></span>
+                            =
+                            <span style="color:goldenrod">R x<sub>s</sub> / ||x<sub>s</sub>||</span>
+                            × <br>
+                            <span style="color:darkcyan">f(||D(G<sub>&sigma;</sub><span style="font-size: 80%;">&lowast;</span>I)(x)||)</span>
+                            × <br>
+                            <span style="color:yellowgreen">sign(T-I(x))</span>
+                        </span>
+                    </li>
+                </ul>
+            </td>
+
+            <td style="width: 60%">
+                <div class="animation-frames" example="1-2"></div>
+                <div style="text-align:center">
+                    <input class="animation-frames-controls" example="1-2"
+                     type="range" value=0 min=0 max=250 step=10>
+                </div>
+            </td>
+        </tr>
+    </table>
+</section>
+
+<section>
+    <h3>Example 2</h3>
+
+    <table>
+        <tr>
+            <td style="vertical-align:top">
+                <ul>
+                    <li>
+                        <span>
+                            <span style="color:coral">Curve velocity</span>
+                            is in
+                            <span style="color:goldenrod">the outward direction</span>
+                            with
+                            <span style="color:darkcyan">speed decaying with image edge strength</span>
+                            and
+                            <span style="color:yellowgreen">contracts in bright areas</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span style="font-size: 36px">
+                            <span style="color:coral">x<sub>t</sub></span>
+                            =
+                            <span style="color:goldenrod">R x<sub>s</sub> / ||x<sub>s</sub>||</span>
+                            × <br>
+                            <span style="color:darkcyan">f(||D(G<sub>&sigma;</sub><span style="font-size: 80%;">&lowast;</span>I)(x)||)</span>
+                            × <br>
+                            <span style="color:yellowgreen">sign(T-I(x))</span>
+                        </span>
+                    </li>
+                </ul>
+            </td>
+
+            <td style="width: 60%">
+                <div class="animation-frames" example="2"></div>
+                <div style="text-align:center">
+                    <input class="animation-frames-controls" example="2"
+                     type="range" value=0 min=0 max=250 step=10>
+                </div>
+            </td>
+        </tr>
+    </table>
+</section>
+
+<section>
+    <h3>Implicit curve evolution: level set framework</h3>
+    <ul>
+        <li>Implicit curve = {x : u(x,t) = 0}</li>
+        <li>Enforce level curve moves in normal direction with speed V(x) yields level set evolution PDE: u<sub>t</sub> + V ||Du|| = 0</li>
+    </ul>
+    <figure>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Level_set_method.png/1280px-Level_set_method.png"
+            width="400px">
+        <figcaption><a href="https://commons.wikimedia.org/wiki/File:Level_set_method.png">[source]</a></figcaption>
+    </figure>
+</section>
+
+<section>
+    <h3>Example 2</h3>
+
+    <table>
+        <tr>
+            <td style="vertical-align:top">
+                <ul>
+                    <li>
+                        <span>
+                            <span style="color:coral">Curve velocity</span>
+                            is in
+                            <span style="color:goldenrod">the outward direction</span>
+                            with
+                            <span style="color:darkcyan">speed decaying with image edge strength</span>
+                            and
+                            <span style="color:yellowgreen">contracts in bright areas</span>
+                        </span>
+                    </li>
+                    <li>
+                        <span style="font-size: 36px">
+                            <span style="color:coral">x<sub>t</sub></span>
+                            =
+                            <span style="color:goldenrod">R x<sub>s</sub> / ||x<sub>s</sub>||</span>
+                            × <br>
+                            <span style="color:darkcyan">f(||D(G<sub>&sigma;</sub><span style="font-size: 80%;">&lowast;</span>I)(x)||)</span>
+                            × <br>
+                            <span style="color:yellowgreen">sign(T-I(x))</span>
+                        </span>
+                    </li>
+                </ul>
+            </td>
+
+            <td style="width: 60%">
+                <div class="animation-frames" example="2-ls"></div>
+                <div style="text-align:center">
+                    <input class="animation-frames-controls" example="2-ls"
+                     type="range" value=0 min=0 max=1500 step=100>
+                </div>
+            </td>
+        </tr>
+    </table>
+</section>
+
+			</div>
+		</div>
+
+        <script
+          src="https://code.jquery.com/jquery-3.3.1.min.js"
+          integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+          crossorigin="anonymous"></script>
+		<script src="js/reveal.js"></script>
+		<script>
+            Reveal.initialize({
+                history: true,
+                //slideNumber: 'c/t',
+                transition: 'none',
+            });
+		</script>
+        <script
+		<script src="js/main.js"></script>
+	</body>
+</html>
