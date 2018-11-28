@@ -226,21 +226,16 @@
                 <ul>
                     <li>
                         <span>
-                            <span style="color:coral">Curve velocity</span>
-                            is in
-                            <span style="color:goldenrod">the outward direction</span>
-                            with
-                            <span style="color:darkcyan">speed decaying with image edge strength</span>
+                            <span style="color:coral">Velocity in normal direction</span>
+                            <span style="color:darkcyan">decays with image edge strength</span>
                             and
                             <span style="color:yellowgreen">contracts in bright areas</span>
                         </span>
                     </li>
                     <li>
                         <span style="font-size: 36px">
-                            <span style="color:coral">x<sub>t</sub></span>
-                            =
-                            <span style="color:goldenrod">R x<sub>s</sub> / ||x<sub>s</sub>||</span>
-                            × <br>
+                            <span style="color:coral">V(x)</span>
+                            = <br>
                             <span style="color:darkcyan">f(||D(G<sub>&sigma;</sub><span style="font-size: 80%;">&lowast;</span>I)(x)||)</span>
                             × <br>
                             <span style="color:yellowgreen">sign(T-I(x))</span>
@@ -258,6 +253,15 @@
             </td>
         </tr>
     </table>
+</section>
+
+<section>
+    <h2>Some things to read</h2>
+    <ul style="font-size: 80%">
+        <li>Kass, Michael, Andrew Witkin, and Demetri Terzopoulos. "Snakes: Active contour models." International journal of computer vision (1988)</li>
+        <li>Malladi, Ravi, James A. Sethian, and Baba C. Vemuri. "Shape modeling with front propagation: A level set approach." IEEE transactions on pattern analysis and machine intelligence (1995)</li>
+        <li>Adalsteinsson, David, and James A. Sethian. "A fast level set method for propagating interfaces." Journal of computational physics (1995)</li>
+
 </section>
 
 			</div>
