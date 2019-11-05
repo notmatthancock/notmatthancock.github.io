@@ -30,6 +30,11 @@
     }
 }
 
+.home {
+    background-color: #f0f0f0;
+    padding: 10px;
+}
+
 .notes-title-link {
     margin-left: 10px;
     &,
@@ -229,6 +234,11 @@
 
 .post-pagination {
     width: 100%;
+}
+
+.post {
+    background-color: #f0f0f0;
+    padding: 10px;
 }
 
 .post-content {
