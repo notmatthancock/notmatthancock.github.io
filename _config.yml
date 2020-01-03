@@ -9,7 +9,7 @@ github_username: notmatthancock
 
 gems: [jekyll-paginate]
 
-paginate: 7
+paginate: 100
 paginate_path: "/notes/page/:num"
 
 # Build settings
