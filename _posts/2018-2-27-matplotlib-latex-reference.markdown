@@ -6,6 +6,7 @@ tags:
 - software
 - matplotlib
 - latex
+mathjax: true
 ---
 
 Recently, I wanted to reference an equation in a LaTeX document from a figure created using [matplotlib](https://matplotlib.org/). Luckily, matplotlib has a PGF backend that makes this possible. Here's an example:
