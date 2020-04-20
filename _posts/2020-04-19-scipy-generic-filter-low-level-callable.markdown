@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Fast custom image filters using low level callables and scipy generic filter
+title: Fast custom image filters using low level callables
 area: notes
 tags:
 - software
