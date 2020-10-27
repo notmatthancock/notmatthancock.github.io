@@ -31,6 +31,19 @@ img#me {
 
 #index-nav td { text-align: center; }
 
+#index-social {
+    padding-top: 25px;
+    font-size: 80%;
+}
+#index-social table {
+    width: 100%;
+    border: 1px solid #ccc;
+    background-color: #eee;
+}
+#index-social table td {
+    text-align: center;
+}
+
 @media only screen and (max-device-width: 480px) {
     body { font-size: 12px; }
     #index-wrap { width: 300px; margin: 10px auto; }
