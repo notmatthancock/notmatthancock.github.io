@@ -4,6 +4,24 @@ var labels = ['&#9679;', null, '&#9632;'];
 var points = Array();
 var pid = 0;
 
+
+function downloadString(text, fileType, fileName) {
+  // via: https://gist.github.com/danallison/3ec9d5314788b337b682
+
+  var blob = new Blob([text], { type: fileType });
+
+  var a = document.createElement('a');
+  a.download = fileName;
+  a.href = URL.createObjectURL(blob);
+  a.dataset.downloadurl = [fileType, a.download, a.href].join(':');
+  a.style.display = "none";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  setTimeout(function() { URL.revokeObjectURL(a.href); }, 1500);
+}
+
+
 // Return the html string to be added, and add the
 // point to the point list (after converting to mathematical coords).
 add_point = function(t, l, w) {
@@ -153,7 +171,7 @@ $(document).ready(function() {
             dat += points[i].slice(1).toString() + '\n';
         }
 
-        window.open("data:text/plain;charset=utf-8,"+encodeURIComponent("# x,y,label\n" + dat));
+        downloadString("# x,y,label\n" + dat, 'csv', '2d-2class-dataset.csv');
     });
 
     $('#clear').click(function() {
