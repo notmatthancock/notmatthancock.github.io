@@ -15,8 +15,6 @@ mathjax: true
 
 Image segmentation with region growing is simple and can be used as an initialization step for more sophisticated segmentation methods. In this note, I'll describe how to implement a region growing method for 3D image volume segmentation (note: the code here can be applied, without modification, to 2D images by adding an extra axis to the image) that uses a single seed point and uses a neighborhood average inclusion criteria. First, we'll implement the algorithm in Python, and next, I'll show how to implement the algorithm in C, wrapping the C code using `f2py` in order to make it callable from Python. Implementing the code in C will give us big performance boosts, while wrapping the code in Python will gives all the convenience of scripting in Python. 
 
-<p style="color: #bf4040">Disclaimer: I make no claim that the presented code is robust or error-free :grinning:</p>
-
 {% include toc.html %}
 
 ## Pseudocode
