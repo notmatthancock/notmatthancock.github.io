@@ -7,5 +7,5 @@ area: misc
 
 
 <!--* [Resume]({{ site.baseurl }}/resume)-->
-* [Quotes]({{ site.baseurl }}/quotes.html)
-* [Teaching materials (from graduate school years)]({{ site.baseurl }}/teaching)
+<!--* [Quotes from smart people]({{ site.baseurl }}/quotes.html)-->
+* [Old teaching stuff]({{ site.baseurl }}/teaching)
