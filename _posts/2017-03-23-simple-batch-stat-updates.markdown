@@ -35,7 +35,7 @@ $$
 \begin{align*}
     \sigma^2   &= \frac{1}{m+n} \sum_{i=1}^{m+n} (x_i - \mu)^2 \\
     \sigma_m^2 &= \frac{1}{m} \sum_{i=1}^{m} (x_i - \mu_m)^2 \\
-    \sigma_n^2 &= \frac{1}{n} \sum_{i=m+n}^{m+1} (x_i - \mu_n)^2
+    \sigma_n^2 &= \frac{1}{n} \sum_{i=m+1}^{m+n} (x_i - \mu_n)^2
 \end{align*}
 $$
 
